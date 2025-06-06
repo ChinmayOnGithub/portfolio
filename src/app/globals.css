@@ -1,0 +1,73 @@
+/* globals.css */
+@import "tailwindcss";
+
+/*─────────────────────────────────────────────────────────────────────
+  Define your CSS variables in :root (light mode)
+─────────────────────────────────────────────────────────────────────*/
+:root {
+  /* True Neutral Grayscale (OKLCH with 0 chroma) */
+  --color-gray-50: oklch(98% 0 0);
+  --color-gray-100: oklch(95% 0 0);
+  --color-gray-200: oklch(90% 0 0);
+  --color-gray-300: oklch(82% 0 0);
+  --color-gray-400: oklch(64% 0 0);
+  --color-gray-500: oklch(45% 0 0);
+  --color-gray-600: oklch(35% 0 0);
+  --color-gray-700: oklch(25% 0 0);
+  --color-gray-800: oklch(15% 0 0);
+  --color-gray-900: oklch(10% 0 0);
+  --color-gray-950: oklch(5% 0 0);
+
+  /* Base colors */
+  --color-background: var(--color-gray-50);
+  --color-foreground: var(--color-gray-900);
+
+  /* Fonts */
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: monospace;
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  Dark mode overrides
+─────────────────────────────────────────────────────────────────────*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Base colors (grays remain the same!) */
+    --color-background: var(--color-gray-950);
+    --color-foreground: var(--color-gray-50);
+  }
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  Tailwind theme mapping
+─────────────────────────────────────────────────────────────────────*/
+@theme {
+  /* Map CSS variables to Tailwind's color system */
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+
+  --color-gray-50: var(--color-gray-50);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
+  --color-gray-950: var(--color-gray-950);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  Base styles
+─────────────────────────────────────────────────────────────────────*/
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s, color 0.3s;
+}
