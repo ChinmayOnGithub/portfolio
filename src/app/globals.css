@@ -10,6 +10,8 @@
 :root {
   /* Semantic Color Variables */
   --color-background: #212129;
+  --color-links: #4278dd;
+
   /* Dark page background */
   --color-secondary: #2B2D38;
   /* Section strip or muted bg */
@@ -61,6 +63,7 @@
   --color-text-secondary: var(--color-text-secondary);
   --color-text-tertiary: var(--color-text-tertiary);
   --color-text-quaternary: var(--color-text-quaternary);
+  --color-text-links: var(--color-links);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
