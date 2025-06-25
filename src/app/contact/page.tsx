@@ -4,7 +4,7 @@ export default function Contact() {
       <h1 className="text-7xl font-bold mb-8">Contact</h1>
       <div className="max-w-2xl text-center">
         <p className="text-xl text-gray-300 mb-8">
-          Let's connect! Feel free to reach out to me.
+          Lets connect! Feel free to reach out to me.
         </p>
         <div className="space-y-4">
           <div className="bg-gray-700 p-6 rounded-lg">

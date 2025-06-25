@@ -10,10 +10,7 @@ export default function Navigation() {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/terminal', label: 'Terminal' },
+    { href: '/projects', label: 'Projects' }
   ];
 
   const handleMouseEnter = useCallback((href: string) => {
@@ -25,11 +22,11 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-700/50 backdrop-blur-sm z-50">
+    <nav className="top-0 left-0 right-0 bg-primary border-b border-gray-600/40 backdrop-blur-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-xl font-bold text-gray-50 hover:text-gray-200 transition-colors"
             onMouseEnter={() => handleMouseEnter('/')}
           >
@@ -40,9 +37,8 @@ export default function Navigation() {
               <Link
                 key={href}
                 href={href}
-                className={`text-gray-300 hover:text-gray-50 transition-colors ${
-                  pathname === href ? 'text-gray-50 font-medium' : ''
-                }`}
+                className={`text-gray-300 hover:text-gray-50 transition-colors ${pathname === href ? 'text-gray-50 font-medium' : ''
+                  }`}
                 onMouseEnter={() => handleMouseEnter(href)}
               >
                 {label}
@@ -51,6 +47,6 @@ export default function Navigation() {
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 } 

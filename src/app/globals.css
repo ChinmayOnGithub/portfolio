@@ -1,40 +1,49 @@
 /* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
 @import "tailwindcss";
 
+
 /*─────────────────────────────────────────────────────────────────────
-  Define your CSS variables in :root (light mode)
+  Base variables & fonts
 ─────────────────────────────────────────────────────────────────────*/
 :root {
-  /* True Neutral Grayscale (OKLCH with 0 chroma) */
-  --color-gray-50: oklch(98% 0 0);
-  --color-gray-100: oklch(95% 0 0);
-  --color-gray-200: oklch(90% 0 0);
-  --color-gray-300: oklch(82% 0 0);
-  --color-gray-400: oklch(64% 0 0);
-  --color-gray-500: oklch(45% 0 0);
-  --color-gray-600: oklch(35% 0 0);
-  --color-gray-700: oklch(25% 0 0);
-  --color-gray-800: oklch(15% 0 0);
-  --color-gray-900: oklch(10% 0 0);
-  --color-gray-950: oklch(5% 0 0);
+  /* Semantic Color Variables */
+  --color-background: #212129;
+  /* Dark page background */
+  --color-secondary: #2B2D38;
+  /* Section strip or muted bg */
+  --color-card-bg: #353845;
+  /* Default card background */
+  --color-card-accent: #F9A826;
+  /* Highlighted/active card */
+  --color-accent: #F9A826;
+  /* Buttons, links, highlights */
 
-  /* Base colors */
-  --color-background: var(--color-gray-50);
-  --color-foreground: var(--color-gray-900);
+  --color-text-primary: #FFFFFF;
+  /* Main headings & body text */
+  --color-text-secondary: #C4C4C4;
+  /* Subtitles & paragraphs */
+  --color-text-tertiary: #A3A3A3;
+  /* Captions & metadata */
+  --color-text-quaternary: #6E6E6E;
+  /* Icons, separators */
 
   /* Fonts */
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-mono: monospace;
+  --font-inter: 'Inter', sans-serif;
+  --font-sharetech: 'Share Tech Mono', monospace;
+  --font-anton: 'Anton', sans-serif;
 }
 
 /*─────────────────────────────────────────────────────────────────────
-  Dark mode overrides
+  Dark mode override
 ─────────────────────────────────────────────────────────────────────*/
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Base colors (grays remain the same!) */
-    --color-background: var(--color-gray-950);
-    --color-foreground: var(--color-gray-50);
+    --color-background: #1C1F2A;
+    --color-text-primary: #FFFFFF;
   }
 }
 
@@ -42,32 +51,31 @@
   Tailwind theme mapping
 ─────────────────────────────────────────────────────────────────────*/
 @theme {
-  /* Map CSS variables to Tailwind's color system */
   --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
+  --color-secondary: var(--color-secondary);
+  --color-card-bg: var(--color-card-bg);
+  --color-card-accent: var(--color-card-accent);
+  --color-accent: var(--color-accent);
 
-  --color-gray-50: var(--color-gray-50);
-  --color-gray-100: var(--color-gray-100);
-  --color-gray-200: var(--color-gray-200);
-  --color-gray-300: var(--color-gray-300);
-  --color-gray-400: var(--color-gray-400);
-  --color-gray-500: var(--color-gray-500);
-  --color-gray-600: var(--color-gray-600);
-  --color-gray-700: var(--color-gray-700);
-  --color-gray-800: var(--color-gray-800);
-  --color-gray-900: var(--color-gray-900);
-  --color-gray-950: var(--color-gray-950);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-quaternary: var(--color-text-quaternary);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-sharetech: var(--font-sharetech);
+  --font-inter: var(--font-inter);
+  --font-anton: var(--font-anton);
 }
 
 /*─────────────────────────────────────────────────────────────────────
   Base styles
 ─────────────────────────────────────────────────────────────────────*/
+
 body {
   background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
-  transition: background-color 0.3s, color 0.3s;
+  color: var(--color-text-primary);
+  font-family: var(--font-inter);
+  transition: all 0.3s ease;
 }
