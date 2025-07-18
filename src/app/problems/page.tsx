@@ -131,7 +131,6 @@ export default function Problems() {
   const [loading, setLoading] = useState(true);
   const [sectionErrors, setSectionErrors] = useState<{[key: string]: string}>({});
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function fetchAllData() {
       let cache: any = null;
@@ -207,7 +206,7 @@ export default function Problems() {
       }
     }
     fetchAllData();
-  }, [solvedStats]);
+  }, []);
 
   // Prepare data for MonthlyHeatmap
   let heatmapData: { date: string; value: number }[] = [];
