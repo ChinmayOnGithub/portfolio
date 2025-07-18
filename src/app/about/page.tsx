@@ -1,14 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
 
 
 export default function Home() {
 	// Only import LinkedInBadge on the client
-	const LinkedInBadge = dynamic(() => import("../components/LinkedInBadge"), {
-		ssr: false,
-	});
 
 	return (
 		<div className="bg-background min-h-screen flex justify-center items-center px-2 sm:px-0">

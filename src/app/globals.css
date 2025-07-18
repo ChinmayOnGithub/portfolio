@@ -82,3 +82,13 @@ body {
   font-family: var(--font-inter);
   transition: all 0.3s ease;
 }
+
+.fade-in-heatmap {
+  opacity: 0;
+  animation: fadeInHeatmap 0.7s ease forwards;
+}
+
+@keyframes fadeInHeatmap {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
