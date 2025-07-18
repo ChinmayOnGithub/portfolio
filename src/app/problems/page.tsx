@@ -55,41 +55,57 @@ function generateEmptyHeatmapData() {
 const CACHE_KEY = 'leetcodeProfileCache';
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour in ms
 
-function SafeProfile({ profile, contestInfo, badges }: { profile: any, contestInfo: any, badges: any[] }) {
+function SafeProfile({ profile, contestInfo, badges, solvedStats }: { profile: any, contestInfo: any, badges: any[], solvedStats?: any }) {
   try {
     if (!profile) return null;
     const avatarSrc = typeof profile.avatar === 'string' && profile.avatar ? profile.avatar : '/default-avatar.png';
+    // Try to get easy/medium/hard solved counts from profile if present
+    let total = null, easy = null, medium = null, hard = null;
+    if (solvedStats && typeof solvedStats === 'object') {
+      total = solvedStats.solvedProblem ?? null;
+      easy = solvedStats.easySolved ?? null;
+      medium = solvedStats.mediumSolved ?? null;
+      hard = solvedStats.hardSolved ?? null;
+    }
     return (
       <div className="mb-4">
         <div className="flex items-center gap-4 mb-2">
           <Image src={avatarSrc} alt="avatar" width={48} height={48} className="rounded-full border-2 border-accent" />
           <div>
             <div className="text-lg font-bold font-inter text-gray-50">{profile.name} <span className="text-sm text-gray-400">({profile.username})</span></div>
-            <div className="text-sm text-gray-400 mt-1">
-              <span className="mr-4">Problems Solved: <span className="text-accent font-semibold">{profile.totalSolved ?? 'N/A'}</span></span>
-              <span className="mr-4">LeetCode Ranking: <span className="text-accent font-semibold">{profile.ranking ?? 'N/A'}</span></span>
-              <span className="mr-4">Contest Rating: <span className="text-accent font-semibold">{contestInfo?.contestRating ? Math.round(contestInfo.contestRating) : 'N/A'}</span></span>
+            {/* Badges Section: directly below name, no label */}
+            {badges.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2 mb-1">
+                {badges.map((badge, i) => {
+                  const badgeSrc = typeof badge.icon === 'string' && badge.icon ? badge.icon : '/default-badge.png';
+                  return (
+                    <div key={i} className="flex items-center gap-1 bg-card-bg px-2 py-1 rounded text-xs text-gray-100">
+                      <Image src={badgeSrc} alt={badge.name} width={20} height={20} className="w-5 h-5" />
+                      <span>{badge.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            <div className="flex flex-col gap-1 text-sm text-gray-400 mt-2">
+              <span>
+                Problems Solved: <span className="text-accent font-semibold">{total !== null ? total : 'N/A'}</span>
+                {(easy !== null && medium !== null && hard !== null) && (
+                  <span className="ml-2 text-xs font-normal text-gray-300">
+                    (<span className="inline-flex items-center gap-1">
+                      <span style={{color:'#22c55e',fontSize:'1.1em',verticalAlign:'middle'}}>&#9679;</span> {easy}
+                      <span style={{color:'#fde047',fontSize:'1.1em',verticalAlign:'middle',marginLeft:8}}>&#9679;</span> {medium}
+                      <span style={{color:'#f87171',fontSize:'1.1em',verticalAlign:'middle',marginLeft:8}}>&#9679;</span> {hard}
+                    </span>)
+                  </span>
+                )}
+              </span>
+              <span>LeetCode Ranking: <span className="text-accent font-semibold">{profile.ranking ?? 'N/A'}</span></span>
+              <span>Contest Rating: <span className="text-accent font-semibold">{contestInfo?.contestRating ? Math.round(contestInfo.contestRating) : 'N/A'}</span></span>
               <span>Contests Attended: <span className="text-accent font-semibold">{contestInfo?.contestAttend ?? 'N/A'}</span></span>
             </div>
           </div>
         </div>
-        {/* Badges Section */}
-        {badges.length > 0 && (
-          <div className="mt-2">
-            <div className="font-semibold text-gray-200 mb-1">Badges:</div>
-            <div className="flex flex-wrap gap-2">
-              {badges.map((badge, i) => {
-                const badgeSrc = typeof badge.icon === 'string' && badge.icon ? badge.icon : '/default-badge.png';
-                return (
-                  <div key={i} className="flex items-center gap-1 bg-card-bg px-2 py-1 rounded text-xs text-gray-100">
-                    <Image src={badgeSrc} alt={badge.name} width={20} height={20} className="w-5 h-5" />
-                    <span>{badge.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </div>
     );
   } catch (err) {
@@ -111,6 +127,7 @@ export default function Problems() {
   const [badges, setBadges] = useState<any[]>([]);
   const [contestInfo, setContestInfo] = useState<any>(null);
   const [calendar, setCalendar] = useState<{ [date: string]: number } | null>(null);
+  const [solvedStats, setSolvedStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sectionErrors, setSectionErrors] = useState<{[key: string]: string}>({});
 
@@ -126,6 +143,7 @@ export default function Problems() {
             setBadges(cache.badges);
             setContestInfo(cache.contestInfo);
             setCalendar(cache.calendar);
+            setSolvedStats(cache.solvedStats ?? null);
             setLoading(false);
             return;
           }
@@ -135,7 +153,7 @@ export default function Problems() {
       }
       // Fetch all APIs in parallel
       const newSectionErrors: {[key: string]: string} = {};
-      let newProfile = null, newBadges = [], newContestInfo = null, newCalendar = null;
+      let newProfile = null, newBadges = [], newContestInfo = null, newCalendar = null, newSolvedStats = null;
       try {
         newProfile = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/").then(r => r.json());
         setProfile(newProfile);
@@ -164,9 +182,15 @@ export default function Problems() {
       } catch {
         newSectionErrors.calendar = 'Failed to load calendar';
       }
+      try {
+        const solvedRes = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/solved").then(r => r.json());
+        setSolvedStats(solvedRes);
+      } catch {
+        newSectionErrors.solved = 'Failed to load solved count';
+      }
       setSectionErrors(newSectionErrors);
       setLoading(false);
-      if (newProfile || newBadges.length || newContestInfo || newCalendar) {
+      if (newProfile || newBadges.length || newContestInfo || newCalendar || solvedStats) {
         try {
           localStorage.setItem(CACHE_KEY, JSON.stringify({
             timestamp: Date.now(),
@@ -174,6 +198,7 @@ export default function Problems() {
             badges: newBadges,
             contestInfo: newContestInfo,
             calendar: newCalendar,
+            solvedStats,
           }));
         } catch {
           //
@@ -215,7 +240,7 @@ export default function Problems() {
         </p>
         <div className="rounded-xl bg-secondary/80 p-4 sm:p-8 shadow-sm flex flex-col gap-6">
           {/* Profile Section */}
-          <SafeProfile profile={profile} contestInfo={contestInfo} badges={badges} />
+          <SafeProfile profile={profile} contestInfo={contestInfo} badges={badges} solvedStats={solvedStats} />
           {/* Heatmap Section */}
           <SafeHeatmap data={heatmapData} />
         </div>

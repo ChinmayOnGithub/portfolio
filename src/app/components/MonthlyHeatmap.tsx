@@ -128,26 +128,33 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
   const nonZeroValues = days.filter(d => d.value > 0).map(d => d.value);
   const min = nonZeroValues.length > 0 ? Math.min(...nonZeroValues) : 0;
   const max = nonZeroValues.length > 0 ? Math.max(...nonZeroValues) : 1;
-  // LeetCode dark mode palette with 8 shades (background + 7 greens, max is saturated green)
+  // Expanded LeetCode-style palette for more granularity
   const shades = [
     '#2d333b', // 0: background (no submissions)
-    '#0e4429', // 1: 1 submission (darkest green)
-    '#006d32', // 2: 2-3 submissions
-    '#178a3d', // 3: 4-7 submissions
-    '#26a641', // 4: 8-15 submissions
-    '#39d353', // 5: 16-31 submissions
-    '#6ee07f', // 6: 32-63 submissions
-    '#00ff4a', // 7: 64+ submissions (saturated green)
+    '#0e4429', // 1: 1 submission
+    '#14532d', // 2: 2 submissions
+    '#166534', // 3: 3 submissions
+    '#15803d', // 4: 4 submissions
+    '#16a34a', // 5: 5 submissions
+    '#22c55e', // 6: 6 submissions
+    '#4ade80', // 7: 7-9 submissions
+    '#6ee07f', // 8: 10-14 submissions
+    '#00ff4a', // 9: 15+ submissions (saturated green)
   ];
 
   function makeColorScale(data: { value: number }[]) {
-    const max = Math.max(...data.map(d => d.value), 1);
-    const scale = d3.scaleQuantize<number>()
-      .domain([1, max])
-      .range([1, 2, 3, 4, 5, 6, 7, 7]); // 1-7 for shades, 0 for zero
+    // Map submission counts to shade indices for finer granularity
     return (n: number) => {
       if (n < 1) return shades[0];
-      return shades[scale(n)];
+      if (n === 1) return shades[1];
+      if (n === 2) return shades[2];
+      if (n === 3) return shades[3];
+      if (n === 4) return shades[4];
+      if (n === 5) return shades[5];
+      if (n === 6) return shades[6];
+      if (n >= 7 && n <= 9) return shades[7];
+      if (n >= 10 && n <= 14) return shades[8];
+      return shades[9]; // 15+
     };
   }
   const getFill = makeColorScale(days);
@@ -165,15 +172,37 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
     return labels;
   }, [days]);
 
+  // Dynamically calculate number of weeks based on data
+  const weeksSet = new Set(days.map(d => d.week));
+  const numWeeks = weeksSet.size;
   const box = 14;
   const gap = 3;
-  const width = 53 * (box + gap) + 40;
+  const width = numWeeks * (box + gap) + 40;
   const height = 7 * (box + gap) + 40;
+
+  useEffect(() => {
+    // Responsive recalc on resize
+    function handleResize() {
+      if (ref.current) {
+        const svg = d3.select(ref.current);
+        svg.attr('viewBox', `0 0 ${width} ${height}`)
+          .attr('width', '100%')
+          .attr('height', 'auto')
+          .attr('preserveAspectRatio', 'xMinYMin meet');
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, [width, height]);
 
   useEffect(() => {
     const svg = d3.select(ref.current);
     svg.selectAll('*').remove();
-    svg.attr('width', width).attr('height', height);
+    svg.attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('width', '100%')
+      .attr('height', 'auto')
+      .attr('preserveAspectRatio', 'xMinYMin meet');
 
     svg.append('g')
       .selectAll('text')
@@ -181,7 +210,7 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
       .enter()
       .append('text')
       .attr('x', d => 40 + d.x * (box + gap))
-      .attr('y', 20)
+      .attr('y', 10)
       .attr('fill', dark ? '#a3a3a3' : '#444')
       .attr('font-size', 12)
       .attr('font-weight', 600)
@@ -228,8 +257,10 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
   }, [days, getFill, dark, height, monthLabels, width]);
 
   return (
-    <div className={animate ? 'fade-in-heatmap relative' : 'relative'}>
-      <svg ref={ref} className="w-full h-auto" />
+    <div className={(animate ? 'fade-in-heatmap ' : '') + 'relative w-full max-w-full flex flex-col items-start'}>
+      <div className="w-full flex items-center justify-center mt-0 mb-0">
+        <svg ref={ref} className="w-full h-auto block mt-0 mb-0" style={{marginTop: 0, marginBottom: 0}} />
+      </div>
       <div id="heatmap-tooltip" style={{
         display: 'none',
         position: 'fixed',
@@ -244,9 +275,9 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
       }} />
       {/* Legend */}
-      <div className="flex items-center gap-1 mt-2 ml-10">
+      <div className="flex items-center gap-1 mt-2 ml-2 sm:ml-10">
         <span className="text-xs text-gray-400">Less</span>
-        {shades.map((shade) => (
+        {shades.map((shade, i) => (
           <span key={shade} style={{
             display: 'inline-block',
             width: 16,
@@ -255,6 +286,7 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
             background: shade,
             marginLeft: 2,
             marginRight: 2,
+            border: i === 0 ? '1px solid #444' : 'none',
           }} />
         ))}
         <span className="text-xs text-gray-400">More</span>
