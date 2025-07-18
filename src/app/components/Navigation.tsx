@@ -10,7 +10,8 @@ export default function Navigation() {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' }
+    { href: '/projects', label: 'Projects' },
+    { href: '/problems', label: 'Problems' }
   ];
 
   const handleMouseEnter = useCallback((href: string) => {
