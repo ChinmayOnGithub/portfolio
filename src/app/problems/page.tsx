@@ -130,6 +130,7 @@ export default function Problems() {
   const [solvedStats, setSolvedStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sectionErrors, setSectionErrors] = useState<{[key: string]: string}>({});
+  const [rateLimited, setRateLimited] = useState(false);
 
   useEffect(() => {
     async function fetchAllData() {
@@ -153,44 +154,66 @@ export default function Problems() {
       }
       // Fetch all APIs in parallel
       const newSectionErrors: {[key: string]: string} = {};
-      let newProfile = null, newBadges = [], newContestInfo = null, newCalendar = null;
-      try {
-        newProfile = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/").then(r => r.json());
-        setProfile(newProfile);
-      } catch {
-        newSectionErrors.profile = 'Failed to load profile';
+      let newProfile = null, newBadges = [], newContestInfo = null, newCalendar = null, newSolvedStats = null;
+      let rateLimitHit = false;
+      // Helper to check for rate limit
+      function isRateLimited(res: any) {
+        if (typeof res === 'string' && res.includes('Too many request')) return true;
+        if (res && typeof res === 'object' && res.error && String(res.error).includes('Too many request')) return true;
+        return false;
       }
       try {
-        const badgesRes = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/badges").then(r => r.json());
+        const res = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/");
+        const data = await res.text();
+        if (isRateLimited(data)) { rateLimitHit = true; throw new Error('Rate limited'); }
+        newProfile = JSON.parse(data);
+        setProfile(newProfile);
+      } catch {
+        newSectionErrors.profile = rateLimitHit ? 'Rate limited. Try again later.' : 'Failed to load profile.';
+      }
+      try {
+        const res = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/badges");
+        const data = await res.text();
+        if (isRateLimited(data)) { rateLimitHit = true; throw new Error('Rate limited'); }
+        const badgesRes = JSON.parse(data);
         newBadges = badgesRes.badges || [];
         setBadges(newBadges);
       } catch {
-        newSectionErrors.badges = 'Failed to load badges';
+        newSectionErrors.badges = rateLimitHit ? 'Rate limited. Try again later.' : 'Failed to load badges.';
       }
       try {
-        newContestInfo = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/contest").then(r => r.json());
+        const res = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/contest");
+        const data = await res.text();
+        if (isRateLimited(data)) { rateLimitHit = true; throw new Error('Rate limited'); }
+        newContestInfo = JSON.parse(data);
         setContestInfo(newContestInfo);
       } catch {
-        newSectionErrors.contest = 'Failed to load contest info';
+        newSectionErrors.contest = rateLimitHit ? 'Rate limited. Try again later.' : 'Failed to load contest info.';
       }
       try {
-        const calendarRes = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/calendar").then(r => r.json());
-        let cal = (calendarRes as any).submissionCalendar || calendarRes;
+        const res = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/calendar");
+        const data = await res.text();
+        if (isRateLimited(data)) { rateLimitHit = true; throw new Error('Rate limited'); }
+        let cal = (JSON.parse(data) as any).submissionCalendar || JSON.parse(data);
         cal = parseCalendar(cal);
         newCalendar = cal;
         setCalendar(newCalendar);
       } catch {
-        newSectionErrors.calendar = 'Failed to load calendar';
+        newSectionErrors.calendar = rateLimitHit ? 'Rate limited. Try again later.' : 'Failed to load calendar.';
       }
       try {
-        const solvedRes = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/solved").then(r => r.json());
-        setSolvedStats(solvedRes);
+        const res = await fetch("https://alfa-leetcode-api.onrender.com/chinmaydpatil09/solved");
+        const data = await res.text();
+        if (isRateLimited(data)) { rateLimitHit = true; throw new Error('Rate limited'); }
+        newSolvedStats = JSON.parse(data);
+        setSolvedStats(newSolvedStats);
       } catch {
-        newSectionErrors.solved = 'Failed to load solved count';
+        newSectionErrors.solved = rateLimitHit ? 'Rate limited. Try again later.' : 'Failed to load solved count.';
       }
       setSectionErrors(newSectionErrors);
+      setRateLimited(rateLimitHit);
       setLoading(false);
-      if (newProfile || newBadges.length || newContestInfo || newCalendar || solvedStats) {
+      if (!rateLimitHit && (newProfile || newBadges.length || newContestInfo || newCalendar || newSolvedStats)) {
         try {
           localStorage.setItem(CACHE_KEY, JSON.stringify({
             timestamp: Date.now(),
@@ -198,7 +221,7 @@ export default function Problems() {
             badges: newBadges,
             contestInfo: newContestInfo,
             calendar: newCalendar,
-            solvedStats,
+            solvedStats: newSolvedStats,
           }));
         } catch {
           //
@@ -226,10 +249,6 @@ export default function Problems() {
   if (!calendar || heatmapData.length === 0) {
     heatmapData = generateEmptyHeatmapData();
   }
-  // Debug: log the last date in the heatmap
-  if (heatmapData.length > 0) {
-    console.log('Last date in heatmap:', heatmapData[heatmapData.length - 1].date);
-  }
 
   return (
     <div className="bg-background min-h-screen w-full flex justify-center px-2 sm:px-4 py-16 sm:py-32">
@@ -239,10 +258,22 @@ export default function Problems() {
           Track my progress on LeetCode, Codeforces, GitHub and more. Here you can see my coding stats!
         </p>
         <div className="rounded-xl bg-secondary/80 p-4 sm:p-8 shadow-sm flex flex-col gap-6">
+          {/* Error/Loading Section */}
+          {loading && <div className="text-center text-gray-400 py-8">Loading LeetCode stats...</div>}
+          {rateLimited && <div className="text-center text-red-400 font-semibold py-8">LeetCode API rate limit exceeded. Please try again in 1 hour.</div>}
+          {!loading && !rateLimited && Object.values(sectionErrors).some(Boolean) && (
+            <div className="text-center text-yellow-400 font-semibold py-4">
+              {Object.entries(sectionErrors).map(([key, msg]) => msg && <div key={key}>{msg}</div>)}
+            </div>
+          )}
           {/* Profile Section */}
-          <SafeProfile profile={profile} contestInfo={contestInfo} badges={badges} solvedStats={solvedStats} />
+          {!loading && !rateLimited && !sectionErrors.profile && profile && (
+            <SafeProfile profile={profile} contestInfo={contestInfo} badges={badges} solvedStats={solvedStats} />
+          )}
           {/* Heatmap Section */}
-          <SafeHeatmap data={heatmapData} />
+          {!loading && !rateLimited && !sectionErrors.calendar && (
+            <SafeHeatmap data={heatmapData} />
+          )}
         </div>
       </div>
     </div>
