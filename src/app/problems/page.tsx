@@ -93,9 +93,9 @@ function SafeProfile({ profile, contestInfo, badges, solvedStats }: { profile: a
                 {(easy !== null && medium !== null && hard !== null) && (
                   <span className="ml-2 text-xs font-normal text-gray-300">
                     (<span className="inline-flex items-center gap-1">
-                      <span style={{color:'#22c55e',fontSize:'1.1em',verticalAlign:'middle'}}>&#9679;</span> {easy}
-                      <span style={{color:'#fde047',fontSize:'1.1em',verticalAlign:'middle',marginLeft:8}}>&#9679;</span> {medium}
-                      <span style={{color:'#f87171',fontSize:'1.1em',verticalAlign:'middle',marginLeft:8}}>&#9679;</span> {hard}
+                      <span style={{ color: '#22c55e', fontSize: '1.1em', verticalAlign: 'middle' }}>&#9679;</span> {easy}
+                      <span style={{ color: '#fde047', fontSize: '1.1em', verticalAlign: 'middle', marginLeft: 8 }}>&#9679;</span> {medium}
+                      <span style={{ color: '#f87171', fontSize: '1.1em', verticalAlign: 'middle', marginLeft: 8 }}>&#9679;</span> {hard}
                     </span>)
                   </span>
                 )}
@@ -129,7 +129,7 @@ export default function Problems() {
   const [calendar, setCalendar] = useState<{ [date: string]: number } | null>(null);
   const [solvedStats, setSolvedStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [sectionErrors, setSectionErrors] = useState<{[key: string]: string}>({});
+  const [sectionErrors, setSectionErrors] = useState<{ [key: string]: string }>({});
   const [rateLimited, setRateLimited] = useState(false);
 
   useEffect(() => {
@@ -153,7 +153,7 @@ export default function Problems() {
         // Ignore cache errors
       }
       // Fetch all APIs in parallel
-      const newSectionErrors: {[key: string]: string} = {};
+      const newSectionErrors: { [key: string]: string } = {};
       let newProfile = null, newBadges = [], newContestInfo = null, newCalendar = null, newSolvedStats = null;
       let rateLimitHit = false;
       // Helper to check for rate limit

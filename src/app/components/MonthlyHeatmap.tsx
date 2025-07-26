@@ -258,8 +258,26 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
 
   return (
     <div className={(animate ? 'fade-in-heatmap ' : '') + 'relative w-full max-w-full flex flex-col items-start'}>
-      <div className="w-full flex items-center justify-center mt-0 mb-0">
-        <svg ref={ref} className="w-full h-auto block mt-0 mb-0" style={{marginTop: 0, marginBottom: 0}} />
+      <div
+        className="w-full flex items-center justify-center"
+        style={{
+          marginTop: 0,
+          marginBottom: 0,
+          paddingLeft: '0.5rem',
+          paddingRight: '0.5rem',
+          // Reduce margin for small screens, keep normal for desktop
+          paddingTop: '0.5rem',
+          paddingBottom: '0.5rem',
+          // Use media query for desktop
+          ...(typeof window !== 'undefined' && window.innerWidth >= 640 ? {
+            paddingLeft: '2.5rem',
+            paddingRight: '2.5rem',
+            paddingTop: '1.5rem',
+            paddingBottom: '1.5rem',
+          } : {})
+        }}
+      >
+        <svg ref={ref} className="w-full h-auto block" style={{marginTop: 0, marginBottom: 0}} />
       </div>
       <div id="heatmap-tooltip" style={{
         display: 'none',
@@ -274,7 +292,7 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
         zIndex: 1000,
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
       }} />
-      {/* Legend */}
+      {/*
       <div className="flex items-center gap-1 mt-2 ml-2 sm:ml-10">
         <span className="text-xs text-gray-400">Less</span>
         {shades.map((shade, i) => (
@@ -291,6 +309,7 @@ const MonthlyHeatmap: React.FC<Props> = ({ data, animate }) => {
         ))}
         <span className="text-xs text-gray-400">More</span>
       </div>
+      */}
     </div>
   );
 };
