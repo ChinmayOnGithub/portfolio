@@ -1,5 +1,6 @@
 'use client';
 import Image from "next/image";
+import { useState, useEffect } from 'react';
 
 // --- DATA ARRAYS ---
 const projects = [
@@ -8,31 +9,41 @@ const projects = [
 	{ logo: "/project-logos/another.svg", name: "Project Gamma", description: "Next.js app with server-side rendering." }
 ];
 
-// Updated with Naruto theme
 const skills = {
 	"Frontend Jutsu": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "JavaScript (ES6+)"],
 	"Backend Ninjutsu": ["Node.js", "Express", "REST APIs", "GraphQL", "Prisma"],
 	"Shinobi Tools": ["PostgreSQL", "MongoDB", "Git & GitHub", "Docker", "Figma"],
 };
 
-// Updated with Naruto theme
 const problemSolving = [
 	{ name: "LeetCode Dojo", url: "https://leetcode.com/u/ChinmayOnLeetcode/", description: "Honing my skills in data structures and algorithms." },
 	{ name: "Codeforces Arena", url: "https://codeforces.com/profile/chinmaypatil", description: "Battling in competitive programming contests." }
 ];
 
-// New data for the contact section
 const contactLinks = [
 	{ name: "GitHub", url: "https://github.com/ChinmayOnGithub", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>) },
 	{ name: "LinkedIn", url: "https://www.linkedin.com/in/chinmay-patil-cp/", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>) },
 	{ name: "Email", url: "mailto:chinmay.patil.contact@gmail.com", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>) }
 ];
 
-
 // --- MAIN COMPONENT ---
-export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
+export default function Home() {
+	const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+	useEffect(() => {
+		const isLightTheme = document.documentElement.classList.contains('light-theme');
+		setTheme(isLightTheme ? 'light' : 'dark');
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (mutation.attributeName === 'class') {
+					const newIsLightTheme = (mutation.target as HTMLElement).classList.contains('light-theme');
+					setTheme(newIsLightTheme ? 'light' : 'dark');
+				}
+			});
+		});
+		observer.observe(document.documentElement, { attributes: true });
+		return () => observer.disconnect();
+	}, []);
 
-	// --- THEME DEFINITIONS ---
 	const themeClasses = {
 		dark: {
 			bg: 'bg-[#1a1a1a]',
@@ -53,19 +64,15 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 	};
 	const currentTheme = themeClasses[theme];
 
-	// --- HANDLER to scroll to the new contact section ---
 	const scrollToContact = () => {
 		document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	// --- JSX ---
 	return (
-		<div className={`${currentTheme.bg} ${currentTheme.text} min-h-screen flex flex-col items-center overflow-x-hidden transition-colors duration-500`}>
+		<div className={`${currentTheme.text} min-h-screen flex flex-col items-center overflow-x-hidden transition-colors duration-500`}>
 
-			{/* --- SCROLLING FADE/BLUR EFFECT --- */}
 			<div className={`fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t ${theme === 'dark' ? 'from-[#1a1a1a]' : 'from-[#FAF3E6]'} to-transparent z-20 pointer-events-none transition-colors duration-500`}></div>
 
-			{/* --- HERO SECTION --- */}
 			<section id="home" className="grid grid-cols-1 md:grid-cols-2 max-w-6xl w-full min-h-screen items-center px-4 z-10 scroll-mt-24">
 				<div className="pt-32 md:pt-0">
 					<p className={`text-lg ${currentTheme.accent} pb-4 font-mono`}>
@@ -80,7 +87,7 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 						</h2>
 					</div>
 					<p className={`mt-8 max-w-xl ${currentTheme.textMuted}`}>
-						A full-stack developer from Maharashtra, IN, on a mission to craft beautiful, high-performance web applications and robust backend systems.
+						I&apos;m a software developer based in Maharashtra, IN, specializing in building beautiful, high-performance web applications and robust backend systems.
 					</p>
 					<button onClick={scrollToContact} className="mt-12 text-white font-bold py-3 px-6 rounded-md bg-orange-500 hover:bg-orange-600 transition-all duration-300 border-2 border-transparent focus:border-white focus:outline-none">
 						Let&apos;s Connect
@@ -88,7 +95,6 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 				</div>
 			</section>
 
-			{/* --- ABOUT SECTION --- */}
 			<section id="about" className="relative w-full flex justify-center min-h-screen items-center px-4 py-16 md:py-0 scroll-mt-24">
 				<div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '8px 8px' }}></div>
 				<div className="flex flex-col-reverse md:grid md:grid-cols-[2fr_3fr] gap-10 max-w-6xl w-full z-10">
@@ -106,12 +112,12 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 					</div>
 					<div className="flex flex-col">
 						<h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8 font-mono tracking-wide">
-							<span className={currentTheme.accent}>01.</span> The Shinobi's Journey
+							<span className={currentTheme.accent}>01.</span> The Shinobi&apos;s Journey
 						</h2>
 						<div className={`space-y-4 max-w-xl ${currentTheme.cardBg} p-6 rounded-lg border ${currentTheme.border} backdrop-blur-sm`}>
-							<p>Hello! I’m Chinmay, a full‑stack developer with a passion for creating digital experiences that are both powerful and elegant.</p>
-							<p>My training focuses on writing clean, maintainable code and shipping features that solve real-world problems, from lightning‑fast UIs to rock‑solid backend services.</p>
-							<p>Soon, I’ll be graduating from the esteemed{' '}
+							<p>Hello! I’m Chinmay, a full‑stack developer with a passion for creating digital experiences that are not only functional but also a pleasure to use.</p>
+							<p>I focus on writing clean, maintainable code and shipping features that solve real-world problems, from lightning‑fast UIs to rock‑solid backend services.</p>
+							<p>Soon, I’ll be graduating with a B.Tech from{' '}
 								<a className={`${currentTheme.accent} font-medium underline`} href="https://www.walchandsangli.ac.in/" target="_blank" rel="noopener noreferrer">
 									Walchand College of Engineering
 								</a>
@@ -122,14 +128,13 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 				</div>
 			</section>
 
-			{/* --- PROJECTS SECTION --- */}
 			<section id="projects" className="w-full flex justify-center px-4 py-16 md:py-32 bg-black/30 z-10 scroll-mt-24">
 				<div className="max-w-6xl w-full">
 					<h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 font-mono tracking-wide">
 						<span className={currentTheme.accent}>02.</span> Missions & Projects
 					</h2>
 					<p className={`text-base ${currentTheme.textMuted} mb-10 max-w-3xl`}>
-						A few missions I've undertaken recently. Many are open-source, so feel free to inspect the scrolls.
+						A few missions I&apos;ve undertaken recently. Many are open-source, so feel free to inspect the scrolls.
 					</p>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 						{projects.map((project) => (
@@ -151,7 +156,6 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 				</div>
 			</section>
 
-			{/* --- SKILLS SECTION --- */}
 			<section id="skills" className="max-w-6xl w-full min-h-screen flex flex-col justify-center px-4 py-16 md:py-0 z-10 scroll-mt-24">
 				<h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-12 font-mono tracking-wide">
 					<span className={currentTheme.accent}>03.</span> Jutsu & Techniques
@@ -173,7 +177,6 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 				</div>
 			</section>
 
-			{/* --- PROBLEM SOLVING SECTION --- */}
 			<section id="problems" className="max-w-6xl w-full min-h-screen flex flex-col justify-center px-4 py-16 md:py-0 z-10 scroll-mt-24">
 				<h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-12 font-mono tracking-wide">
 					<span className={currentTheme.accent}>04.</span> Dojo & Training
@@ -195,14 +198,13 @@ export default function Home({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
 				</div>
 			</section>
 
-			{/* --- CONTACT SECTION (REPLACES FOOTER) --- */}
 			<footer id="contact" className="w-full flex justify-center px-4 py-24 bg-black/30 z-10">
 				<div className="max-w-3xl w-full text-center">
 					<h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 font-mono">
 						<span className={currentTheme.accent}>05.</span> Summoning Jutsu
 					</h2>
 					<p className={`text-lg ${currentTheme.textMuted} mb-10`}>
-						My inbox is always open. Whether you have a question or just want to say hi, I’ll get back to you!
+						My inbox is always open. Whether you have a question or just want to say hi, I&apos;ll get back to you!
 					</p>
 					<div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 						{contactLinks.map((link) => (

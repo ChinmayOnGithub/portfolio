@@ -1,4 +1,3 @@
-// app/components/Navigation.tsx
 'use client';
 
 import { useCallback, useState, useEffect, useRef } from 'react';
@@ -22,7 +21,8 @@ export default function Navigation() {
   // --- STATE ---
   const [hovered, setHovered] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [theme, setTheme] = useState('dark');
+  // FIX: Explicitly type the theme state to satisfy TypeScript
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [musicStarted, setMusicStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -85,7 +85,9 @@ export default function Navigation() {
 
   // --- EFFECTS ---
   useEffect(() => {
-    document.body.className = theme === 'light' ? 'light-theme' : '';
+    // FIX: Apply theme class to the root <html> element for global styling
+    document.documentElement.classList.toggle('light-theme', theme === 'light');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -132,7 +134,7 @@ export default function Navigation() {
       themeButton: 'text-[#235E80] hover:text-black',
     }
   };
-  const currentTheme = themeClasses[theme];
+  const currentTheme = themeClasses[theme]; // This line will now work without error
 
   // --- JSX ---
   return (
@@ -140,14 +142,12 @@ export default function Navigation() {
       <audio ref={audioRef} src="/music/background-theme.mp3" loop />
       <div className="flex items-center justify-between gap-4 sm:gap-8 px-3 py-2">
 
-        {/* --- SIMPLIFIED MUSIC PLAYER --- */}
         <div className="flex items-center">
           <button onClick={toggleMute} className={`p-2 rounded-full transition-colors ${currentTheme.themeButton}`} aria-label="Toggle Music">
             <div className={musicStarted ? 'animate-spin' : ''}>
               <MusicNoteIcon />
             </div>
           </button>
-          {/* <img src="vibe02.gif" alt="vibing" /> */}
         </div>
 
         <div className={`w-px h-6 ${theme === 'dark' ? 'bg-gray-700' : 'bg-[#D26911]/50'}`}></div>
