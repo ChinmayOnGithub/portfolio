@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+/*─────────────────────────────────────────────────────────────────────
+  THEME COLORS — Named per Figma reference
+─────────────────────────────────────────────────────────────────────*/
+:root {
+  --primary: #212129;
+  --secondary: #4B5563;
+  --normal-button: #2B2D38;
+  --almost-primary: #FFD12A;
+  --faint-text: #8E959F;
+  --mygreen: #00AB40;
+  --links-color: #38BDF8;
+  --link-on-hover: #7DD3FC;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #C4C4C4;
+  --text-tertiary: #A3A3A3;
+  --text-quaternary: #6E6E6E;
+
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: monospace;
+  --font-inter: 'Inter', sans-serif;
+  --font-sharetech: 'Share Tech Mono', monospace;
+  --font-anton: 'Anton', sans-serif;
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  DARK MODE OVERRIDE
+─────────────────────────────────────────────────────────────────────*/
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #212129;
+    --text-primary: #FFFFFF;
+  }
+} */
+
+/*─────────────────────────────────────────────────────────────────────
+  BASE STYLES
+─────────────────────────────────────────────────────────────────────*/
+/* body {
+  background: var(--primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  transition: all 0.3s ease;
+} */
+
+/*─────────────────────────────────────────────────────────────────────
+  ANIMATIONS
+─────────────────────────────────────────────────────────────────────*/
+.fade-in-heatmap {
+  opacity: 0;
+  animation: fadeInHeatmap 0.7s ease forwards;
+}
+
+@keyframes fadeInHeatmap {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  CUSTOM TAILWIND UTILITIES — No config.js needed
+─────────────────────────────────────────────────────────────────────*/
+@layer utilities {
+
+  /* Background colors */
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+
+  .bg-mygreen {
+    background-color: var(--mygreen);
+  }
+
+  .bg-almost-primary {
+    background-color: var(--almost-primary);
+  }
+
+  .bg-normal-button {
+    background-color: var(--normal-button);
+  }
+
+  .bg-faint {
+    background-color: var(--faint-text);
+  }
+
+  /* Text colors */
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-tertiary {
+    color: var(--text-tertiary);
+  }
+
+  .text-quaternary {
+    color: var(--text-quaternary);
+  }
+
+  .text-links {
+    color: var(--links-color);
+  }
+
+  /* Hover text */
+  .hover\:text-link-hover:hover {
+    color: var(--link-on-hover);
+  }
+
+  /* Placeholder / faint text */
+  .text-faint {
+    color: var(--faint-text);
+  }
+
+  /* Fonts */
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .font-mono {
+    font-family: var(--font-sharetech);
+  }
+
+  .font-anton {
+    font-family: var(--font-anton);
+  }
+
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}

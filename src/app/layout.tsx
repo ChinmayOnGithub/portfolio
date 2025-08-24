@@ -203,14 +203,77 @@
 // }
 
 
+// // src/app/layout.tsx
+// import type { Metadata, Viewport } from 'next';
+// import { Inter, Roboto_Mono } from 'next/font/google';
+// import './globals.css';
+// import ClientLayoutWrapper from './components/ClientLayoutWrapper';
+// import Navigation from './components/Navigation';
+// import InteractiveBackground from './components/InteractiveBackground';
+// import { ThemeProvider } from './components/ThemeProvider';
+// import Loader from './components/Loader'; // <-- 1. Import the new Loader
+
+// const inter = Inter({
+// 	subsets: ['latin'],
+// 	variable: '--font-inter',
+// 	display: 'swap',
+// });
+
+// const robotoMono = Roboto_Mono({
+// 	subsets: ['latin'],
+// 	variable: '--font-roboto-mono',
+// 	display: 'swap',
+// });
+
+// export const metadata: Metadata = {
+// 	title: 'chinmaypatil',
+// 	description: 'Portfolio of Chinmay Patil',
+// 	metadataBase: new URL('https://chinmaypatil.com'),
+// };
+
+// export const viewport: Viewport = {
+// 	themeColor: '#1a1a1a',
+// 	width: 'device-width',
+// 	initialScale: 1,
+// };
+
+// export default function RootLayout({
+// 	children,
+// }: Readonly<{
+// 	children: React.ReactNode;
+// }>) {
+// 	return (
+// 		<html lang="en" className="scroll-smooth" suppressHydrationWarning>
+// 			<body
+// 				className={`${inter.variable} ${robotoMono.variable} font-sans antialiased bg-[#101010] text-gray-400`}
+// 			>
+// 				<ThemeProvider
+// 					attribute="class"
+// 					defaultTheme="dark"
+// 					enableSystem
+// 					disableTransitionOnChange={false}
+// 				>
+// 					<Loader /> {/* <-- 2. Add the Loader component here */}
+// 					<InteractiveBackground />
+// 					<div className="relative z-20">
+// 						<Navigation />
+// 					</div>
+// 					<main className="relative z-10">
+// 						<ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+// 					</main>
+// 				</ThemeProvider>
+// 			</body>
+// 		</html>
+// 	);
+// }
+
+
 // src/app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import './globals.css';
-import ClientLayoutWrapper from './components/ClientLayoutWrapper';
-import Navigation from './components/Navigation';
-import InteractiveBackground from './components/InteractiveBackground';
 import { ThemeProvider } from './components/ThemeProvider';
+import AppShell from './components/AppShell';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -224,6 +287,7 @@ const robotoMono = Roboto_Mono({
 	display: 'swap',
 });
 
+// Metadata is now correctly in a Server Component
 export const metadata: Metadata = {
 	title: 'chinmaypatil',
 	description: 'Portfolio of Chinmay Patil',
@@ -250,15 +314,10 @@ export default function RootLayout({
 					attribute="class"
 					defaultTheme="dark"
 					enableSystem
-					disableTransitionOnChange={false} // FIX: Changed to false to allow smooth transitions
+					disableTransitionOnChange={false}
 				>
-					<InteractiveBackground />
-					<div className="relative z-20">
-						<Navigation />
-					</div>
-					<main className="relative z-10">
-						<ClientLayoutWrapper>{children}</ClientLayoutWrapper>
-					</main>
+					{/* The new AppShell component now handles all client-side logic */}
+					<AppShell>{children}</AppShell>
 				</ThemeProvider>
 			</body>
 		</html>
