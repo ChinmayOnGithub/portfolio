@@ -1258,7 +1258,7 @@ export default function DarkModePage() {
       <div className="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#121212] to-transparent z-20 pointer-events-none"></div>
 
       {/* --- HERO SECTION (Now transparent to show the video) --- */}
-      <section id="home" className="flex items-center justify-center w-full h-screen px-6 sm:px-8 z-10 bg-transparent">
+      <section id="home" className="flex items-center justify-center w-full h-screen px-6 sm:px-8 z-10 bg-[#121212]">
         <div className="max-w-6xl w-full text-center md:text-left">
           <p className="text-lg text-orange-500 pb-4 font-mono">
             Hello, my name is
