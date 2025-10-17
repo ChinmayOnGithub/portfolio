@@ -1,18 +1,30 @@
 'use client';
 
+import React from 'react';
 import { useTheme } from 'next-themes';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { getProjectById } from '../../constants';
 
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const { resolvedTheme } = useTheme();
-  const project = getProjectById(params.id);
+  const [resolvedParams, setResolvedParams] = React.useState<{ id: string } | null>(null);
+
+  React.useEffect(() => {
+    params.then(setResolvedParams);
+  }, [params]);
+
+  if (!resolvedParams) {
+    return <div>Loading...</div>;
+  }
+
+  const project = getProjectById(resolvedParams.id);
 
   if (!project) {
     notFound();
@@ -38,16 +50,16 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         {/* Article header with disambiguation */}
         <div className="mb-6">
           <p className={`text-sm mb-2 ${isDark ? 'text-[#7d8590]' : 'text-[#54595d]'}`}>
-            From Chinmay Patil's Portfolio
+            From Chinmay Patil&apos;s Portfolio
           </p>
           <div className={`text-sm p-3 mb-4 border-l-4 ${isDark
-              ? 'bg-[#161b22] border-[#30363d] text-[#7d8590]'
-              : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
+            ? 'bg-[#161b22] border-[#30363d] text-[#7d8590]'
+            : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
             }`}>
             This article is about the {project.category} application. For other projects, see{' '}
-            <a href="/" className={isDark ? 'text-[#58a6ff]' : 'text-[#0645ad]'}>
+            <Link href="/" className={isDark ? 'text-[#58a6ff]' : 'text-[#0645ad]'}>
               Portfolio (disambiguation)
-            </a>.
+            </Link>.
           </div>
         </div>
 
@@ -59,14 +71,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="flex flex-wrap gap-2 mt-4 mb-6">
           <span className={`px-2 py-1 text-xs border rounded ${isDark
-              ? 'bg-[#21262d] border-[#30363d] text-[#7d8590]'
-              : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
+            ? 'bg-[#21262d] border-[#30363d] text-[#7d8590]'
+            : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
             }`}>
             Article
           </span>
           <span className={`px-2 py-1 text-xs border rounded ${isDark
-              ? 'bg-[#21262d] border-[#30363d] text-[#7d8590]'
-              : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
+            ? 'bg-[#21262d] border-[#30363d] text-[#7d8590]'
+            : 'bg-[#f8f9fa] border-[#a2a9b1] text-[#54595d]'
             }`}>
             Talk
           </span>
@@ -86,8 +98,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
             {/* Table of Contents */}
             <div className={`float-left mr-6 mb-4 p-4 border ${isDark
-                ? 'bg-[#161b22] border-[#30363d]'
-                : 'bg-[#f8f9fa] border-[#a2a9b1]'
+              ? 'bg-[#161b22] border-[#30363d]'
+              : 'bg-[#f8f9fa] border-[#a2a9b1]'
               }`} style={{ width: '250px' }}>
               <div className={`text-center font-bold mb-2 ${isDark ? 'text-[#e6edf3]' : 'text-black'
                 }`}>
@@ -183,8 +195,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
                 {project.technologies.map((tech) => (
                   <div key={tech} className={`p-2 border text-sm ${isDark
-                      ? 'bg-[#21262d] border-[#30363d] text-[#e6edf3]'
-                      : 'bg-[#f8f9fa] border-[#a2a9b1] text-black'
+                    ? 'bg-[#21262d] border-[#30363d] text-[#e6edf3]'
+                    : 'bg-[#f8f9fa] border-[#a2a9b1] text-black'
                     }`}>
                     {tech}
                   </div>
@@ -261,19 +273,19 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <li>
                   <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
                     className={isDark ? 'text-[#58a6ff]' : 'text-[#0645ad]'}>
-                    "{project.name} Source Code Repository"
+                    &quot;{project.name} Source Code Repository&quot;
                   </a>. GitHub. Retrieved {new Date().getFullYear()}.
                 </li>
                 {project.liveUrl && (
                   <li>
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
                       className={isDark ? 'text-[#58a6ff]' : 'text-[#0645ad]'}>
-                      "{project.name} Live Application"
+                      &quot;{project.name} Live Application&quot;
                     </a>. Retrieved {new Date().getFullYear()}.
                   </li>
                 )}
                 <li>
-                  "Portfolio Projects Overview". Chinmay Patil. {project.year}.
+                  &quot;Portfolio Projects Overview&quot;. Chinmay Patil. {project.year}.
                 </li>
               </ol>
             </section>
@@ -282,8 +294,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           {/* Wikipedia-style infobox */}
           <div className="w-80 flex-shrink-0">
             <div className={`border p-4 ${isDark
-                ? 'bg-[#161b22] border-[#30363d]'
-                : 'bg-[#f8f9fa] border-[#a2a9b1]'
+              ? 'bg-[#161b22] border-[#30363d]'
+              : 'bg-[#f8f9fa] border-[#a2a9b1]'
               }`}>
               <div className={`text-center font-bold mb-3 ${isDark ? 'text-[#e6edf3]' : 'text-black'
                 }`}>

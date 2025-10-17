@@ -18,17 +18,7 @@ const problemSolving = [
   { name: "Codeforces", url: "https://codeforces.com/profile/chinmaydpatil09", description: "Participating in competitive programming contests." }
 ];
 
-// const contactLinks = [
-//   { name: "GitHub", url: "https://github.com/ChinmayOnGithub", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>) },
-//   { name: "LinkedIn", url: "https://www.linkedin.com/in/chinmaydpatil/", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>) },
-//   { name: "Email", url: "mailto:chinmay.patil.contact@gmail.com", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>) }
-// ];
 
-const contactLinks = [
-  { name: 'Github', icon: 'x', url: '#', hoverBg: 'bg-gray-800', hoverText: 'text-white' }, // GitHub's dark grey
-  { name: 'LinkedIn', icon: 'x', url: '#', hoverBg: 'bg-red-500', hoverText: 'text-white' }, // LinkedIn blue
-  { name: 'Email', icon: 'x', url: '#', hoverBg: 'bg-orange-500', hoverText: 'text-white' }, // Orange accent for email
-];
 
 export default function DarkModePage() {
 
@@ -82,7 +72,7 @@ export default function DarkModePage() {
               onClick={scrollToContact}
               className="relative bg-lime-400 text-black font-bold text-lg px-8 py-4 rounded-full border-4 border-lime-400 transition-all duration-200 hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 z-10"
             >
-              Let's Connect
+              Let&apos;s Connect
             </button>
             <div className="absolute top-2 left-2 w-full h-full bg-gray-700 rounded-full -z-10"></div>
           </div>
@@ -105,12 +95,12 @@ export default function DarkModePage() {
               <span className="text-orange-500">01.</span> My Journey
             </h2>
             <div className="space-y-4 max-w-xl bg-[#282828] p-6 rounded-lg border border-lime-400 backdrop-blur-sm">
-              <p>Hello! I'm Chinmay, a full‑stack developer with a passion for creating digital experiences that are not only functional but also a pleasure to use.</p>
+              <p>Hello! I&apos;m Chinmay, a full‑stack developer with a passion for creating digital experiences that are not only functional but also a pleasure to use.</p>
               <p>I focus on writing clean, maintainable code and shipping features that solve real-world problems, from lightning‑fast UIs to rock‑solid backend services.</p>
-              <p>Soon, I'll be graduating with a B.Tech from{' '}
+              <p>Soon, I&apos;ll be graduating with a B.Tech from{' '}
                 <a className="text-orange-500 font-medium underline" href="https://www.walchandsangli.ac.in/" target="_blank" rel="noopener noreferrer">
                   Walchand College of Engineering
-                </a>, where I've honed my skills in system design and performance optimization.
+                </a>, where I&apos;ve honed my skills in system design and performance optimization.
               </p>
             </div>
           </div>
