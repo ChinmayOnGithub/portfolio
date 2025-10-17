@@ -71,6 +71,11 @@ body {
 ─────────────────────────────────────────────────────────────────────*/
 @layer utilities {
 
+  /* Custom gradient utilities */
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
   /* Background colors */
   .bg-primary {
     background-color: var(--primary);
@@ -142,5 +147,9 @@ body {
 
   .font-cormorant {
     font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-times {
+    font-family: 'Times New Roman', serif;
   }
 }
