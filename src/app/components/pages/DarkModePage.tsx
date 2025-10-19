@@ -7,18 +7,127 @@ import { projects } from '../../constants';
 // Use only first 3 projects for homepage
 const featuredProjects = projects.slice(0, 3);
 
-const skills = {
-  "Core Toolkit": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "JavaScript (ES6+)"],
-  "Backend & APIs": ["Node.js", "Express", "REST APIs", "GraphQL", "Prisma"],
-  "Developer Tools": ["PostgreSQL", "MongoDB", "Git & GitHub", "Docker", "Figma"],
+// const skills = {
+//   "Core Toolkit": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "JavaScript (ES6+)"],
+//   "Backend & APIs": ["Node.js", "Express", "REST APIs", "GraphQL", "Prisma"],
+//   "Developer Tools": ["PostgreSQL", "MongoDB", "Git & GitHub", "Docker", "Figma"],
+// };
+
+// --- DATA FOR SKILLS SECTION ---
+const languagesAndCore = [
+  // Basics at the bottom
+  { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white" },
+  { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black" },
+  { name: "JavaScript", color: "#F7DF1E", shadow: "rgba(247, 223, 30, 0.4)", hoverText: "text-black" },
+  { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+  { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+  { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+].reverse(); // .reverse() puts basics at the bottom of the visual stack
+
+const frontendSkills = [
+  { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white" },
+  { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white" },
+  { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black" },
+  { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black" },
+].reverse();
+
+const backendAndDatabases = [
+  { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white" },
+  { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white" },
+  { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white" },
+].reverse();
+
+const devopsAndTools = [
+  { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black" },
+  { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white" },
+  { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black" },
+  { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white" },
+  { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
+  { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
+].reverse();
+
+// This combines all skills into one big array for the file drawer
+const allSkills = [
+  ...frontendSkills,
+  ...backendAndDatabases,
+  ...languagesAndCore,
+  ...devopsAndTools,
+];
+
+// Define the type for a single skill
+type Skill = {
+  name: string;
+  color: string;
+  shadow: string;
+  hoverText: string;
 };
+
+// Define the type for the props
+type SkillStackProps = {
+  title: string;
+  skills: Skill[];
+};
+
+const SkillStack = ({ title, skills }: SkillStackProps) => (
+  <div className="flex flex-col items-center">
+    <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono">{title}</h3>
+    <div className="flex flex-col items-center w-full max-w-xs min-h-[250px]">
+      {skills.map((skill, index) => (
+        <div
+          key={skill.name}
+          className="group relative w-full p-4 rounded-lg 
+                     border border-lime-400 bg-[#1f1f1f] text-gray-300
+                     transition-all duration-300 ease-out 
+                     z-${10 + index} 
+                     ${index > 0 ? '-mt-10' : ''} 
+                     hover:-translate-y-2 hover:z-50 hover:scale-105"
+          style={{
+            minHeight: '60px',
+            // Default border color is lime green (from className)
+          }}
+          onMouseEnter={(e) => {
+            // On hover: set brand colors
+            e.currentTarget.style.backgroundColor = skill.color;
+            e.currentTarget.style.borderColor = skill.color;
+            e.currentTarget.style.color = skill.hoverText === 'text-black' ? '#000' : '#FFF';
+            e.currentTarget.style.boxShadow = `0 8px 30px 0 ${skill.shadow}`;
+          }}
+          onMouseLeave={(e) => {
+            // On leave: reset to default
+            e.currentTarget.style.backgroundColor = '#1f1f1f';
+            e.currentTarget.style.borderColor = '#B6F427'; // Tailwind's lime-400
+            e.currentTarget.style.color = '#D1D5DB'; // text-gray-300
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          {/* Default State: Skill Name (Uniform Color) */}
+          <h4
+            className="text-lg font-semibold text-center group-hover:opacity-0 transition-opacity duration-150"
+          >
+            {skill.name}
+          </h4>
+
+          {/* Hover State: Logo + Name (Inverted Color) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                          pointer-events-none">
+            <span className="w-8 h-8 flex items-center justify-center text-xl font-bold">
+              {/* This is where your {skill.logo} component will render */}
+              {skill.logo}
+            </span>
+            <span className="font-semibold">{skill.name}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 
 const problemSolving = [
   { name: "LeetCode", url: "https://leetcode.com/u/chinmaydpatil09/", description: "Honing my skills in data structures and algorithms." },
   { name: "Codeforces", url: "https://codeforces.com/profile/chinmaydpatil09", description: "Participating in competitive programming contests." }
 ];
-
-
 
 export default function DarkModePage() {
 
@@ -87,7 +196,7 @@ export default function DarkModePage() {
             <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 relative group">
               <div className="absolute -inset-2 bg-orange-500 rounded-full opacity-0 group-hover:opacity-50 blur-2xl transition-opacity duration-500"></div>
               <div className="absolute -inset-1 bg-purple-600 rounded-full opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 delay-100"></div>
-              <Image src="/chinmaypatil.jpg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-2 border-gray-800 transition-all duration-300 group-hover:scale-105" onError={(e) => { e.currentTarget.src = 'https://placehold.co/400x400/1a1a1a/ff4500?text=Chinmay'; }} />
+              <Image src="/player.svg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-2 border-gray-800 transition-all duration-300 group-hover:scale-105" onError={(e) => { e.currentTarget.src = 'https://placehold.co/400x400/1a1a1a/ff4500?text=Chinmay'; }} />
             </div>
           </div>
           <div className="flex flex-col text-center md:text-left">
@@ -137,7 +246,7 @@ export default function DarkModePage() {
       </section>
 
       {/* --- SKILLS SECTION (Lighter Dark + Diagonal Lines) --- */}
-      <section id="skills" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#212121] relative">
+      {/* <section id="skills" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#212121] relative">
         <div className="absolute inset-0" style={{ backgroundImage: 'repeating-linear-gradient(45deg, rgba(96, 96, 96, 0.1), rgba(96, 96, 96, 0.1) 1px, transparent 1px, transparent 25px)' }}></div>
         <div className="max-w-6xl w-full relative">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-12 font-mono tracking-wide text-center md:text-left">
@@ -159,30 +268,97 @@ export default function DarkModePage() {
             ))}
           </div>
         </div>
+      </section> */}
+      {/* --- SKILLS SECTION (Skill Stacks) --- */}
+      <section id="skills" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
+        {/* Same consistent grid background */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
+          backgroundSize: '30px 30px'
+        }}></div>
+
+        <div className="max-w-6xl w-full relative flex flex-col items-center">
+          {/* Section title remains consistent */}
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
+            <span className="text-orange-500">03.</span> My Arsenal
+          </h2>
+
+          {/* Multiple Stacks Container - 4 columns on desktop */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-6">
+            <SkillStack title="Languages & Core" skills={languagesAndCore} />
+            <SkillStack title="Frontend" skills={frontendSkills} />
+            <SkillStack title="Backend & DBs" skills={backendAndDatabases} />
+            <SkillStack title="DevOps & Tools" skills={devopsAndTools} />
+          </div>
+        </div>
       </section>
 
       {/* --- PROBLEM SOLVING SECTION (Darker + Dot Pattern) --- */}
-      <section id="problems" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#252525] relative">
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(rgba(72, 72, 72, 0.14) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-        <div className="max-w-6xl w-full relative">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-12 font-mono tracking-wide text-center md:text-left">
-            <span className="text-orange-500">04.</span> Professional Growth
+      {/* --- SKILLS SECTION (File Drawer) --- */}
+      <section id="skills" className="w-full flex items-center justify-center min-h-screen py-24 px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
+        {/* Same consistent grid background */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
+          backgroundSize: '30px 30px'
+        }}></div>
+
+        <div className="max-w-4xl w-full relative flex flex-col items-center">
+          {/* Section title */}
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
+            <span className="text-orange-500">03.</span> My Arsenal
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {problemSolving.map((platform) => (
-              <a key={platform.name} href={platform.url} target="_blank" rel="noopener noreferrer" className="group relative block p-6 overflow-hidden rounded-lg border-2 border-gray-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10">
-                <div className="absolute inset-0 bg-[#1f1f1f] transition-colors"></div>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" style={{ backgroundImage: 'radial-gradient(circle at 80% 80%, #9400d3 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
-                <div className="relative">
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    {platform.name}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 group-hover:opacity-100 transition-opacity text-gray-400"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>
-                  </h3>
-                  <p className="mt-2 text-gray-400">{platform.description}</p>
-                </div>
-              </a>
+
+          {/* The File Drawer Container */}
+          <div className="w-full flex flex-col items-center">
+            {allSkills.map((skill, index) => (
+              <div
+                key={skill.name}
+                className={`group relative w-[55%] p-4 
+                            rounded-t-lg 
+                            border-b-0 border-2 border-lime-400 
+                            bg-[#1f1f1f] text-gray-300
+                            transition-all duration-300 ease-out 
+                            z-${10 + index} 
+                            ${index > 0 ? '-mt-10' : ''} 
+                            ${index % 2 === 0 ? 'self-start' : 'self-end'}
+                            hover:z-50`}
+                style={{
+                  minHeight: '60px',
+                }}
+                onMouseEnter={(e) => {
+                  // On hover: set brand colors
+                  e.currentTarget.style.backgroundColor = skill.color;
+                  e.currentTarget.style.borderColor = skill.color;
+                  e.currentTarget.style.color = skill.hoverText === 'text-black' ? '#000' : '#FFF';
+                  e.currentTarget.style.boxShadow = `0 8px 30px 0 ${skill.shadow}`;
+                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.03)';
+                }}
+                onMouseLeave={(e) => {
+                  // On leave: reset to default
+                  e.currentTarget.style.backgroundColor = '#1f1f1f';
+                  e.currentTarget.style.borderColor = '#B6F427'; // Tailwind's lime-400
+                  e.currentTarget.style.color = '#D1D5DB'; // text-gray-300
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0px) scale(1)';
+                }}
+              >
+                {/* Default State: Skill Name (Uniform Color) */}
+                <h4
+                  className={`text-lg font-semibold transition-all duration-300 ease-out group-hover:scale-110
+                              ${index % 2 === 0 ? 'text-left pl-4' : 'text-right pr-4'}`}
+                >
+                  {skill.name}
+                </h4>
+              </div>
             ))}
           </div>
+
+          {/* Drawer Handle */}
+          <div className="w-[60%] h-4 bg-gray-700 rounded-b-md mt-0 z-0 shadow-inner"></div>
+          <div className="w-32 h-8 bg-gray-600 rounded-b-lg flex items-center justify-center -mt-1 shadow-lg">
+            <div className="w-16 h-1 bg-gray-800 rounded-full"></div>
+          </div>
+
         </div>
       </section>
 
@@ -208,24 +384,24 @@ export default function DarkModePage() {
       </footer> */}
       <footer id="contact" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 bg-[#212121] z-10 relative">
         {/* Lime and Orange subtle grid background */}
-        <div className="absolute inset-0" style={{ 
-            backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)', 
-            backgroundSize: '30px 30px' 
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
+          backgroundSize: '30px 30px'
         }}></div>
-        
+
         <div className="max-w-3xl w-full text-center relative flex flex-col items-center">
           {/* HEADER: Orange for the number, white for the text */}
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 font-mono">
             <span className="text-orange-500">05.</span> Summoning Jutsu
           </h2>
-          
+
           <p className="text-lg text-gray-300 mb-10 max-w-lg">
             My inbox is always open. Whether you have a question or just want to say hi, I&apos;ll get back to you!
           </p>
-          
+
           {/* 1. THE MAIN "JUTSU" BUTTON (EMAIL) */}
           {/* This mimics your flashy "Let's Connect" button for consistency */}
-          <a 
+          <a
             href="mailto:chinmaydpatil09@gmail.com"
             className="group relative inline-flex items-center justify-center px-10 py-4 
                       font-bold text-gray-900 bg-lime-400 rounded-lg 
@@ -235,13 +411,13 @@ export default function DarkModePage() {
           >
             <span className="text-lg">Say Hello</span>
           </a>
-          
+
           {/* 2. THE "SEAL" (SECONDARY ICON LINKS) */}
           <div className="flex gap-8 mt-10">
             {/* GitHub Icon Link */}
-            <a 
-              href="#your-github-url" // <-- REPLACE THIS
-              target="_blank" 
+            <a
+              href="#your-github-url"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-all duration-300 ease-out
                         hover:text-lime-400 hover:scale-110 hover:-translate-y-1
@@ -256,9 +432,9 @@ export default function DarkModePage() {
             </a>
 
             {/* LinkedIn Icon Link */}
-            <a 
+            <a
               href="#your-linkedin-url" // <-- REPLACE THIS
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-all duration-300 ease-out
                         hover:text-lime-400 hover:scale-110 hover:-translate-y-1
@@ -271,9 +447,9 @@ export default function DarkModePage() {
               </svg>
             </a>
           </div>
-          
+
         </div>
-      </footer> 
+      </footer>
     </div>
   );
 }

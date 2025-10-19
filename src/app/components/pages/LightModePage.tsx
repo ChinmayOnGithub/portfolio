@@ -73,7 +73,7 @@ export default function LightModePage() {
           </div>
           <div className="flex items-center justify-center order-1 md:order-2">
             <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 relative group">
-              <img src="/chinmaypatil.jpg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-4 border-white shadow-2xl transition-all duration-300 group-hover:scale-105" onError={(e) => { (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/400x400/FAF3E6/D26911?text=Chinmay'; }} />
+              <img src="/player.svg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-4 border-white shadow-2xl transition-all duration-300 group-hover:scale-105" onError={(e) => { (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/400x400/FAF3E6/D26911?text=Chinmay'; }} />
             </div>
           </div>
         </div>
