@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { projects } from '../../constants';
+import React from "react";
 
 // Use only first 3 projects for homepage
 const featuredProjects = projects.slice(0, 3);
@@ -14,47 +15,39 @@ const featuredProjects = projects.slice(0, 3);
 // };
 
 // --- DATA FOR SKILLS SECTION ---
-const languagesAndCore = [
-  // Basics at the bottom
-  { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white" },
-  { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black" },
-  { name: "JavaScript", color: "#F7DF1E", shadow: "rgba(247, 223, 30, 0.4)", hoverText: "text-black" },
-  { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
-  { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
-  { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
-].reverse(); // .reverse() puts basics at the bottom of the visual stack
+// Unused arrays - kept for reference
+// const languagesAndCore = [
+//   { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white" },
+//   { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black" },
+//   { name: "JavaScript", color: "#F7DF1E", shadow: "rgba(247, 223, 30, 0.4)", hoverText: "text-black" },
+//   { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+//   { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+//   { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+// ].reverse();
 
-const frontendSkills = [
-  { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white" },
-  { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white" },
-  { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black" },
-  { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black" },
-].reverse();
+// const frontendSkills = [
+//   { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white" },
+//   { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white" },
+//   { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black" },
+//   { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black" },
+// ].reverse();
 
-const backendAndDatabases = [
-  { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white" },
-  { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white" },
-  { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white" },
-].reverse();
+// const backendAndDatabases = [
+//   { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white" },
+//   { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white" },
+//   { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white" },
+// ].reverse();
 
-const devopsAndTools = [
-  { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black" },
-  { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white" },
-  { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black" },
-  { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white" },
-  { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
-  { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
-].reverse();
+// const devopsAndTools = [
+//   { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black" },
+//   { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white" },
+//   { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black" },
+//   { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white" },
+//   { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
+//   { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
+// ].reverse();
 
-// This combines all skills into one big array for the file drawer
-const allSkills = [
-  ...frontendSkills,
-  ...backendAndDatabases,
-  ...languagesAndCore,
-  ...devopsAndTools,
-];
-
-// Define the type for a single skill
+// Type definition for skills
 type Skill = {
   name: string;
   color: string;
@@ -62,66 +55,85 @@ type Skill = {
   hoverText: string;
 };
 
-// Define the type for the props
-type SkillStackProps = {
-  title: string;
-  skills: Skill[];
-};
+// Commented out - Alternative file drawer design
+// type SkillWithSide = Skill & {
+//   side: 'left' | 'right';
+//   logo?: string | React.ReactNode;
+// };
 
-const SkillStack = ({ title, skills }: SkillStackProps) => (
-  <div className="flex flex-col items-center">
-    <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono">{title}</h3>
-    <div className="flex flex-col items-center w-full max-w-xs min-h-[250px]">
-      {skills.map((skill, index) => (
-        <div
-          key={skill.name}
-          className="group relative w-full p-4 rounded-lg 
-                     border border-lime-400 bg-[#1f1f1f] text-gray-300
-                     transition-all duration-300 ease-out 
-                     z-${10 + index} 
-                     ${index > 0 ? '-mt-10' : ''} 
-                     hover:-translate-y-2 hover:z-50 hover:scale-105"
-          style={{
-            minHeight: '60px',
-            // Default border color is lime green (from className)
-          }}
-          onMouseEnter={(e) => {
-            // On hover: set brand colors
-            e.currentTarget.style.backgroundColor = skill.color;
-            e.currentTarget.style.borderColor = skill.color;
-            e.currentTarget.style.color = skill.hoverText === 'text-black' ? '#000' : '#FFF';
-            e.currentTarget.style.boxShadow = `0 8px 30px 0 ${skill.shadow}`;
-          }}
-          onMouseLeave={(e) => {
-            // On leave: reset to default
-            e.currentTarget.style.backgroundColor = '#1f1f1f';
-            e.currentTarget.style.borderColor = '#B6F427'; // Tailwind's lime-400
-            e.currentTarget.style.color = '#D1D5DB'; // text-gray-300
-            e.currentTarget.style.boxShadow = 'none';
-          }}
-        >
-          {/* Default State: Skill Name (Uniform Color) */}
-          <h4
-            className="text-lg font-semibold text-center group-hover:opacity-0 transition-opacity duration-150"
-          >
-            {skill.name}
-          </h4>
+// const allSkills: SkillWithSide[] = [
+//   { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black", side: 'left' },
+//   { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white", side: 'right' },
+//   { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black", side: 'left' },
+//   { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white", side: 'right' },
+//   { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white", side: 'left' },
+//   { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white", side: 'right' },
+//   { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white", side: 'left' },
+//   { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white", side: 'right' },
+//   { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white", side: 'left' },
+//   { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black", side: 'right' },
+//   { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black", side: 'left' },
+//   { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black", side: 'right' },
+//   { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white", side: 'left' },
+//   { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black", side: 'right' },
+//   { name: "JavaScript", color: "#F7DF1E", shadow: "rgba(247, 223, 30, 0.4)", hoverText: "text-black", side: 'left' },
+//   { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white", side: 'right' },
+//   { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white", side: 'left' },
+//   { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black", side: 'right' },
+//   { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black", side: 'left' },
+// ];
 
-          {/* Hover State: Logo + Name (Inverted Color) */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 
-                          opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                          pointer-events-none">
-            <span className="w-8 h-8 flex items-center justify-center text-xl font-bold">
-              {/* This is where your {skill.logo} component will render */}
-              {skill.logo}
-            </span>
-            <span className="font-semibold">{skill.name}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+// Commented out - Alternative stacked design
+// type SkillStackProps = {
+//   title: string;
+//   skills: Skill[];
+// };
+
+// const SkillStack = ({ title, skills }: SkillStackProps) => (
+//   <div className="flex flex-col items-center">
+//     <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono">{title}</h3>
+//     <div className="flex flex-col items-center w-full max-w-xs min-h-[250px]">
+//       {skills.map((skill, index) => (
+//         <div
+//           key={skill.name}
+//           className="group relative w-full p-4 rounded-lg 
+//                      border border-lime-400 bg-[#1f1f1f] text-gray-300
+//                      transition-all duration-300 ease-out 
+//                      z-${10 + index} 
+//                      ${index > 0 ? '-mt-10' : ''} 
+//                      hover:-translate-y-2 hover:z-50 hover:scale-105"
+//           style={{
+//             minHeight: '60px',
+//           }}
+//           onMouseEnter={(e) => {
+//             e.currentTarget.style.backgroundColor = skill.color;
+//             e.currentTarget.style.borderColor = skill.color;
+//             e.currentTarget.style.color = skill.hoverText === 'text-black' ? '#000' : '#FFF';
+//             e.currentTarget.style.boxShadow = `0 8px 30px 0 ${skill.shadow}`;
+//           }}
+//           onMouseLeave={(e) => {
+//             e.currentTarget.style.backgroundColor = '#1f1f1f';
+//             e.currentTarget.style.borderColor = '#B6F427';
+//             e.currentTarget.style.color = '#D1D5DB';
+//             e.currentTarget.style.boxShadow = 'none';
+//           }}
+//         >
+//           <h4 className="text-lg font-semibold text-center group-hover:opacity-0 transition-opacity duration-150">
+//             {skill.name}
+//           </h4>
+//           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 
+//                           opacity-0 group-hover:opacity-100 transition-opacity duration-300
+//                           pointer-events-none">
+//             <span className="w-8 h-8 flex items-center justify-center text-xl font-bold">
+//               {skill.color}
+//             </span>
+//             <span className="font-semibold">{skill.name}</span>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   </div>
+// );
 
 
 const problemSolving = [
@@ -134,6 +146,92 @@ export default function DarkModePage() {
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Commented out - Alternative file folder design component
+  // const FileFolder = ({ skill, index }: { skill: SkillWithSide, index: number }) => {
+  //   const isLeftTab = skill.side === 'left';
+  //   const [isHovered, setIsHovered] = React.useState(false);
+
+  //   const folderContainerStyle = {
+  //     transform: isHovered ? 'translateY(-10px)' : 'translateY(0px)',
+  //     boxShadow: isHovered ? `0 10px 35px 0 ${skill.shadow}` : 'none',
+  //     width: '60%',
+  //     minHeight: '60px',
+  //     marginLeft: 'auto',
+  //     marginRight: 'auto',
+  //     zIndex: 10 + index,
+  //   };
+
+  //   const mainFolderBodyStyle = {
+  //     backgroundColor: isHovered ? skill.color : '#1f1f1f',
+  //     borderColor: isHovered ? skill.color : '#B6F427',
+  //     borderBottom: '2px solid',
+  //     borderLeft: isLeftTab ? 'none' : '2px solid',
+  //     borderRight: isLeftTab ? '2px solid' : 'none',
+  //     borderTopLeftRadius: isLeftTab ? '0' : '0.375rem',
+  //     borderTopRightRadius: isLeftTab ? '0.375rem' : '0',
+  //   };
+
+  //   const tabStyle = {
+  //     backgroundColor: isHovered ? skill.color : '#1f1f1f',
+  //     borderColor: isHovered ? skill.color : '#B6F427',
+  //     borderTop: '2px solid',
+  //     borderLeft: isLeftTab ? '2px solid' : 'none',
+  //     borderRight: isLeftTab ? 'none' : '2px solid',
+  //   };
+
+  //   return (
+  //     <div
+  //       key={skill.name}
+  //       className={`relative h-[70px] transition-all duration-300 ease-out 
+  //                 ${index > 0 ? '-mt-10' : ''}`}
+  //       style={folderContainerStyle as React.CSSProperties}
+  //       onMouseEnter={() => setIsHovered(true)}
+  //       onMouseLeave={() => setIsHovered(false)}
+  //       tabIndex={0}
+  //       onFocus={() => setIsHovered(true)}
+  //       onBlur={() => setIsHovered(false)}
+  //       role="listitem"
+  //       aria-label={`Skill: ${skill.name}`}
+  //     >
+  //       <div className={`absolute inset-0 flex ${isLeftTab ? 'flex-row' : 'flex-row-reverse'}`}>
+  //         <div
+  //           className="relative h-[24px] w-[130px] flex-shrink-0 
+  //                    rounded-t-md transition-colors duration-300 ease-out"
+  //           style={tabStyle as React.CSSProperties}
+  //         >
+  //           <span
+  //             className="absolute inset-0 flex items-center justify-center 
+  //                      text-xs font-semibold transition-opacity duration-300"
+  //             style={{
+  //               color: isHovered ? skill.hoverText : '#D1D5DB',
+  //               opacity: isHovered ? 0 : 1,
+  //             }}
+  //           >
+  //             {skill.name}
+  //           </span>
+  //         </div>
+  //         <div
+  //           className="relative w-full h-full rounded-b-md
+  //                    transition-colors duration-300 ease-out"
+  //           style={mainFolderBodyStyle as React.CSSProperties}
+  //         >
+  //           <span
+  //             className="absolute inset-0 flex items-center justify-center 
+  //                      text-xl font-bold transition-all duration-300 ease-out"
+  //             style={{
+  //               color: skill.hoverText,
+  //               opacity: isHovered ? 1 : 0,
+  //               transform: isHovered ? 'translateY(-5px)' : 'translateY(0px)',
+  //             }}
+  //           >
+  //             {skill.name}
+  //           </span>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="relative min-h-screen flex flex-col items-center overflow-x-hidden bg-[#212121]">
@@ -269,46 +367,19 @@ export default function DarkModePage() {
           </div>
         </div>
       </section> */}
-      {/* --- SKILLS SECTION (Skill Stacks) --- */}
-      <section id="skills" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
-        {/* Same consistent grid background */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
-          backgroundSize: '30px 30px'
-        }}></div>
 
-        <div className="max-w-6xl w-full relative flex flex-col items-center">
-          {/* Section title remains consistent */}
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
-            <span className="text-orange-500">03.</span> My Arsenal
-          </h2>
-
-          {/* Multiple Stacks Container - 4 columns on desktop */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-6">
-            <SkillStack title="Languages & Core" skills={languagesAndCore} />
-            <SkillStack title="Frontend" skills={frontendSkills} />
-            <SkillStack title="Backend & DBs" skills={backendAndDatabases} />
-            <SkillStack title="DevOps & Tools" skills={devopsAndTools} />
-          </div>
-        </div>
-      </section>
-
-      {/* --- PROBLEM SOLVING SECTION (Darker + Dot Pattern) --- */}
-      {/* --- SKILLS SECTION (File Drawer) --- */}
-      <section id="skills" className="w-full flex items-center justify-center min-h-screen py-24 px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
-        {/* Same consistent grid background */}
+      {/* --- SKILLS SECTION (File Drawer) - COMMENTED OUT --- */}
+      {/* <section id="skills" className="w-full flex items-center justify-center min-h-screen py-24 px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
         <div className="absolute inset-0" style={{
           backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
           backgroundSize: '30px 30px'
         }}></div>
 
         <div className="max-w-4xl w-full relative flex flex-col items-center">
-          {/* Section title */}
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
             <span className="text-orange-500">03.</span> My Arsenal
           </h2>
 
-          {/* The File Drawer Container */}
           <div className="w-full flex flex-col items-center">
             {allSkills.map((skill, index) => (
               <div
@@ -326,7 +397,6 @@ export default function DarkModePage() {
                   minHeight: '60px',
                 }}
                 onMouseEnter={(e) => {
-                  // On hover: set brand colors
                   e.currentTarget.style.backgroundColor = skill.color;
                   e.currentTarget.style.borderColor = skill.color;
                   e.currentTarget.style.color = skill.hoverText === 'text-black' ? '#000' : '#FFF';
@@ -334,15 +404,13 @@ export default function DarkModePage() {
                   e.currentTarget.style.transform = 'translateY(-8px) scale(1.03)';
                 }}
                 onMouseLeave={(e) => {
-                  // On leave: reset to default
                   e.currentTarget.style.backgroundColor = '#1f1f1f';
-                  e.currentTarget.style.borderColor = '#B6F427'; // Tailwind's lime-400
-                  e.currentTarget.style.color = '#D1D5DB'; // text-gray-300
+                  e.currentTarget.style.borderColor = '#B6F427';
+                  e.currentTarget.style.color = '#D1D5DB';
                   e.currentTarget.style.boxShadow = 'none';
                   e.currentTarget.style.transform = 'translateY(0px) scale(1)';
                 }}
               >
-                {/* Default State: Skill Name (Uniform Color) */}
                 <h4
                   className={`text-lg font-semibold transition-all duration-300 ease-out group-hover:scale-110
                               ${index % 2 === 0 ? 'text-left pl-4' : 'text-right pr-4'}`}
@@ -353,12 +421,204 @@ export default function DarkModePage() {
             ))}
           </div>
 
-          {/* Drawer Handle */}
           <div className="w-[60%] h-4 bg-gray-700 rounded-b-md mt-0 z-0 shadow-inner"></div>
           <div className="w-32 h-8 bg-gray-600 rounded-b-lg flex items-center justify-center -mt-1 shadow-lg">
             <div className="w-16 h-1 bg-gray-800 rounded-full"></div>
           </div>
 
+        </div>
+      </section> */}
+
+
+      {/* --- SKILLS SECTION (File Drawer) --- */}
+      <section id="skills" className="w-full flex items-center justify-center min-h-screen py-24 px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
+        {/* Same consistent grid background */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
+          backgroundSize: '30px 30px'
+        }}></div>
+
+        <div className="max-w-6xl w-full relative flex flex-col items-center">
+          {/* Section title */}
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
+            <span className="text-orange-500">03.</span> My Arsenal
+          </h2>
+
+          {/* This is the new, clean, categorized grid */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            {/* --- Category: Languages & Core Concepts --- */}
+            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Languages & Core</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white" },
+                  { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black" },
+                  { name: "JavaScript", color: "#F7DF1E", shadow: "rgba(247, 223, 30, 0.4)", hoverText: "text-black" },
+                  { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+                  { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+                  { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
+                ].map((skill) => {
+                  const [isHovered, setIsHovered] = React.useState(false);
+                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
+
+                  return (
+                    <div
+                      key={skillTypeSkill.name}
+                      className="p-4 rounded-md border-2 cursor-pointer
+                                 transition-all duration-300 ease-out"
+                      style={{
+                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
+                        borderColor: isHovered ? skillTypeSkill.color : '#444',
+                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
+                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
+                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* --- Category: Frontend --- */}
+            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Frontend</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white" },
+                  { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white" },
+                  { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black" },
+                  { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black" },
+                ].map((skill) => {
+                  const [isHovered, setIsHovered] = React.useState(false);
+                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
+
+                  return (
+                    <div
+                      key={skillTypeSkill.name}
+                      className="p-4 rounded-md border-2 cursor-pointer
+                                 transition-all duration-300 ease-out"
+                      style={{
+                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
+                        borderColor: isHovered ? skillTypeSkill.color : '#444',
+                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
+                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
+                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* --- Category: Backend & Databases --- */}
+            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Backend & Databases</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white" },
+                  { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white" },
+                  { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white" },
+                ].map((skill) => {
+                  const [isHovered, setIsHovered] = React.useState(false);
+                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
+
+                  return (
+                    <div
+                      key={skillTypeSkill.name}
+                      className="p-4 rounded-md border-2 cursor-pointer
+                                 transition-all duration-300 ease-out"
+                      style={{
+                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
+                        borderColor: isHovered ? skillTypeSkill.color : '#444',
+                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
+                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
+                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* --- Category: DevOps & Tools --- */}
+            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">DevOps & Tools</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black" },
+                  { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white" },
+                  { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black" },
+                  { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white" },
+                  { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
+                  { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
+                ].map((skill) => {
+                  const [isHovered, setIsHovered] = React.useState(false);
+                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
+
+                  return (
+                    <div
+                      key={skillTypeSkill.name}
+                      className="p-4 rounded-md border-2 cursor-pointer
+                                 transition-all duration-300 ease-out"
+                      style={{
+                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
+                        borderColor: isHovered ? skillTypeSkill.color : '#444',
+                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
+                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
+                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                      }}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+      {/* --- PROBLEM SOLVING SECTION (Darker + Dot Pattern) --- */}
+      <section id="problems" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#252525] relative">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(rgba(72, 72, 72, 0.14) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+        <div className="max-w-6xl w-full relative">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-12 font-mono tracking-wide text-center md:text-left">
+            <span className="text-orange-500">04.</span> Professional Growth
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {problemSolving.map((platform) => (
+              <a key={platform.name} href={platform.url} target="_blank" rel="noopener noreferrer" className="group relative block p-6 overflow-hidden rounded-lg border-2 border-gray-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10">
+                <div className="absolute inset-0 bg-[#1f1f1f] transition-colors"></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" style={{ backgroundImage: 'radial-gradient(circle at 80% 80%, #9400d3 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
+                <div className="relative">
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    {platform.name}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 group-hover:opacity-100 transition-opacity text-gray-400"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>
+                  </h3>
+                  <p className="mt-2 text-gray-400">{platform.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
