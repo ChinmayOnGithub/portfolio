@@ -626,7 +626,7 @@ export default function DarkModePage() {
           <div className="flex gap-8 mt-10">
             {/* GitHub Icon Link */}
             <a
-              href="#your-github-url"
+              href="https://www.github.com/ChinmayOnGithub/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-all duration-300 ease-out
@@ -643,7 +643,7 @@ export default function DarkModePage() {
 
             {/* LinkedIn Icon Link */}
             <a
-              href="#your-linkedin-url" // <-- REPLACE THIS
+              href="https://www.linkedin.com/in/chinmaydpatil/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-all duration-300 ease-out
