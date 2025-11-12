@@ -55,6 +55,29 @@ type Skill = {
   hoverText: string;
 };
 
+// Skill card component to avoid hooks in callbacks
+const SkillCard = ({ skill }: { skill: Skill }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <div
+      className="p-2.5 rounded-lg border-2 cursor-pointer
+                 transition-all duration-300 ease-out backdrop-blur-sm"
+      style={{
+        backgroundColor: isHovered ? skill.color : 'rgba(40, 40, 40, 0.8)',
+        borderColor: isHovered ? skill.color : 'rgba(68, 68, 68, 0.6)',
+        color: isHovered ? (skill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
+        boxShadow: isHovered ? `0 6px 20px ${skill.shadow}, 0 0 30px ${skill.shadow}` : '0 2px 8px rgba(0,0,0,0.3)',
+        transform: isHovered ? 'translateY(-3px) scale(1.05)' : 'translateY(0) scale(1)',
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <h4 className="font-bold text-center text-sm">{skill.name}</h4>
+    </div>
+  );
+};
+
 // Commented out - Alternative file drawer design
 // type SkillWithSide = Skill & {
 //   side: 'left' | 'right';
@@ -430,27 +453,34 @@ export default function DarkModePage() {
       </section> */}
 
 
-      {/* --- SKILLS SECTION (File Drawer) --- */}
-      <section id="skills" className="w-full flex items-center justify-center min-h-screen py-24 px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
-        {/* Same consistent grid background */}
+      {/* --- SKILLS SECTION (Enhanced with Glassmorphism) --- */}
+      <section id="skills" className="w-full flex items-center justify-center h-screen px-6 sm:px-8 z-10 bg-[#212121] relative overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-lime-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+        
+        {/* Grid background */}
         <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.1) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(182, 244, 39, 0.08) 1px, transparent 1px), linear-gradient(to right, rgba(255, 126, 0, 0.08) 1px, transparent 1px)',
           backgroundSize: '30px 30px'
         }}></div>
 
         <div className="max-w-6xl w-full relative flex flex-col items-center">
-          {/* Section title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-16 font-mono tracking-wide text-center">
-            <span className="text-orange-500">03.</span> My Arsenal
+          {/* Section title with glow */}
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8 font-mono tracking-wide text-center relative">
+            <span className="text-orange-500 drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]">03.</span> My Arsenal
           </h2>
 
-          {/* This is the new, clean, categorized grid */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Compact grid - all skills in one view */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {/* --- Category: Languages & Core Concepts --- */}
-            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Languages & Core</h3>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="group bg-[#1f1f1f]/60 backdrop-blur-md p-4 rounded-xl border-2 border-lime-400/40 shadow-lg hover:shadow-lime-400/20 hover:border-lime-400/60 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-lg font-bold text-gray-100 mb-3 font-mono text-center group-hover:text-lime-400 transition-colors">Languages & Core</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {[
                   { name: "C++", color: "#00599C", shadow: "rgba(0, 89, 156, 0.4)", hoverText: "text-white" },
                   { name: "Java", color: "#f89820", shadow: "rgba(248, 152, 32, 0.4)", hoverText: "text-black" },
@@ -458,135 +488,55 @@ export default function DarkModePage() {
                   { name: "OOP", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
                   { name: "DSA", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
                   { name: "DBMS", color: "#A29BFE", shadow: "rgba(162, 155, 254, 0.4)", hoverText: "text-black" },
-                ].map((skill) => {
-                  const [isHovered, setIsHovered] = React.useState(false);
-                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
-
-                  return (
-                    <div
-                      key={skillTypeSkill.name}
-                      className="p-4 rounded-md border-2 cursor-pointer
-                                 transition-all duration-300 ease-out"
-                      style={{
-                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
-                        borderColor: isHovered ? skillTypeSkill.color : '#444',
-                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
-                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
-                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                      }}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
-                    </div>
-                  );
-                })}
+                ].map((skill) => (
+                  <SkillCard key={skill.name} skill={skill as Skill} />
+                ))}
               </div>
             </div>
 
             {/* --- Category: Frontend --- */}
-            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Frontend</h3>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="group bg-[#1f1f1f]/60 backdrop-blur-md p-4 rounded-xl border-2 border-lime-400/40 shadow-lg hover:shadow-lime-400/20 hover:border-lime-400/60 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-lg font-bold text-gray-100 mb-3 font-mono text-center group-hover:text-lime-400 transition-colors">Frontend</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {[
                   { name: "HTML", color: "#E34F26", shadow: "rgba(227, 79, 38, 0.4)", hoverText: "text-white" },
                   { name: "CSS", color: "#1572B6", shadow: "rgba(21, 114, 182, 0.4)", hoverText: "text-white" },
                   { name: "TailwindCSS", color: "#06B6D4", shadow: "rgba(6, 182, 212, 0.4)", hoverText: "text-black" },
                   { name: "React.js", color: "#61DAFB", shadow: "rgba(97, 218, 251, 0.4)", hoverText: "text-black" },
-                ].map((skill) => {
-                  const [isHovered, setIsHovered] = React.useState(false);
-                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
-
-                  return (
-                    <div
-                      key={skillTypeSkill.name}
-                      className="p-4 rounded-md border-2 cursor-pointer
-                                 transition-all duration-300 ease-out"
-                      style={{
-                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
-                        borderColor: isHovered ? skillTypeSkill.color : '#444',
-                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
-                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
-                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                      }}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
-                    </div>
-                  );
-                })}
+                ].map((skill) => (
+                  <SkillCard key={skill.name} skill={skill as Skill} />
+                ))}
               </div>
             </div>
 
             {/* --- Category: Backend & Databases --- */}
-            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">Backend & Databases</h3>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="group bg-[#1f1f1f]/60 backdrop-blur-md p-4 rounded-xl border-2 border-lime-400/40 shadow-lg hover:shadow-lime-400/20 hover:border-lime-400/60 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-lg font-bold text-gray-100 mb-3 font-mono text-center group-hover:text-lime-400 transition-colors">Backend & DB</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {[
                   { name: "Node.js", color: "#5FA04E", shadow: "rgba(95, 160, 78, 0.4)", hoverText: "text-white" },
                   { name: "MySQL", color: "#4479A1", shadow: "rgba(68, 121, 161, 0.4)", hoverText: "text-white" },
                   { name: "MongoDB", color: "#47A248", shadow: "rgba(71, 162, 72, 0.4)", hoverText: "text-white" },
-                ].map((skill) => {
-                  const [isHovered, setIsHovered] = React.useState(false);
-                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
-
-                  return (
-                    <div
-                      key={skillTypeSkill.name}
-                      className="p-4 rounded-md border-2 cursor-pointer
-                                 transition-all duration-300 ease-out"
-                      style={{
-                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
-                        borderColor: isHovered ? skillTypeSkill.color : '#444',
-                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
-                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
-                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                      }}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
-                    </div>
-                  );
-                })}
+                ].map((skill) => (
+                  <SkillCard key={skill.name} skill={skill as Skill} />
+                ))}
               </div>
             </div>
 
             {/* --- Category: DevOps & Tools --- */}
-            <div className="bg-[#1f1f1f] p-6 rounded-lg border-2 border-lime-400/30">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 font-mono text-center">DevOps & Tools</h3>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="group bg-[#1f1f1f]/60 backdrop-blur-md p-4 rounded-xl border-2 border-lime-400/40 shadow-lg hover:shadow-lime-400/20 hover:border-lime-400/60 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-lg font-bold text-gray-100 mb-3 font-mono text-center group-hover:text-lime-400 transition-colors">DevOps & Tools</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {[
                   { name: "GitHub", color: "#FFFFFF", shadow: "rgba(255, 255, 255, 0.4)", hoverText: "text-black" },
                   { name: "Postman", color: "#FF6C37", shadow: "rgba(255, 108, 55, 0.4)", hoverText: "text-white" },
                   { name: "Linux", color: "#FCC624", shadow: "rgba(252, 198, 36, 0.4)", hoverText: "text-black" },
                   { name: "Docker", color: "#2496ED", shadow: "rgba(36, 150, 237, 0.4)", hoverText: "text-white" },
-                  { name: "AWS (EC2, S3)", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
-                  { name: "Kubernetes", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
-                ].map((skill) => {
-                  const [isHovered, setIsHovered] = React.useState(false);
-                  const skillTypeSkill = skill as Skill; // Cast to your defined Skill type
-
-                  return (
-                    <div
-                      key={skillTypeSkill.name}
-                      className="p-4 rounded-md border-2 cursor-pointer
-                                 transition-all duration-300 ease-out"
-                      style={{
-                        backgroundColor: isHovered ? skillTypeSkill.color : '#282828',
-                        borderColor: isHovered ? skillTypeSkill.color : '#444',
-                        color: isHovered ? (skillTypeSkill.hoverText === 'text-black' ? '#000' : '#FFF') : '#D1D5DB',
-                        boxShadow: isHovered ? `0 6px 20px ${skillTypeSkill.shadow}` : 'none',
-                        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                      }}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <h4 className="font-semibold text-center">{skillTypeSkill.name}</h4>
-                    </div>
-                  );
-                })}
+                  { name: "AWS", color: "#232F3E", shadow: "rgba(35, 47, 62, 0.4)", hoverText: "text-white" },
+                  { name: "K8s", color: "#326CE5", shadow: "rgba(50, 108, 229, 0.4)", hoverText: "text-white" },
+                ].map((skill) => (
+                  <SkillCard key={skill.name} skill={skill as Skill} />
+                ))}
               </div>
             </div>
 
