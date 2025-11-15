@@ -23,7 +23,7 @@ export const projects: Project[] = [
     description: 'Cloudinary based online video platform.',
     longDescription: 'Stremora is a modern video streaming platform that revolutionizes content consumption with cutting-edge web technologies. Built with Next.js and powered by Cloudinary\'s robust media infrastructure, it delivers a Netflix-like experience with seamless video processing, adaptive streaming, and intelligent content delivery. The platform features user authentication, personalized recommendations, and real-time engagement tools.',
     logo: '/project-logos/stremora.svg',
-    logoLight: '/project-logos/stremora-light.svg',
+    logoLight: '/project-logos/stremora.svg',
     technologies: ['Next.js', 'React', 'TypeScript', 'Cloudinary', 'Tailwind CSS', 'Prisma', 'PostgreSQL', 'NextAuth.js'],
     features: [
       'Cloudinary-powered video processing and optimization',
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     description: 'Blockchain based certification verification.',
     longDescription: 'VerifyHub transforms digital credential verification through blockchain technology, creating an immutable and transparent system for educational certificates. Built on Ethereum, it eliminates fraud and provides instant verification for institutions, employers, and certificate holders. The platform features smart contracts for automated verification, IPFS for decentralized storage, and a user-friendly interface for seamless certificate management.',
     logo: '/project-logos/verifyhub.svg',
-    logoLight: '/project-logos/verifyhub-light.svg',
+    logoLight: '/project-logos/verifyhub.svg',
     technologies: ['React', 'Ethereum', 'Solidity', 'Web3.js', 'IPFS', 'Node.js', 'Express', 'MetaMask'],
     features: [
       'Ethereum blockchain integration for immutable records',
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     description: 'Java-based vector quantization compression tool.',
     longDescription: 'VQCompress is an advanced image compression desktop application that implements Vector Quantization algorithms for efficient image processing. Built entirely in Java with Swing UI, it provides researchers and developers with a powerful tool for image compression analysis. The application features multiple compression algorithms, real-time preview capabilities, and comprehensive compression metrics for academic and professional use.',
     logo: '/project-logos/compresso.svg',
-    logoLight: '/project-logos/vqcompress-light.svg',
+    logoLight: '/project-logos/compresso.svg',
     technologies: ['Java', 'Swing', 'AWT', 'BufferedImage', 'Vector Quantization', 'K-means', 'LBG Algorithm'],
     features: [
       'Advanced Vector Quantization compression algorithms',
