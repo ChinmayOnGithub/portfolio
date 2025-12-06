@@ -39,22 +39,22 @@ export function Projects() {
   ];
 
   return (
-    <Card className={isDark ? 'bg-zinc-850 border-zinc-700' : 'bg-slate-100 border-slate-200'}>
+    <Card className={`${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
       <CardHeader>
-        <CardTitle className={isDark ? 'text-white' : 'text-slate-900'}>Projects</CardTitle>
+        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Projects</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {projects.map((project, index) => (
-          <div key={index} className={`border-b last:border-0 pb-6 last:pb-0 ${isDark ? 'border-zinc-800' : 'border-slate-300'}`}>
+          <div key={index} className={`border-b last:border-0 pb-6 last:pb-0 ${isDark ? 'border-zinc-800/30' : 'border-slate-200'}`}>
             <div className="flex items-start justify-between mb-2">
               <div>
-                <h3 className={`font-semibold text-lg flex items-center gap-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`font-semibold text-lg flex items-center gap-2 ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>
                   {project.title}
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={isDark ? 'text-zinc-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'} title="transition-colors"
+                    className={isDark ? 'text-zinc-500 hover:text-[#E6E6E6]' : 'text-[#3A5FCD] hover:text-[#2A4FBD]'} title="transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
@@ -65,14 +65,14 @@ export function Projects() {
 
             <p className={`text-sm mb-3 ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>Associated with {project.association}</p>
 
-            <p className={`text-sm mb-4 leading-relaxed ${isDark ? 'text-zinc-300' : 'text-slate-700'}`}>{project.description}</p>
+            <p className={`text-sm mb-4 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-700'}`}>{project.description}</p>
 
             <div className="flex flex-wrap gap-2">
               {project.skills.map((skill, skillIndex) => (
                 <Badge
                   key={skillIndex}
                   variant="secondary"
-                  className={isDark ? 'bg-zinc-900 text-zinc-300 border-zinc-800' : 'bg-slate-200 text-slate-700 border-slate-300'}
+                  className={isDark ? 'bg-zinc-900/60 text-zinc-300 border-zinc-800/50' : 'bg-slate-200 text-slate-700 border-slate-300'}
                 >
                   {skill}
                 </Badge>

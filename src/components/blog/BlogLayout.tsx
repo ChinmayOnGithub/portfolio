@@ -28,15 +28,15 @@ export function BlogLayout({ children }: BlogLayoutProps) {
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'bg-black' : 'bg-slate-50'}`}>
+    <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'bg-zinc-950' : 'bg-slate-50'}`}>
       {/* Top Header */}
       <header className={`sticky top-0 z-50 border-b backdrop-blur-lg ${
-        isDark ? 'bg-black/80 border-zinc-800' : 'bg-white/80 border-slate-200'
+        isDark ? 'bg-zinc-950/80 border-zinc-800' : 'bg-white/80 border-slate-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/blogs">
-              <h1 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              <h1 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Technical Blog
               </h1>
             </Link>

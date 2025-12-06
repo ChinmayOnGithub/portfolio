@@ -84,8 +84,8 @@ export default function ClientLayoutWrapper({
 
       {/* --- FIXED EMAIL LINK (Right Side) --- */}
       <div className="fixed right-6 md:right-12 bottom-0 hidden lg:flex flex-col justify-center items-center gap-6 z-20">
-        <a href="mailto:chinmay.patil.contact@gmail.com" className={`[writing-mode:vertical-rl] tracking-widest font-mono text-sm transition-all duration-300 hover:-translate-y-1 ${currentTheme.emailLink}`}>
-          chinmay.patil.contact@gmail.com
+        <a href="mailto:chinmaydpatil09@gmail.com" className={`[writing-mode:vertical-rl] tracking-widest font-mono text-sm transition-all duration-300 hover:-translate-y-1 ${currentTheme.emailLink}`}>
+          chinmaydpatil09@gmail.com
         </a>
         <div className={`h-[90px] w-0.5 rounded-full ${currentTheme.line}`}></div>
       </div>

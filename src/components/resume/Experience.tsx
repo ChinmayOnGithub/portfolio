@@ -43,33 +43,33 @@ export function Experience() {
   ];
 
   return (
-    <Card className={isDark ? 'bg-zinc-850 border-zinc-700' : 'bg-slate-100 border-slate-200'}>
+    <Card className={`${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
       <CardHeader>
-        <CardTitle className={isDark ? 'text-white' : 'text-slate-900'}>Experience</CardTitle>
+        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Experience</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {experiences.map((exp, expIndex) => (
           <div key={expIndex} className="relative">
-            {expIndex !== 0 && <div className={`absolute left-5 -top-3 w-px h-3 ${isDark ? 'bg-zinc-800' : 'bg-slate-300'}`} />}
+            {expIndex !== 0 && <div className={`absolute left-5 -top-3 w-px h-3 ${isDark ? 'bg-zinc-800/30' : 'bg-slate-300'}`} />}
 
             <div className="flex gap-4">
-              <div className={`w-10 h-10 rounded border flex items-center justify-center flex-shrink-0 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-200 border-slate-300'}`}>
-                <Building2 className={`w-5 h-5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`} />
+              <div className={`w-10 h-10 rounded border flex items-center justify-center shrink-0 ${isDark ? 'bg-zinc-900/50 border-zinc-800/50' : 'bg-slate-200 border-slate-300'}`}>
+                <Building2 className={`w-5 h-5 ${isDark ? 'text-zinc-500' : 'text-slate-600'}`} />
               </div>
 
               <div className="flex-1">
                 <div className="mb-4">
-                  <h3 className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>{exp.company}</h3>
+                  <h3 className={`font-semibold text-lg ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{exp.company}</h3>
                   <p className={`text-sm ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{exp.duration}</p>
                   <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{exp.location}</p>
                 </div>
 
                 <div className="space-y-4">
                   {exp.roles.map((role, roleIndex) => (
-                    <div key={roleIndex} className={`relative pl-6 border-l-2 ${isDark ? 'border-zinc-800' : 'border-slate-300'}`}>
+                    <div key={roleIndex} className={`relative pl-6 border-l-2 ${isDark ? 'border-zinc-800/50' : 'border-slate-300'}`}>
                       <div className={`absolute -left-1 top-2 w-2 h-2 rounded-full ${isDark ? 'bg-zinc-600' : 'bg-slate-400'}`} />
 
-                      <h4 className={`font-medium ${isDark ? 'text-white' : 'text-slate-900'}`}>{role.title}</h4>
+                      <h4 className={`font-medium ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{role.title}</h4>
                       <p className={`text-sm mb-1 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{role.type} · {role.period}</p>
                       {role.workMode && (
                         <p className={`text-sm mb-2 ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{role.workMode}</p>
@@ -82,7 +82,7 @@ export function Experience() {
                             <Badge
                               key={skillIndex}
                               variant="secondary"
-                              className={isDark ? 'bg-zinc-900 text-zinc-300 border-zinc-800' : 'bg-slate-200 text-slate-700 border-slate-300'}
+                              className={isDark ? 'bg-zinc-900/60 text-zinc-300 border-zinc-800/50' : 'bg-slate-200 text-slate-700 border-slate-300'}
                             >
                               {skill}
                             </Badge>

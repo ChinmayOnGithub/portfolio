@@ -26,23 +26,23 @@ export function Featured() {
   ];
 
   return (
-    <Card className={`gap-4 ${isDark ? 'bg-zinc-850 border-zinc-700' : 'bg-slate-100 border-slate-200'}`}>
-      <CardHeader>
-        <CardTitle className={isDark ? 'text-white' : 'text-slate-900'}>Featured</CardTitle>
+    <Card className={`gap-4 ${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
+      <CardHeader className="pb-3">
+        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Featured</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {featuredItems.map((item, index) => (
             <div
               key={index}
-              className={`border rounded-lg p-4 transition-colors cursor-pointer ${isDark ? 'border-zinc-900 hover:bg-zinc-900 text-zinc-400' : 'border-slate-300 hover:bg-slate-200 text-slate-600'
+              className={`border p-3 transition-colors cursor-pointer ${isDark ? 'border-zinc-800/50 hover:bg-zinc-900/50 text-zinc-400 backdrop-blur-sm' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
                 }`}
             >
               <div className="flex items-start gap-3">
-                <item.icon className={`w-5 h-5 mt-1 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`} />
+                <item.icon className={`w-5 h-5 mt-1 ${isDark ? 'text-zinc-500' : 'text-slate-500'}`} />
                 <div className="flex-1">
                   <p className={`text-xs uppercase mb-1 ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{item.type}</p>
-                  <h3 className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.title}</h3>
+                  <h3 className={`font-semibold mb-2 ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{item.title}</h3>
                   <p className={`text-sm mb-1 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{item.description}</p>
                   <p className={`text-xs ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{item.subtitle}</p>
                   {item.engagement && (

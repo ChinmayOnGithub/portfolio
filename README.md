@@ -1,70 +1,199 @@
-# 🌟 Portfolio Website
+# Portfolio Website
 
-A modern and dynamic portfolio web application built with **Next.js**, blending creative design with interactive components. Designed to showcase professional projects, skills, and personal style in an engaging way.
+A modern, responsive portfolio website built with Next.js 16, featuring a resume page, designed portfolio, and technical blog.
 
 ## 🚀 Features
 
-- Fully responsive, mobile-first design
-- Smooth animations and transitions
-- Project showcase with category filters
-- Custom theme palette and illustrations
-- Optimized performance with Next.js best practices
+- **Resume Page** (`/`) - Clean, professional resume with dark/light mode
+- **Portfolio** (`/portfolio`) - Designed portfolio with interactive background and navigation
+- **Technical Blog** (`/blogs`) - Blog system with sidebar navigation
+- **Responsive Design** - Works seamlessly on all devices
+- **Dark/Light Mode** - Theme toggle with persistent preferences
+- **Fast Performance** - Optimized with Next.js 16 and Turbopack
 
-## 🛠️ Skills Demonstrated
+## 📁 Project Structure
 
-- Framework: Next.js (React-based)
-- Styling: Tailwind CSS | SCSS
-- UI/UX: Responsive layouts, micro-animations, theme-driven design
-- Deployment: Vercel
-- Version Control: Git & GitHub
+```
+├── src/
+│   ├── app/                    # Next.js app directory
+│   │   ├── page.tsx           # Resume (homepage)
+│   │   ├── portfolio/         # Portfolio page
+│   │   ├── blogs/             # Blog listing and posts
+│   │   ├── about/             # About page
+│   │   ├── projects/          # Projects pages
+│   │   └── components/        # Portfolio-specific components
+│   ├── components/
+│   │   ├── resume/            # Resume components
+│   │   ├── blog/              # Blog components
+│   │   └── ui/                # Shared UI components
+│   └── lib/                   # Utility functions
+├── public/                    # Static assets
+└── content/                   # Blog content (markdown)
+```
 
-## 📸 Screenshots
-![Hero-section](/public/screenshots/hero.png)
-![About-section](/public/screenshots/about.png)
+## 🛠️ Tech Stack
 
-## ⚡ Installation & Usage
+- **Framework**: Next.js 16
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **UI Components**: Radix UI
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+- **Theme**: next-themes
+
+## 📦 Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/ChinmayOnGithub/portfolio.git
+git clone <your-repo-url>
 cd portfolio
 ```
 
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Run the development server:
+3. Create environment file:
+```bash
+cp .env.example .env
+```
+
+4. Add your GitHub token (optional):
+```
+NEXT_PUBLIC_GITHUB_TOKEN=your_token_here
+```
+
+## 🚀 Development
+
+Run the development server:
+
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Prerequisites
+## 🏗️ Build
 
-- Node.js v18 or higher
-- npm or yarn package manager
+Build for production:
 
-## 🏗️ Tech Stack
+```bash
+npm run build
+```
 
-- **Frontend:** Next.js 14+
-- **Styling:** Tailwind CSS, SCSS
-- **Animation:** Framer Motion
-- **Deployment:** Vercel
-- **Version Control:** Git & GitHub
+Start production server:
 
-## 📬 Contact & Links
+```bash
+npm start
+```
 
-- **Portfolio:** [chinmaydpatil.com](https://chinmaypatil.com)
-- **LinkedIn:** [chinmaydpatil](https://www.linkedin.com/in/chinmaydpatil/)
-- **GitHub:** [ChinmayOnGithub](https://github.com/ChinmayOnGithub)
+## 📝 Content Management
 
----
+### Resume Content
 
-⭐ Star this repo if you found it helpful!
+Edit resume data in `src/components/resume/data.ts`:
+- Personal information
+- Skills
+- Projects
+- Experience
+- Education
+- Certifications
+
+### Blog Posts
+
+Blog posts are stored in `src/app/blogs/[slug]/page.tsx` as structured data. To add a new post:
+
+1. Add post data to the `blogData` object
+2. Include title, excerpt, date, tags, and content
+3. Add to the listing in `src/app/blogs/page.tsx`
+
+## 🎨 Customization
+
+### Colors
+
+Theme colors are defined in Tailwind CSS. Main colors used:
+- **Dark Mode**: zinc-950, zinc-900, zinc-800
+- **Light Mode**: white, slate-50, slate-100
+- **Accent**: Blue (blue-600, blue-400)
+
+### Fonts
+
+- **Sans-serif**: Inter (default)
+- **Monospace**: Roboto Mono
+- **Serif**: Georgia/Times New Roman (blog content)
+
+## 📱 Routes
+
+- `/` - Resume (homepage)
+- `/portfolio` - Designed portfolio
+- `/blogs` - Blog listing
+- `/blogs/[slug]` - Individual blog posts
+- `/about` - About page
+- `/projects/[id]` - Project details
+- `/problems` - Problem-solving profiles
+
+## 🔧 Configuration
+
+### Next.js Config
+
+Configuration is in `next.config.mjs`. Current settings:
+- MDX support
+- Optimized CSS with Critters
+
+### TypeScript
+
+TypeScript configuration in `tsconfig.json` with strict mode enabled.
+
+### ESLint
+
+Linting configuration in `eslint.config.mjs` following Next.js best practices.
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
+
+### Other Platforms
+
+Build the project:
+```bash
+npm run build
+```
+
+The output will be in `.next/` directory. Serve with:
+```bash
+npm start
+```
+
+## 📄 Environment Variables
+
+Required environment variables:
+
+- `NEXT_PUBLIC_GITHUB_TOKEN` - GitHub API token (optional, for GitHub data)
+
+## 🐛 Known Issues
+
+- Turbopack warning about multiple lockfiles (can be ignored or fixed by removing extra lockfiles)
+
+## 📝 License
+
+Private project - All rights reserved
+
+## 👤 Author
+
+**Chinmay Patil**
+- GitHub: [@ChinmayOnGithub](https://github.com/ChinmayOnGithub)
+- LinkedIn: [chinmaydpatil](https://linkedin.com/in/chinmaydpatil)
+- Email: chinmaydpatil09@gmail.com
+
+## 🙏 Acknowledgments
+
+- Next.js team for the amazing framework
+- Vercel for hosting
+- Radix UI for accessible components
+- Tailwind CSS for styling utilities
