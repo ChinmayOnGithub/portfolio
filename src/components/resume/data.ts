@@ -127,9 +127,13 @@ export const interests = [
   'Competitive programming',
 ];
 
-export const blogs = {
-  note: 'Blogs and technical write-ups will appear here. For now, this section highlights that you are open to writing about backend, Linux, and DevOps topics.',
-};
+export const blogs = [
+  {
+    title: 'Coming Soon',
+    description: 'Technical write-ups about backend development, Linux, and DevOps.',
+    link: '/blogs',
+  },
+];
 
 export const homelab = {
   summary:

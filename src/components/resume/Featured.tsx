@@ -23,13 +23,6 @@ export function Featured() {
       engagement: '6 PRs • October 2025',
       icon: Image,
     },
-    {
-      type: 'achievement',
-      title: 'Vision CTF - Finalist',
-      description: 'Ranked top 5% among 60+ teams | 2024',
-      subtitle: 'Competitive cybersecurity challenge demonstrating problem-solving and security expertise.',
-      icon: Image,
-    },
   ];
 
   return (

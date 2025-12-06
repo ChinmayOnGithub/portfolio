@@ -308,7 +308,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="scroll-smooth" suppressHydrationWarning>
 			<body
-				className={`${inter.variable} ${robotoMono.variable} font-sans antialiased bg-[#101010] text-gray-400`}
+				className={`${inter.variable} ${robotoMono.variable} font-sans antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"
@@ -316,7 +316,6 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange={false}
 				>
-					{/* The new AppShell component now handles all client-side logic */}
 					<AppShell>{children}</AppShell>
 				</ThemeProvider>
 			</body>

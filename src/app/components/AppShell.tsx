@@ -17,9 +17,9 @@ export default function AppShell({
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
-  // Only show portfolio navigation on homepage, Apple navigation everywhere else
-  const isHomePage = pathname === '/';
-  const isOtherPage = pathname !== '/';
+  // Only show portfolio navigation on /portfolio page
+  const isPortfolioPage = pathname === '/portfolio';
+  const isProjectPage = pathname.startsWith('/projects');
 
   useEffect(() => {
     setIsMounted(true);
@@ -41,23 +41,21 @@ export default function AppShell({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          {/* Portfolio Navigation only for homepage */}
-          {isHomePage && (
+          {/* Portfolio Navigation only for /portfolio page */}
+          {isPortfolioPage && (
             <div className="relative z-20">
               <Navigation />
             </div>
           )}
 
           {/* Minimal Navigation for project pages */}
-          {isOtherPage && pathname.startsWith('/projects') && <ProjectNavigation />}
+          {isProjectPage && <ProjectNavigation />}
 
-          <main className={`relative ${isHomePage ? 'z-10' : 'z-0'}`}>
-            {isHomePage ? (
+          <main className={`relative ${isPortfolioPage ? 'z-10' : 'z-0'}`}>
+            {isPortfolioPage ? (
               <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
             ) : (
-              <div className="pt-16">
-                {children}
-              </div>
+              children
             )}
           </main>
         </motion.div>

@@ -3,7 +3,7 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MapPin, Linkedin, Github, AudioWaveform, Moon, Sun } from 'lucide-react';
+import { MapPin, Linkedin, Github, AudioWaveform, Moon, Sun, Download } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
 
 export function ResumeHeader() {
@@ -50,26 +50,58 @@ export function ResumeHeader() {
                     }`} asChild>
                     <a href="mailto:chinmaydpatil09@gmail.com">Contact</a>
                   </Button>
-                  <Button size="sm" className={`border ${isDark ? 'border-zinc-700 bg-transparent text-white hover:bg-zinc-800' : 'border-slate-300 bg-transparent text-slate-900 hover:bg-slate-100'
-                    }`} asChild>
-                    <a href="https://www.chinmaypatil.com" target="_blank" rel="noopener noreferrer">Portfolio</a>
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    className={`${isDark ? 'border-zinc-600 bg-zinc-900 text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500' : 'border-slate-300 bg-white text-slate-900 hover:bg-slate-100 hover:border-slate-400'}`}
+                    asChild
+                  >
+                    <a href="/portfolio">Portfolio</a>
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    className={`${isDark ? 'border-zinc-600 bg-zinc-900 text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500' : 'border-slate-300 bg-white text-slate-900 hover:bg-slate-100 hover:border-slate-400'}`}
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = '/resume.pdf';
+                      link.download = 'ChinmayPatil_Resume.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  >
+                    <Download className="w-4 h-4 mr-1" />
+                    Resume
                   </Button>
                 </div>
               </div>
 
               <div className="flex gap-2 flex-shrink-0">
-                <Button size="sm" onClick={toggleTheme} className={`${isDark ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-                  }`}>
+                <Button 
+                  size="sm" 
+                  onClick={toggleTheme} 
+                  variant="outline"
+                  className={`${isDark ? 'border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900'}`}
+                >
                   {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 </Button>
-                <Button size="sm" className={`${isDark ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-                  }`} asChild>
+                <Button 
+                  size="sm" 
+                  variant="outline"
+                  className={`${isDark ? 'border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900'}`} 
+                  asChild
+                >
                   <a href="https://linkedin.com/in/chinmaydpatil" target="_blank" rel="noopener noreferrer">
                     <Linkedin className="w-4 h-4" />
                   </a>
                 </Button>
-                <Button size="sm" className={`${isDark ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-                  }`} asChild>
+                <Button 
+                  size="sm" 
+                  variant="outline"
+                  className={`${isDark ? 'border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900'}`} 
+                  asChild
+                >
                   <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer">
                     <Github className="w-4 h-4" />
                   </a>
