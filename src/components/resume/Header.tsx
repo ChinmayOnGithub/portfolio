@@ -50,16 +50,16 @@ export function ResumeHeader() {
                     }`} asChild>
                     <a href="mailto:chinmaydpatil09@gmail.com">Contact</a>
                   </Button>
-                  <Button 
+                  {/* <Button 
                     size="sm" 
                     variant="outline"
                     className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:border-zinc-600' : 'border-slate-300 bg-white text-[#3A5FCD] hover:bg-slate-50 hover:border-[#3A5FCD]/30'}`}
                     asChild
                   >
                     <a href="/portfolio">Portfolio</a>
-                  </Button>
-                  <Button 
-                    size="sm" 
+                  </Button> */}
+                  <Button
+                    size="sm"
                     variant="outline"
                     className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:border-zinc-600' : 'border-slate-300 bg-white text-slate-900 hover:bg-slate-50 hover:border-slate-400'}`}
                     onClick={() => {
@@ -78,28 +78,28 @@ export function ResumeHeader() {
               </div>
 
               <div className="flex gap-2 shrink-0">
-                <Button 
-                  size="sm" 
-                  onClick={toggleTheme} 
+                <Button
+                  size="sm"
+                  onClick={toggleTheme}
                   variant="outline"
                   className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:text-[#E6E6E6]' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
                 >
                   {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 </Button>
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   variant="outline"
-                  className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:text-[#E6E6E6]' : 'border-slate-300 bg-white text-[#3A5FCD] hover:bg-slate-50 hover:border-[#3A5FCD]/30'}`} 
+                  className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:text-[#E6E6E6]' : 'border-slate-300 bg-white text-[#3A5FCD] hover:bg-slate-50 hover:border-[#3A5FCD]/30'}`}
                   asChild
                 >
                   <a href="https://linkedin.com/in/chinmaydpatil" target="_blank" rel="noopener noreferrer">
                     <Linkedin className="w-4 h-4" />
                   </a>
                 </Button>
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   variant="outline"
-                  className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:text-[#E6E6E6]' : 'border-slate-300 bg-white text-[#3A5FCD] hover:bg-slate-50 hover:border-[#3A5FCD]/30'}`} 
+                  className={`${isDark ? 'border-zinc-700/50 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/80 hover:text-[#E6E6E6]' : 'border-slate-300 bg-white text-[#3A5FCD] hover:bg-slate-50 hover:border-[#3A5FCD]/30'}`}
                   asChild
                 >
                   <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer">
