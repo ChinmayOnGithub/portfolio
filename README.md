@@ -176,9 +176,6 @@ Required environment variables:
 
 - `NEXT_PUBLIC_GITHUB_TOKEN` - GitHub API token (optional, for GitHub data)
 
-## 🐛 Known Issues
-
-- Turbopack warning about multiple lockfiles (can be ignored or fixed by removing extra lockfiles)
 
 ## 📝 License
 
@@ -197,3 +194,5 @@ Private project - All rights reserved
 - Vercel for hosting
 - Radix UI for accessible components
 - Tailwind CSS for styling utilities
+
+
