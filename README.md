@@ -11,6 +11,8 @@ A modern, responsive portfolio website built with Next.js 16, featuring a resume
 - **Dark/Light Mode** - Theme toggle with persistent preferences
 - **Fast Performance** - Optimized with Next.js 16 and Turbopack
 
+
+ii
 ## 📁 Project Structure
 
 ```
