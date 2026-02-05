@@ -189,11 +189,3 @@ Private project - All rights reserved
 - LinkedIn: [chinmaydpatil](https://linkedin.com/in/chinmaydpatil)
 - Email: chinmaydpatil09@gmail.com
 
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Vercel for hosting
-- Radix UI for accessible components
-- Tailwind CSS for styling utilities
-
-
