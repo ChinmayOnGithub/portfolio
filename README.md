@@ -181,11 +181,3 @@ Required environment variables:
 ## 📝 License
 
 Private project - All rights reserved
-
-## 👤 Author
-
-**Chinmay Patil**
-- GitHub: [@ChinmayOnGithub](https://github.com/ChinmayOnGithub)
-- LinkedIn: [chinmaydpatil](https://linkedin.com/in/chinmaydpatil)
-- Email: chinmaydpatil09@gmail.com
-
