@@ -213,7 +213,7 @@
 //     return <div className="w-10 h-10"></div>;
 //   }
 //   const currentTheme = resolvedTheme === 'light' ? themeClasses.light : themeClasses.dark;
-//   const vibeImageSrc = resolvedTheme === 'light' ? '/catty.png' : '/watching_tv.jpg';
+//   const vibeImageSrc = resolvedTheme === 'light' ? '/images/catty.png' : '/images/watching_tv.jpg';
 
 //   return (
 //     <div className={`relative flex items-center rounded-full transition-all duration-500 ease-in-out ${isOpen ? `w-56 p-1 ${currentTheme.playerBg}` : 'w-10'}`}>
@@ -355,7 +355,7 @@ export default function RetroMusicPlayer() {
     return <div className="w-10 h-10"></div>;
   }
   const currentTheme = resolvedTheme === 'light' ? themeClasses.light : themeClasses.dark;
-  const vibeImageSrc = resolvedTheme === 'light' ? '/catty.png' : '/watching_tv.jpg';
+  const vibeImageSrc = resolvedTheme === 'light' ? '/images/catty.png' : '/images/watching_tv.jpg';
 
   return (
     <div className={`relative flex items-center rounded-full transition-all duration-500 ease-in-out ${isOpen ? `w-56 p-1 ${currentTheme.playerBg}` : 'w-10'}`}>

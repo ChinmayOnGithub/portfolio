@@ -30,20 +30,30 @@ export function SkillsSection() {
     'OOP',
   ];
 
+  const getSkillStyle = () => {
+    return 'vintage-badge';
+  };
+
   return (
-    <Card className={`${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
-      <CardHeader className="pb-3">
-        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Skills</CardTitle>
+    <Card className="vintage-card">
+      <div className="vintage-card-inner-border" />
+      <div className="vintage-corner-flourish vintage-flourish-tl" />
+      <div className="vintage-corner-flourish vintage-flourish-tr" />
+      <div className="vintage-corner-flourish vintage-flourish-bl" />
+      <div className="vintage-corner-flourish vintage-flourish-br" />
+
+      <CardHeader className="pb-3 relative z-10">
+        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Skills</CardTitle>
       </CardHeader>
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 font-serif relative z-10">
         <div className="mb-6">
-          <h3 className={`font-medium mb-3 text-sm ${isDark ? 'text-[#E6E6E6]' : 'text-slate-800'}`}>Top Skills</h3>
+          <h3 className="font-bold mb-3 text-sm text-[var(--meta-color)] font-cormorant tracking-wide uppercase">Top Skills</h3>
           <div className="flex flex-wrap gap-2">
             {topSkills.map((skill, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className={`text-sm px-3 py-1 ${isDark ? 'bg-[#E6E6E6] text-black border-zinc-200 hover:bg-white' : 'bg-slate-800 text-white border-slate-700 hover:bg-slate-700'}`}
+                className={`text-sm px-3 py-1 transition-all shadow-none ${getSkillStyle()}`}
               >
                 {skill}
               </Badge>
@@ -52,13 +62,13 @@ export function SkillsSection() {
         </div>
 
         <div>
-          <h3 className={`font-medium mb-3 text-sm ${isDark ? 'text-[#E6E6E6]' : 'text-slate-800'}`}>All Skills</h3>
+          <h3 className="font-bold mb-3 text-sm text-[var(--meta-color)] font-cormorant tracking-wide uppercase">All Skills</h3>
           <div className="flex flex-wrap gap-2">
             {allSkills.map((skill, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className={`text-sm px-3 py-1 ${isDark ? 'bg-zinc-900/60 text-zinc-300 border-zinc-800/50 hover:bg-zinc-800/80' : 'bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300'}`}
+                className={`text-sm px-3 py-1 transition-all shadow-none ${getSkillStyle()}`}
               >
                 {skill}
               </Badge>

@@ -42,7 +42,7 @@
 
 //   // Conditionally choose the video source based on the current theme.
 //   // Make sure you have both video files in your /public folder.
-//   const videoSrc = theme === 'light' ? '/waves.gif' : '/sukuna.gif';
+//   const videoSrc = theme === 'light' ? '/gifs/waves.gif' : '/gifs/sukuna.gif';
 
 //   return (
 //     <div className="fixed inset-0 z-0 pointer-events-none">
@@ -133,7 +133,7 @@
 
 //       {/* UPDATED: Switched to a <video> tag for better performance */}
 //       <video
-//         src="/sukuna.mp4" // Make sure your video file is in the /public folder
+//         src="/gifs/sukuna.mp4" // Make sure your video file is in the /public folder
 //         autoPlay
 //         loop
 //         muted
@@ -206,7 +206,7 @@
 //       />
 
 //       <video
-//         src="/sukuna.mp4"
+//         src="/gifs/sukuna.mp4"
 //         autoPlay
 //         loop
 //         muted
@@ -263,7 +263,7 @@
 //       {/* REMOVED: The spotlight div is gone from this file */}
 
 //       <video
-//         src="/sukuna.mp4"
+//         src="/gifs/sukuna.mp4"
 //         autoPlay
 //         loop
 //         muted
@@ -322,7 +322,7 @@ export default function InteractiveBackground() {
       }}
     >
       <video
-        src="/sukuna.mp4"
+        src="/gifs/sukuna.mp4"
         autoPlay
         loop
         muted

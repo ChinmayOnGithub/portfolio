@@ -1356,24 +1356,24 @@ export default function Navigation() {
   // --- THEME DEFINITIONS (Restored from your original code) ---
   const themeClasses = {
     dark: {
-      nav: 'bg-[#1f1f1f]/80 border-gray-800 shadow-orange-500/10',
-      logo: 'text-gray-200 hover:text-white',
-      link: 'text-gray-400 hover:text-white',
-      activeLink: 'text-white font-medium',
-      underline: 'bg-orange-500',
-      resumeGroup: 'bg-[#1a1a1a] border-gray-700',
-      resumeButton: 'text-gray-300 hover:text-orange-500',
-      themeButton: 'text-gray-400 hover:text-white',
+      nav: 'bg-[#23201D]/90 border-[#443E38]/80 shadow-black/40',
+      logo: 'text-[#A68B6D] hover:text-[#E8E2D8]',
+      link: 'text-[#A68B6D] hover:text-[#E8E2D8]',
+      activeLink: 'text-[#E8E2D8] font-semibold',
+      underline: 'bg-[#D0A060]',
+      resumeGroup: 'bg-[#2D2824]/80 border-[#4E443A]/60',
+      resumeButton: 'text-[#A68B6D] hover:text-[#D0A060]',
+      themeButton: 'text-[#A68B6D] hover:text-[#E8E2D8]',
     },
     light: {
-      nav: 'bg-[#FAF3E6]/80 border-[#D26911]/30 shadow-[#D26911]/20',
-      logo: 'text-[#062540] hover:text-black',
-      link: 'text-[#235E80] hover:text-black',
-      activeLink: 'text-black font-medium',
-      underline: 'bg-[#EAA007]',
-      resumeGroup: 'bg-[#FAF3E6]/50 border-[#D26911]/50',
-      resumeButton: 'text-[#062540] hover:text-[#D26911]',
-      themeButton: 'text-[#235E80] hover:text-black',
+      nav: 'bg-[#F4EFE6]/90 border-[#D3C2B0]/80 shadow-[#D3C2B0]/30',
+      logo: 'text-[#5D4B3E] hover:text-[#2B2620]',
+      link: 'text-[#5D4B3E] hover:text-[#2B2620]',
+      activeLink: 'text-[#2B2620] font-semibold',
+      underline: 'bg-[#8C6239]',
+      resumeGroup: 'bg-[#EFEAD8]/80 border-[#DDD5C5]/60',
+      resumeButton: 'text-[#5D4B3E] hover:text-[#8C6239]',
+      themeButton: 'text-[#5D4B3E] hover:text-[#2B2620]',
     }
   };
 
@@ -1383,13 +1383,13 @@ export default function Navigation() {
 
   const currentTheme = resolvedTheme === 'light' ? themeClasses.light : themeClasses.dark;
   const iconStrokeColor = hovered
-    ? (resolvedTheme === 'light' ? '#D26911' : '#ff4500')
-    : (resolvedTheme === 'light' ? '#062540' : 'white');
+    ? (resolvedTheme === 'light' ? '#8C6239' : '#D0A060')
+    : (resolvedTheme === 'light' ? '#5D4B3E' : '#A68B6D');
 
   // Define CSS variables for animations based on the current theme
   const rootStyles = {
-    '--flicker-color-1': resolvedTheme === 'light' ? '#D26911' : '#ff4500',
-    '--flicker-color-2': resolvedTheme === 'light' ? '#D26911' : '#ff4500',
+    '--flicker-color-1': resolvedTheme === 'light' ? '#8C6239' : '#D0A060',
+    '--flicker-color-2': resolvedTheme === 'light' ? '#8C6239' : '#D0A060',
   };
 
   // --- JSX ---
@@ -1420,7 +1420,7 @@ export default function Navigation() {
             <RetroMusicPlayer />
             <div className={`w-px h-6 ${resolvedTheme === 'dark' ? 'bg-gray-700' : 'bg-[#D26911]/50'}`}></div>
           </div> */}
-          {/* <img src='/crown.svg' alt="Crown icon" width={24} height={24} /> */}
+          {/* <img src='/icons/crown.svg' alt="Crown icon" width={24} height={24} /> */}
 
           <button onClick={() => handleClick('#home')} className={`pl-6 text-lg font-semibold transition-colors duration-300 ${currentTheme.logo}`} aria-label="Scroll to top">
             <span className={activeSection === 'home' ? 'animate-flicker' : ''}>
@@ -1456,11 +1456,21 @@ export default function Navigation() {
 
             {/* --- Resume Group --- */}
             <div className={`group flex items-center justify-center gap-0 h-[40px] rounded-full transition-colors duration-300 ease-in-out shadow-md border ${currentTheme.resumeGroup}`}>
-              <button className={`text-sm px-4 py-2 transition-colors duration-300 font-medium ${currentTheme.resumeButton}`} onClick={() => window.open('/resume.pdf', '_blank')} title="Open Resume">
+              <button 
+                className={`text-sm px-4 py-2 transition-colors duration-300 font-medium ${currentTheme.resumeButton}`} 
+                onClick={() => { if (typeof window !== 'undefined') window.print(); }} 
+                title="Print/Save Live Resume"
+              >
                 RESUME
               </button>
-              <div className={`w-px h-5 ${resolvedTheme === 'dark' ? 'bg-gray-700' : 'bg-[#D26911]/50'}`}></div>
-              <button className="rounded-full h-[40px] w-[48px] flex justify-center items-center" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => { const link = document.createElement("a"); link.href = "/resume.pdf"; link.download = "ChinmayPatil_Resume.pdf"; document.body.appendChild(link); link.click(); document.body.removeChild(link); }} title="Download Resume">
+              <div className={`w-px h-5 ${resolvedTheme === 'dark' ? 'bg-gray-700' : 'bg-[#8C6239]/50'}`}></div>
+              <button 
+                className="rounded-full h-[40px] w-[48px] flex justify-center items-center" 
+                onMouseEnter={() => setHovered(true)} 
+                onMouseLeave={() => setHovered(false)} 
+                onClick={() => { if (typeof window !== 'undefined') window.print(); }} 
+                title="Print/Save Live Resume"
+              >
                 <svg width="24" height="24" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M29.75 21L21 29.75M21 29.75L12.25 21M21 29.75V7M29.75 35H12.25" stroke={iconStrokeColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -1494,8 +1504,8 @@ export default function Navigation() {
               exit={{ y: "-100%" }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="fixed top-0 left-0 right-0 p-8 pt-24 shadow-2xl rounded-b-3xl border-b
-                bg-[#FAF3E6] border-[#D26911]/30 
-                dark:bg-[#1f1f1f] dark:border-gray-800"
+                bg-[#F4EFE6] border-[#D3C2B0]/80 
+                dark:bg-[#23201D] dark:border-[#443E38]/80"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col items-center gap-6">
@@ -1521,8 +1531,8 @@ export default function Navigation() {
                     onClick={() => handleClick(href)}
                     className={`text-2xl font-semibold transition-colors duration-300
                       ${activeSection === href.substring(1)
-                        ? 'text-black dark:text-white'
-                        : 'text-[#235E80]/70 hover:text-black dark:text-gray-400 dark:hover:text-white'}`
+                        ? 'text-[#2B2620] dark:text-[#E8E2D8]'
+                        : 'text-[#5D4B3E]/70 hover:text-[#2B2620] dark:text-[#A68B6D] dark:hover:text-[#E8E2D8]'}`
                     }
                   >
                     {label}
@@ -1533,12 +1543,12 @@ export default function Navigation() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + (navItems.length + 1) * 0.07, duration: 0.4 }}
-                  onClick={() => window.open('/resume.pdf', '_blank')}
+                  onClick={() => { if (typeof window !== 'undefined') window.print(); }}
                   className="mt-6 text-lg font-medium px-6 py-2 rounded-full border 
-                    border-[#D26911]/50 text-[#062540] 
-                    dark:border-gray-700 dark:text-gray-300"
+                    border-[#8C6239]/50 text-[#5D4B3E] 
+                    dark:border-[#D0A060]/50 dark:text-[#A68B6D]"
                 >
-                  View Resume
+                  Print/Save Resume
                 </motion.button>
               </div>
             </motion.div>

@@ -122,7 +122,7 @@
 
 // 					{/* image or video: image used here -> lazy loaded */}
 // 					<img
-// 						src="/sukuna.gif"
+// 						src="/gifs/sukuna.gif"
 // 						alt=""
 // 						loading="lazy"
 // 						decoding="async"

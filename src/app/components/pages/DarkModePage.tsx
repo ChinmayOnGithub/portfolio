@@ -265,7 +265,7 @@ export default function DarkModePage() {
         style={{ opacity: scrollOpacity }}
       >
         <video
-          src="/sukuna.mp4"
+          src="/gifs/sukuna.mp4"
           autoPlay
           loop
           muted
@@ -317,7 +317,7 @@ export default function DarkModePage() {
             <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 relative group">
               <div className="absolute -inset-2 bg-orange-500 rounded-full opacity-0 group-hover:opacity-50 blur-2xl transition-opacity duration-500"></div>
               <div className="absolute -inset-1 bg-purple-600 rounded-full opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 delay-100"></div>
-              <Image src="/player.svg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-2 border-gray-800 transition-all duration-300 group-hover:scale-105" onError={(e) => { e.currentTarget.src = 'https://placehold.co/400x400/1a1a1a/ff4500?text=Chinmay'; }} />
+              <Image src="/images/player.svg" width={400} height={400} alt="A photo of Chinmay Patil" className="relative rounded-lg w-full h-full object-cover border-2 border-gray-800 transition-all duration-300 group-hover:scale-105" onError={(e) => { e.currentTarget.src = 'https://placehold.co/400x400/1a1a1a/ff4500?text=Chinmay'; }} />
             </div>
           </div>
           <div className="flex flex-col text-center md:text-left">

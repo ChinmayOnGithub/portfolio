@@ -11,14 +11,14 @@ export const header = {
   github: 'https://github.com/ChinmayOnGithub',
 };
 
-export const about = `Backend and DevOps focused B.Tech IT student at Walchand College of Engineering. I like designing reliable APIs, working with Linux and containers, and building small tools or homelab setups that make development smoother. Strong problem‑solving background with 800+ problems solved across LeetCode, CodeForces, and CodeChef.`;
+export const about = `Backend and DevOps focused B.Tech IT Graduate from Walchand College of Engineering (Class of 2026). I like designing reliable APIs, working with Linux and containers, and building small tools or homelab setups that make development smoother. Strong problem‑solving background with 800+ problems solved across LeetCode, CodeForces, and CodeChef.`;
 
 export const education = [
   {
     degree: 'B.Tech (Information Technology)',
-    institute: 'Walchand College of Engineering, Sangli',
+    institution: 'Walchand College of Engineering, Sangli',
     scoreLabel: 'CGPA',
-    score: '8.37 / 10',
+    score: '8.37 / 10 (Graduated)',
     period: '2022 — 2026',
   },
 ];

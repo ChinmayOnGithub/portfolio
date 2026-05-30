@@ -22,7 +22,7 @@ export default function Home() {
 				<div className="flex flex-col items-center  pt-8 sm:pt-32 px-4 sm:px-8 pb-8 sm:pb-0">
 					<div className="sm:w-92 w-64">
 						<Image
-							src="/chinmaypatil.jpg"
+							src="/images/chinmaypatil.jpg"
 							width={300}
 							height={300}
 							alt="Chinmay Patil"
@@ -48,7 +48,7 @@ export default function Home() {
 									title="Download Resume"
 								>
 									<Image
-										src="/download.svg"
+										src="/icons/download.svg"
 										alt="Download"
 										width={20}
 										height={20}
@@ -60,7 +60,7 @@ export default function Home() {
 						</div>
 					</div>
 					<div className="flex flex-row items-center w-fit sm:w-92 gap-2 mt-4 text-text-secondary">
-						<Image width={24} height={24} src="/mail.svg" alt="mail" className="w-6 h-6" />
+						<Image width={24} height={24} src="/icons/mail.svg" alt="mail" className="w-6 h-6" />
 						<h1>chinmaydpatil09@gmail.com</h1>
 					</div>
 				</div>

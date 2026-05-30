@@ -1,183 +1,136 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 16, featuring a resume page, designed portfolio, and technical blog.
+A modern, responsive portfolio website built with Next.js, featuring an interactive resume page, custom portfolio design, and technical blog.
 
 ## 🚀 Features
 
-- **Resume Page** (`/`) - Clean, professional resume with dark/light mode
-- **Portfolio** (`/portfolio`) - Designed portfolio with interactive background and navigation
-- **Technical Blog** (`/blogs`) - Blog system with sidebar navigation
-- **Responsive Design** - Works seamlessly on all devices
-- **Dark/Light Mode** - Theme toggle with persistent preferences
-- **Fast Performance** - Optimized with Next.js 16 and Turbopack
+- **Resume Page** (`/`) - Clean, professional resume with dark/light mode and live PDF printing support.
+- **Portfolio** (`/portfolio`) - Sleek, custom-designed portfolio with interactive background particle and theme effects.
+- **Technical Blog** (`/blogs`) - Dynamic blog system with category indexing and smooth markdown content parsing.
+- **Responsive Design** - Perfectly optimized across mobile, tablet, and desktop views.
+- **Micro-Animations** - Subtle, gorgeous interactive states, spinners, and page transitions powered by Framer Motion.
+- **Fast Performance** - Tailored utilizing the Next.js App Router and Turbopack compiler.
 
+---
 
 ## 📁 Project Structure
 
 ```
 ├── src/
-│   ├── app/                    # Next.js app directory
+│   ├── app/                    # Next.js App Router directory
 │   │   ├── page.tsx           # Resume (homepage)
-│   │   ├── portfolio/         # Portfolio page
-│   │   ├── blogs/             # Blog listing and posts
-│   │   ├── about/             # About page
-│   │   ├── projects/          # Projects pages
-│   │   └── components/        # Portfolio-specific components
-│   ├── components/
-│   │   ├── resume/            # Resume components
-│   │   ├── blog/              # Blog components
-│   │   └── ui/                # Shared UI components
-│   └── lib/                   # Utility functions
-├── public/                    # Static assets
-└── content/                   # Blog content (markdown)
+│   │   ├── portfolio/         # Sleek modern Portfolio page
+│   │   ├── blogs/             # Technical Blog listing and single-post views
+│   │   ├── about/             # Personal About details page
+│   │   ├── projects/          # Dynamic Project details page
+│   │   ├── problems/          # Competitive programming and problem-solving hub
+│   │   └── components/        # Page-specific interface elements
+│   ├── components/            # Global UI and shared components
+│   │   ├── resume/            # Interactive resume modules
+│   │   ├── blog/              # Blog rendering widgets
+│   │   └── ui/                # Shared baseline component library
+│   └── lib/                   # Internal utilities & helper functions
+├── public/                    # Static asset organization (strict separation)
+│   ├── images/                # Static photos, avatar, cover images
+│   ├── gifs/                  # Interactive background animations and video files
+│   ├── icons/                 # UI assets, mail and action icons
+│   ├── projects/              # Detailed project showcases & hero assets
+│   ├── project-logos/         # Mini logos representing portfolio projects
+│   ├── screenshots/           # General application view screenshots
+│   └── resume.pdf             # Stored Resume PDF download package
+└── content/                   # Blog content (structured markdown)
 ```
+
+---
+
+## 🎨 Asset & Content Guidelines
+
+To maintain visual excellence and a pristine code workspace, **never place raw assets directly inside the root `public/` directory**. Always categorize them according to their format and purpose:
+
+| Directory | Asset Type | Example Assets |
+| :--- | :--- | :--- |
+| `/public/images/` | Static photos, background covers | `profile.jpg`, `cover.png` |
+| `/public/gifs/` | Video files, animations, loaded loops | `sukuna.mp4`, `watching_tv.jpg` |
+| `/public/icons/` | Custom vector graphics & functional SVGs | `mail.svg`, `download.svg`, `crown.svg` |
+| `/public/project-logos/` | Individual brand/project square icons | `stremora.svg`, `verifyhub.svg` |
+| `/public/projects/` | Hero illustrations or high-res project banners | `stremora_hero.png` |
+| `/public/screenshots/` | Full-screen previews or page captures | `hero.png`, `about.png` |
+
+### Adding a New Project
+1. **Prepare Assets**: Place the project's square brand logo in `/public/project-logos/` and any key showcase banner/hero in `/public/projects/`.
+2. **Update Central Registry**: Add the project's details, description, tech stack, and links in `src/app/constants.ts`.
+3. **Register Page/Card**: The site will dynamically generate the `/projects/[id]` route and display cards on the `/portfolio` view.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16
+- **Framework**: Next.js (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
+- **Styling**: Tailwind CSS
 - **UI Components**: Radix UI
 - **Icons**: Lucide React
 - **Animations**: Framer Motion
-- **Theme**: next-themes
+- **Theme**: next-themes (Persistent mood toggle)
 
-## 📦 Installation
+---
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd portfolio
-```
+## 📦 Installation & Setup
 
-2. Install dependencies:
-```bash
-npm install
-```
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repo-url>
+   cd portfolio
+   ```
 
-3. Create environment file:
-```bash
-cp .env.example .env
-```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-4. Add your GitHub token (optional):
-```
-NEXT_PUBLIC_GITHUB_TOKEN=your_token_here
-```
+3. **Configure Environment**:
+   Create a `.env` file based on `.env.example` and add your optional tokens:
+   ```env
+   NEXT_PUBLIC_GITHUB_TOKEN=your_github_personal_token
+   ```
 
-## 🚀 Development
+4. **Launch Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
-Run the development server:
+5. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+   Start the compiled production runtime:
+   ```bash
+   npm start
+   ```
 
-```bash
-npm run dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+## 📱 Routes & Pages
 
-## 🏗️ Build
+- `/` - Main Interactive Resume (with customized printing style sheets)
+- `/portfolio` - Graphic and dynamic presentation of development history
+- `/about` - Detailed narrative, resume downloads, and personal channels
+- `/blogs` - Markdown-driven engineering blog posts
+- `/projects/[id]` - Deep-dive explanations for specific development projects
+- `/problems` - Dynamic dashboard detailing LeetCode/Codeforces progress
 
-Build for production:
+---
 
-```bash
-npm run build
-```
+## 🔧 Legacy Paths & Cleanup Strategy
 
-Start production server:
+We have identified several legacy paths and dead code blocks inside components such as `Navigation.tsx` and `RetroMusicPlayer.tsx` containing obsolete asset links or unused UI layouts. 
 
-```bash
-npm start
-```
+> [!IMPORTANT]
+> **Cleanup recommendation**: Do not delete these files or paths without user validation. When cleaning up legacy components, keep code backups intact in source control history and carefully test active links (like `/resume.pdf`) to maintain backward compatibility.
 
-## 📝 Content Management
-
-### Resume Content
-
-Edit resume data in `src/components/resume/data.ts`:
-- Personal information
-- Skills
-- Projects
-- Experience
-- Education
-- Certifications
-
-### Blog Posts
-
-Blog posts are stored in `src/app/blogs/[slug]/page.tsx` as structured data. To add a new post:
-
-1. Add post data to the `blogData` object
-2. Include title, excerpt, date, tags, and content
-3. Add to the listing in `src/app/blogs/page.tsx`
-
-## 🎨 Customization
-
-### Colors
-
-Theme colors are defined in Tailwind CSS. Main colors used:
-- **Dark Mode**: zinc-950, zinc-900, zinc-800
-- **Light Mode**: white, slate-50, slate-100
-- **Accent**: Blue (blue-600, blue-400)
-
-### Fonts
-
-- **Sans-serif**: Inter (default)
-- **Monospace**: Roboto Mono
-- **Serif**: Georgia/Times New Roman (blog content)
-
-## 📱 Routes
-
-- `/` - Resume (homepage)
-- `/portfolio` - Designed portfolio
-- `/blogs` - Blog listing
-- `/blogs/[slug]` - Individual blog posts
-- `/about` - About page
-- `/projects/[id]` - Project details
-- `/problems` - Problem-solving profiles
-
-## 🔧 Configuration
-
-### Next.js Config
-
-Configuration is in `next.config.mjs`. Current settings:
-- MDX support
-- Optimized CSS with Critters
-
-### TypeScript
-
-TypeScript configuration in `tsconfig.json` with strict mode enabled.
-
-### ESLint
-
-Linting configuration in `eslint.config.mjs` following Next.js best practices.
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
-
-### Other Platforms
-
-Build the project:
-```bash
-npm run build
-```
-
-The output will be in `.next/` directory. Serve with:
-```bash
-npm start
-```
-
-## 📄 Environment Variables
-
-Required environment variables:
-
-- `NEXT_PUBLIC_GITHUB_TOKEN` - GitHub API token (optional, for GitHub data)
-
+---
 
 ## 📝 License
 
-Private project - All rights reserved
+Private project - All rights reserved.

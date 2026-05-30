@@ -14,7 +14,7 @@ export default function Education() {
     {
       institution: 'Walchand College of Engineering, Sangli',
       degree: 'B.Tech (Information Technology)',
-      field: 'CGPA: 8.37/10',
+      field: 'CGPA: 8.37/10 · Graduated',
       period: '2022 - 2026',
       grade: null,
       activities: null,
@@ -41,27 +41,29 @@ export default function Education() {
   ];
 
   return (
-    <Card className={`${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
-      <CardHeader>
-        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Education</CardTitle>
+    <Card className="vintage-card">
+      <div className="vintage-card-inner-border" />
+      <div className="vintage-corner-flourish vintage-flourish-tl" />
+      <div className="vintage-corner-flourish vintage-flourish-tr" />
+      <div className="vintage-corner-flourish vintage-flourish-bl" />
+      <div className="vintage-corner-flourish vintage-flourish-br" />
+
+      <CardHeader className="relative z-10">
+        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Education</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 relative z-10">
         {education.map((edu, index) => (
-          <div key={index}>
+          <div key={index} className="font-serif">
             <div className="flex gap-4">
-              <div className={`w-10 h-10 rounded border flex items-center justify-center shrink-0 ${isDark ? 'bg-zinc-900/50 border-zinc-800/50' : 'bg-slate-200 border-slate-300'}`}>
-                <GraduationCap className={`w-5 h-5 ${isDark ? 'text-zinc-500' : 'text-slate-600'}`} />
+              <div className="w-10 h-10 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0">
+                <GraduationCap className="w-5 h-5 text-[var(--accent-color)]" />
               </div>
 
               <div className="flex-1">
-                <h3 className={`font-semibold text-lg ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{edu.institution}</h3>
-                <p className={`text-sm mt-1 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{edu.degree}</p>
-                <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{edu.field}</p>
-                <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{edu.period}</p>
-
-                {edu.grade && (
-                  <p className={`text-sm mt-2 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>Grade: {edu.grade}</p>
-                )}
+                <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)]">{edu.institution}</h3>
+                <p className="text-sm mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
+                <p className="text-xs text-[var(--meta-color)] italic">{edu.field}</p>
+                <p className="text-xs text-[var(--meta-color)]">{edu.period}</p>
 
                 {edu.skills && (
                   <div className="flex flex-wrap gap-2 mt-3">
@@ -69,7 +71,7 @@ export default function Education() {
                       <Badge
                         key={skillIndex}
                         variant="secondary"
-                        className={isDark ? 'bg-zinc-900/60 text-zinc-300 border-zinc-800/50' : 'bg-slate-200 text-slate-700 border-slate-300'}
+                        className="text-xs px-2.5 py-0.5 vintage-badge"
                       >
                         {skill}
                       </Badge>

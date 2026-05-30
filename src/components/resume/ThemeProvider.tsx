@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 interface ThemeContextType {
   theme: 'light' | 'dark';
@@ -10,28 +11,18 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ResumeThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('resume-theme') as 'light' | 'dark' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      const newTheme = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('resume-theme', newTheme);
-      document.documentElement.classList.toggle('dark', newTheme === 'dark');
-      return newTheme;
-    });
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
+
+  const theme = (mounted ? resolvedTheme : 'dark') as 'light' | 'dark';
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -27,6 +27,20 @@ export function Experience() {
 
   const experiences: Experience[] = [
     {
+      company: 'Qualys',
+      location: 'Pune, Maharashtra, India (Hybrid)',
+      duration: 'Jan 2026 - Present',
+      roles: [
+        {
+          title: 'Software Engineering Intern (Backend & DevOps)',
+          type: 'Internship',
+          period: 'Jan 2026 - Present',
+          description: 'Developing and optimizing high-performance REST APIs for the enterprise vulnerability scanning platform. Automated end-to-end service orchestration and deployments using Docker and Kubernetes. Collaborated on observability tools, structuring CI/CD pipelines to streamline development workflows.',
+          skills: ['Java', 'Spring Boot', 'REST APIs', 'Docker', 'Kubernetes', 'CI/CD', 'Git'],
+        },
+      ],
+    },
+    {
       company: 'WLUG (Walchand Linux Users Group)',
       location: 'Walchand College, Sangli',
       duration: '2023 - 2024',
@@ -42,39 +56,50 @@ export function Experience() {
     },
   ];
 
+  const getCompanyLogo = (company: string) => {
+    return (
+      <div className="w-10 h-10 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0 transition-all">
+        <span className="font-bold font-cormorant text-base text-[var(--accent-color)]">{company[0]}</span>
+      </div>
+    );
+  };
+
   return (
-    <Card className={`${isDark ? 'bg-[#0F0F13]/80 backdrop-blur-md border-zinc-800/50 shadow-lg shadow-black/10' : 'bg-slate-50 border-slate-200 shadow-sm'}`}>
-      <CardHeader>
-        <CardTitle className={`text-lg font-semibold ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>Experience</CardTitle>
+    <Card className="vintage-card">
+      <div className="vintage-card-inner-border" />
+      <div className="vintage-corner-flourish vintage-flourish-tl" />
+      <div className="vintage-corner-flourish vintage-flourish-tr" />
+      <div className="vintage-corner-flourish vintage-flourish-bl" />
+      <div className="vintage-corner-flourish vintage-flourish-br" />
+
+      <CardHeader className="relative z-10">
+        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Experience</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 relative z-10">
         {experiences.map((exp, expIndex) => (
-          <div key={expIndex} className="relative">
-            {expIndex !== 0 && <div className={`absolute left-5 -top-3 w-px h-3 ${isDark ? 'bg-zinc-800/30' : 'bg-slate-300'}`} />}
+          <div key={expIndex} className="relative font-serif">
+            {expIndex !== 0 && <div className="absolute left-5 -top-3 w-px h-3 bg-[var(--border-color)]" />}
 
             <div className="flex gap-4">
-              <div className={`w-10 h-10 rounded border flex items-center justify-center shrink-0 ${isDark ? 'bg-zinc-900/50 border-zinc-800/50' : 'bg-slate-200 border-slate-300'}`}>
-                <Building2 className={`w-5 h-5 ${isDark ? 'text-zinc-500' : 'text-slate-600'}`} />
-              </div>
+              {getCompanyLogo(exp.company)}
 
               <div className="flex-1">
                 <div className="mb-4">
-                  <h3 className={`font-semibold text-lg ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{exp.company}</h3>
-                  <p className={`text-sm ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{exp.duration}</p>
-                  <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{exp.location}</p>
+                  <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)]">{exp.company}</h3>
+                  <p className="text-xs text-[var(--meta-color)] italic">{exp.duration} · {exp.location}</p>
                 </div>
 
                 <div className="space-y-4">
                   {exp.roles.map((role, roleIndex) => (
-                    <div key={roleIndex} className={`relative pl-6 border-l-2 ${isDark ? 'border-zinc-800/50' : 'border-slate-300'}`}>
-                      <div className={`absolute -left-1 top-2 w-2 h-2 rounded-full ${isDark ? 'bg-zinc-600' : 'bg-slate-400'}`} />
+                    <div key={roleIndex} className="relative pl-6 border-l border-[var(--border-color)]">
+                      <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)]" />
 
-                      <h4 className={`font-medium ${isDark ? 'text-[#E6E6E6]' : 'text-slate-900'}`}>{role.title}</h4>
-                      <p className={`text-sm mb-1 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{role.type} · {role.period}</p>
+                      <h4 className="font-bold text-sm font-serif text-[var(--text-color)]">{role.title}</h4>
+                      <p className="text-xs mb-2 text-[var(--meta-color)]">{role.type} · {role.period}</p>
                       {role.workMode && (
-                        <p className={`text-sm mb-2 ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>{role.workMode}</p>
+                        <p className="text-xs mb-2 text-[var(--meta-color)]">{role.workMode}</p>
                       )}
-                      <p className={`text-sm mb-2 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>{role.description}</p>
+                      <p className="text-sm mb-3 leading-relaxed text-[var(--text-color)]/95">{role.description}</p>
 
                       {role.skills && (
                         <div className="flex flex-wrap gap-2 mt-2">
@@ -82,7 +107,7 @@ export function Experience() {
                             <Badge
                               key={skillIndex}
                               variant="secondary"
-                              className={isDark ? 'bg-zinc-900/60 text-zinc-300 border-zinc-800/50' : 'bg-slate-200 text-slate-700 border-slate-300'}
+                              className="text-xs px-2.5 py-0.5 vintage-badge"
                             >
                               {skill}
                             </Badge>

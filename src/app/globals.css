@@ -152,4 +152,174 @@ body {
   .font-times {
     font-family: 'Times New Roman', serif;
   }
+
+  /*─────────────────────────────────────────────────────────────────────
+    VINTAGE CARD CATALOG & STAMP BUTTONS
+  ─────────────────────────────────────────────────────────────────────*/
+  .vintage-card {
+    position: relative;
+    background-color: var(--card-bg) !important;
+    border: 1.5px solid var(--border-color) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+  }
+
+  .vintage-card-inner-border {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid var(--border-color);
+    pointer-events: none;
+    opacity: 0.35;
+    border-radius: 1px;
+    z-index: 5;
+  }
+
+  .vintage-corner-flourish {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-color: var(--border-color);
+    pointer-events: none;
+    opacity: 0.65;
+    z-index: 10;
+  }
+  .vintage-flourish-tl { top: 6px; left: 6px; border-top: 1.5px solid; border-left: 1.5px solid; }
+  .vintage-flourish-tr { top: 6px; right: 6px; border-top: 1.5px solid; border-right: 1.5px solid; }
+  .vintage-flourish-bl { bottom: 6px; left: 6px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+  .vintage-flourish-br { bottom: 6px; right: 6px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+  /* Stamped Buttons */
+  .vintage-btn {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1.5px solid var(--border-color) !important;
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    border-radius: 1px !important;
+    box-shadow: 2px 2px 0px var(--border-color) !important;
+    transition: all 0.1s ease-in-out;
+  }
+  .vintage-btn:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--border-color) !important;
+    background-color: var(--badge-bg) !important;
+  }
+  .vintage-btn-primary {
+    background-color: var(--badge-bg) !important;
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 2px 2px 0px var(--accent-color) !important;
+  }
+  .vintage-btn-primary:hover {
+    background-color: var(--badge-bg) !important;
+    opacity: 0.9;
+    box-shadow: 1px 1px 0px var(--accent-color) !important;
+  }
+
+  /* Stamped Badges/Pills */
+  .vintage-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background-color: var(--badge-bg) !important;
+    border: 1.2px solid var(--border-color) !important;
+    color: var(--badge-text) !important;
+    border-radius: 1px !important;
+    box-shadow: 1.5px 1.5px 0px var(--border-color) !important;
+    transition: all 0.1s ease-in-out;
+  }
+  .vintage-badge:hover {
+    transform: translate(0.5px, 0.5px);
+    box-shadow: 0.5px 0.5px 0px var(--border-color) !important;
+  }
+}
+
+/*─────────────────────────────────────────────────────────────────────
+  PRINT STYLESHEET (PDF Export Tuning)
+  Optimized for saving current webpage to a clean professional PDF.
+─────────────────────────────────────────────────────────────────────*/
+@media print {
+  /* Hide UI elements, toggles, sidebars, music player, and fixed navigation */
+  nav,
+  .fixed,
+  iframe,
+  footer,
+  button,
+  .print\:hidden,
+  .no-print,
+  .vintage-corner-flourish,
+  .vintage-card-inner-border,
+  .retro-music-player,
+  .lg\:col-span-4, /* Hide the sidebar (BookStack & stamps) for print layout */
+  .vintage-btn {
+    display: none !important;
+  }
+
+  /* Force layout to use full page width and natural vertical stacking */
+  html, body, main, .vintage-ledger-container {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  /* Disable dynamic theme colors and force high contrast black ink on white paper */
+  * {
+    color: #000000 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-color: #d1d5db !important; /* light gray borders for sections */
+  }
+
+  .grid {
+    display: block !important;
+  }
+
+  .lg\:col-span-8 {
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Structure cards as clean resume sections with simple divider lines */
+  .vintage-card {
+    border: none !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    margin-bottom: 1.5rem !important;
+    padding-bottom: 1rem !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Typography formatting */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Ensure page breaks don't happen mid-item inside lists and grids */
+  .space-y-12 > *,
+  li,
+  tr {
+    page-break-inside: avoid !important;
+  }
+
+  /* Clean spacing adjustments for headers and section items */
+  .space-y-12 {
+    margin-top: 0 !important;
+  }
 }
