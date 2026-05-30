@@ -281,6 +281,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         color: 'var(--text-color)'
       }}
     >
+      <title>{`${project.name} | Chinmay Patil`}</title>
+      <meta name="description" content={project.description} />
       {/* Dynamic Scroll Reading Bar */}
       <div
         className="fixed top-0 left-0 right-0 h-[3px] z-50 origin-left transition-all duration-100"
@@ -360,6 +362,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         >
           <button
             onClick={() => setShowMobileToc(!showMobileToc)}
+            aria-expanded={showMobileToc}
             className="flex justify-between items-center w-full font-bold uppercase tracking-widest text-[11px]"
             style={{ color: 'var(--meta-color)' }}
           >
@@ -407,6 +410,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               <img
                 src={project.images[0]}
                 alt={`${project.name} primary plate illustration`}
+                loading="eager"
+                decoding="async"
                 className="w-full h-auto object-cover rounded-sm filter brightness-95 group-hover:brightness-100 transition-all"
               />
             </div>
@@ -506,7 +511,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}
                     onClick={() => setZoomedImage(sec.image || null)}
                   >
-                    <img src={sec.image} alt={sec.title} className="w-full h-auto rounded-sm filter brightness-95 group-hover:brightness-100 transition-all" />
+                    <img src={sec.image} alt={sec.title} loading="lazy" decoding="async" className="w-full h-auto rounded-sm filter brightness-95 group-hover:brightness-100 transition-all" />
                   </div>
                   <figcaption className="mt-2 text-center text-xs italic" style={{ color: 'var(--meta-color)' }}>
                     Plate 1.2: {sec.title} schema layout.
@@ -535,6 +540,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     <img
                       src={image}
                       alt={project.galleryCaptions[index] || `Screenshot ${index + 2}`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-auto object-cover rounded-sm filter brightness-95 group-hover:brightness-100 transition-all"
                     />
                   </div>

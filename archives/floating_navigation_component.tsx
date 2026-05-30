@@ -5,16 +5,17 @@ import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- NAVIGATION DATA ---
+// Aligned with actual resume sections: #home, #about, #projects, #skills, #experience, #education
 const navItems = [
-  // Home is handled by the logo on desktop, so we list it for mobile
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
-  { href: '#problems', 'label': 'Problems' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#education', label: 'Education' },
 ];
 
-// --- ICONS (Restored from your original code) ---
+// --- ICONS (Dynamic Theme Control SVGs) ---
 const SharinganIcon = ({ className }: { className?: string }) => (
   <svg
     width="24"
@@ -85,51 +86,7 @@ const SageModeIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// --- IN-LINE RETRO MUSIC PLAYER (self-contained fix) ---
-const RetroMusicPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const togglePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  return (
-    <div className="flex items-center gap-2">
-      <audio ref={audioRef} src="/retro-theme.mp3" loop />
-      <button
-        onClick={togglePlayPause}
-        className="flex items-center gap-2"
-        aria-label={isPlaying ? "Pause music" : "Play music"}
-      >
-        <div className="w-5 h-5 flex items-center justify-center">
-          {isPlaying ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M5.5 13.5A.5.5 0 0 1 5 13V3a.5.5 0 0 1 1 0v10a.5.5 0 0 1-.5.5zm5-10a.5.5 0 0 1 1 0v10a.5.5 0 0 1-1 0V3z" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-            </svg>
-          )}
-        </div>
-        <div className="w-12 h-2 bg-gray-300 rounded-full dark:bg-gray-700">
-          <div className={`h-full rounded-full transition-all duration-300 ${isPlaying ? 'bg-orange-500 w-full animate-[pulse_1s_infinite_ease-in-out]' : 'w-0'}`}></div>
-        </div>
-      </button>
-    </div>
-  );
-};
-
-
-// --- NEW HAMBURGER MENU ICON (with Framer Motion) ---
+// --- Hamburger Menu Icon with Motion Transitions ---
 const HamburgerIcon = ({ isOpen, resolvedTheme }: { isOpen: boolean; resolvedTheme: string | undefined }) => {
   const lineBase = "h-0.5 w-6 rounded-full transition-all duration-300";
   const color = resolvedTheme === 'dark' ? 'bg-gray-200' : 'bg-[#062540]';
@@ -154,16 +111,14 @@ const HamburgerIcon = ({ isOpen, resolvedTheme }: { isOpen: boolean; resolvedThe
 
 // --- MAIN COMPONENT ---
 export default function Navigation() {
-  // --- STATE ---
   const { setTheme, resolvedTheme } = useTheme();
   const [hovered, setHovered] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isMounted, setIsMounted] = useState(false);
   const [isSwitching, setIsSwitching] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // --- HANDLERS ---
   const handleThemeToggle = () => {
     if (isSwitching) return;
     setIsSwitching(true);
@@ -172,28 +127,28 @@ export default function Navigation() {
   };
 
   const handleClick = useCallback((id: string) => {
-    setIsMenuOpen(false); // Close menu on link click
+    setIsMenuOpen(false);
     const section = document.querySelector(id) as HTMLElement | null;
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
-  // --- EFFECTS ---
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Effect to disable body scroll when mobile menu is open
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-    return () => { document.body.style.overflow = 'auto'; }; // Cleanup on unmount
+    return () => { document.body.style.overflow = 'auto'; };
   }, [isMenuOpen]);
 
+  // Section Observer Configuration
   useEffect(() => {
     if (!isMounted) return;
     if (observerRef.current) observerRef.current.disconnect();
@@ -218,7 +173,7 @@ export default function Navigation() {
     };
   }, [isMounted, resolvedTheme]);
 
-  // --- THEME DEFINITIONS (Restored from your original code) ---
+  // Dynamic Aesthetic Theme Configuration
   const themeClasses = {
     dark: {
       nav: 'bg-[#23201D]/90 border-[#443E38]/80 shadow-black/40',
@@ -251,13 +206,11 @@ export default function Navigation() {
     ? (resolvedTheme === 'light' ? '#8C6239' : '#D0A060')
     : (resolvedTheme === 'light' ? '#5D4B3E' : '#A68B6D');
 
-  // Define CSS variables for animations based on the current theme
   const rootStyles = {
     '--flicker-color-1': resolvedTheme === 'light' ? '#8C6239' : '#D0A060',
     '--flicker-color-2': resolvedTheme === 'light' ? '#8C6239' : '#D0A060',
   };
 
-  // --- JSX ---
   return (
     <>
       <style jsx global>{`
@@ -274,18 +227,21 @@ export default function Navigation() {
         @keyframes spin-fast { from { transform: rotate(0deg); } to { transform: rotate(720deg); } }
       `}</style>
 
-      {/* --- DESKTOP NAVIGATION --- */}
+      {/* --- DESKTOP FLOATING BAR --- */}
       <nav
         className={`fixed top-5 z-50 left-1/2 -translate-x-1/2 backdrop-blur-lg rounded-full border shadow-lg transition-colors duration-500 ${currentTheme.nav} hidden lg:block`}
         style={rootStyles as any}
       >
         <div className="flex items-center justify-between gap-4 sm:gap-8 px-3 py-2">
+          
+          {/* Brand Logo & Flicker Effect */}
           <button onClick={() => handleClick('#home')} className={`pl-6 text-lg font-semibold transition-colors duration-300 ${currentTheme.logo}`} aria-label="Scroll to top">
             <span className={activeSection === 'home' ? 'animate-flicker' : ''}>
               chinmaypatil
             </span>
           </button>
 
+          {/* Links Section */}
           <div className="flex items-center gap-6">
             {navItems.filter(item => item.label !== 'Home').map(({ href, label }) => (
               <button
@@ -302,6 +258,7 @@ export default function Navigation() {
             ))}
           </div>
 
+          {/* Interactive Utilities */}
           <div className="flex items-center gap-4">
             <button
               onClick={handleThemeToggle}
@@ -312,7 +269,7 @@ export default function Navigation() {
               {resolvedTheme === 'dark' ? <SharinganIcon className="animate-spin-slow" /> : <SageModeIcon />}
             </button>
 
-            {/* --- Resume Group --- */}
+            {/* --- Resume Action Group --- */}
             <div className={`group flex items-center justify-center gap-0 h-[40px] rounded-full transition-colors duration-300 ease-in-out shadow-md border ${currentTheme.resumeGroup}`}>
               <button 
                 className={`text-sm px-4 py-2 transition-colors duration-300 font-medium ${currentTheme.resumeButton}`} 
@@ -338,14 +295,14 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* --- MOBILE NAVIGATION (Hamburger) --- */}
+      {/* --- MOBILE ACCORDION (Hamburger Trigger) --- */}
       <div className={`fixed top-5 right-5 z-50 rounded-full border shadow-lg p-2 ${currentTheme.nav} lg:hidden`}>
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-1 z-50 rounded-full aspect-square" aria-label="Toggle Menu">
           <HamburgerIcon isOpen={isMenuOpen} resolvedTheme={resolvedTheme} />
         </button>
       </div>
 
-      {/* --- MOBILE MENU PANEL --- */}
+      {/* --- MOBILE FULL SCREEN PANEL --- */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -367,7 +324,6 @@ export default function Navigation() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col items-center gap-6">
-                {/* Theme Toggle for Mobile */}
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -379,7 +335,7 @@ export default function Navigation() {
                 >
                   {resolvedTheme === 'dark' ? <SharinganIcon className="w-12 h-12 animate-spin-slow" /> : <SageModeIcon className="w-12 h-12" />}
                 </motion.button>
-                {/* Links for Mobile */}
+                
                 {navItems.map(({ href, label }, index) => (
                   <motion.button
                     key={href}
@@ -396,7 +352,7 @@ export default function Navigation() {
                     {label}
                   </motion.button>
                 ))}
-                {/* Resume Button for Mobile */}
+                
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

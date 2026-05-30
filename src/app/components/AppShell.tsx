@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './Loader';
-import Navigation from './Navigation';
 import ProjectNavigation from './ProjectNavigation';
-import ClientLayoutWrapper from './ClientLayoutWrapper';
 
 export default function AppShell({
   children,
@@ -17,8 +15,7 @@ export default function AppShell({
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
-  // Only show portfolio navigation on /portfolio page
-  const isPortfolioPage = pathname === '/portfolio';
+  // Minimal Navigation for project pages
   const isProjectPage = pathname.startsWith('/projects');
 
   useEffect(() => {
@@ -41,22 +38,10 @@ export default function AppShell({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          {/* Portfolio Navigation only for /portfolio page */}
-          {isPortfolioPage && (
-            <div className="relative z-20">
-              <Navigation />
-            </div>
-          )}
-
-          {/* Minimal Navigation for project pages */}
           {isProjectPage && <ProjectNavigation />}
 
-          <main className={`relative ${isPortfolioPage ? 'z-10' : 'z-0'}`}>
-            {isPortfolioPage ? (
-              <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
-            ) : (
-              children
-            )}
+          <main className="relative z-0">
+            {children}
           </main>
         </motion.div>
       )}
