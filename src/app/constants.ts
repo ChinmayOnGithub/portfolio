@@ -177,3 +177,75 @@ export const getProjectById = (id: string): Project | undefined => {
 export const getProjectsByCategory = (category: string): Project[] => {
   return projects.filter(project => project.category === category);
 };
+
+// --- TECHNICAL PAPERS SCHEMA & REGISTRY ---
+export interface PaperSection {
+  title: string;
+  content: string;
+  image?: string;
+}
+
+export interface Paper {
+  id: string;
+  title: string;
+  category: string;
+  date: string; // "May 2026", etc.
+  readTime: number; // in minutes
+  summary: string;
+  content: string;
+  sections: PaperSection[];
+  references: string[];
+}
+
+export const papers: Paper[] = [
+  {
+    id: 'homelab-infrastructure',
+    title: 'Designing an Isolated Homelab Infrastructure',
+    category: 'DevOps & Networking',
+    date: 'May 2026',
+    readTime: 6,
+    summary: 'A detailed blueprint for setting up a secure, multi-tenant home server utilizing Linux namespaces, private subnets, reverse proxies, and local DNS.',
+    content: 'Developing a localized homelab environment requires careful orchestration of system network topologies and strict resource containment. This paper presents an architectural overview of a production-grade homelab setup built entirely on Linux containers and private virtual bridges, ensuring clean operational boundaries.',
+    sections: [
+      {
+        title: 'Network Segmentation and Isolation Bridge',
+        content: 'To prevent dynamic local tests from interfering with active home LAN nodes, the infrastructure relies on a dedicated host-only virtual bridge interface managed by systemd-networkd. This bridge acts as the core gateway, routing internal container traffic through a central proxy router.'
+      },
+      {
+        title: 'Proxy Routing and Dynamic Local DNS',
+        content: 'Private micro-services are partitioned using isolated docker-compose networks. A central reverse proxy automatically intercepts host headers, dynamically terminating local secure TLS certificates so that all active administrative interfaces run strictly under end-to-end HTTPS.'
+      }
+    ],
+    references: [
+      'Linux Virtual Bridging and Namespaces RFC Documentation',
+      'Traefik Reverse Proxy Configuration Guide and Header Routing Guidelines'
+    ]
+  },
+  {
+    id: 'api-reliability-patterns',
+    title: 'Building Resilient APIs: Fail-Safe Engineering',
+    category: 'Backend Architecture',
+    date: 'Apr 2026',
+    readTime: 8,
+    summary: 'An exploration of API reliability mechanisms, focusing on sliding-window rate limiters, token-bucket controls, circuit breakers, and redundant data fallbacks.',
+    content: 'Modern distributed backend architectures must systematically design for upstream and downstream latency spikes at every database and API integration boundary. This technical paper details design patterns used to secure backend systems against client congestion, cascading network timeouts, and thread pool depletion.',
+    sections: [
+      {
+        title: 'Sliding-Window Rate Limiting Engine',
+        content: 'Standard rate limiters often face edge-burst leakage. By adopting a sliding-window algorithm backed by high-throughput Redis sorted sets, the API gateway evaluates client quotas over a rolling 60-second window, protecting database layers from query floods.'
+      },
+      {
+        title: 'Circuit Breaker Interceptors & Fallbacks',
+        content: 'When external micro-services or payment API pathways encounter transient blockages, a local circuit breaker interceptor transitions to an open state immediately. This triggers mock cached metadata fallbacks locally, protecting worker thread pools from resource exhaustion.'
+      }
+    ],
+    references: [
+      'Sliding Window Rate Limiter Algorithmic Specifications and Redis Implementation',
+      'Martin Fowler Circuit Breaker Design Patterns and Fallback Interceptor Guidelines'
+    ]
+  }
+];
+
+export const getPaperById = (id: string): Paper | undefined => {
+  return papers.find(p => p.id === id);
+};

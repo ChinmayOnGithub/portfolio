@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Linkedin, Github, AudioWaveform, Moon, Sun, Download } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
+import coverImg from './images/cover.png';
+import profileImg from './images/profile.jpg';
 
 export function ResumeHeader() {
   const { theme, toggleTheme } = useResumeThemeSafe();
@@ -13,14 +15,14 @@ export function ResumeHeader() {
   return (
     <Card className="rounded-none border-t-0 border-x-0 border-b p-0 gap-0 bg-[var(--card-bg)] border-[var(--border-color)] text-[var(--text-color)] shadow-none">
       <div className="relative h-40 lg:h-56 overflow-hidden print:hidden">
-        <img src="/images/cover.png" alt="Cover" className="w-full h-full object-cover opacity-90 contrast-125" />
+        <img src={coverImg.src} alt="Cover" className="w-full h-full object-cover opacity-90 contrast-125" />
       </div>
 
       <div className="relative px-4 lg:px-6 pb-6 bg-[var(--card-bg)]">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           <div className="shrink-0 -mt-20 lg:-mt-24 print:hidden">
             <div className="w-32 h-32 lg:w-44 lg:h-44 rounded-full border-4 overflow-hidden flex items-center justify-center border-[var(--card-bg)] bg-[var(--card-bg)] shadow-lg relative z-10">
-              <img src="/images/profile.jpg" alt="Profile" className="w-full h-full object-cover filter contrast-[1.05]" />
+              <img src={profileImg.src} alt="Profile" className="w-full h-full object-cover filter contrast-[1.05]" />
             </div>
           </div>
 
@@ -70,8 +72,8 @@ export function ResumeHeader() {
                     <Download className="w-4 h-4 mr-1" />
                     Print/Save Latest PDF
                   </Button>
-                  <a 
-                    href="/resume.pdf" 
+                  <a
+                    href="/resume.pdf"
                     download="ChinmayPatil_Resume.pdf"
                     className="text-xs text-[var(--meta-color)] hover:underline ml-2"
                   >

@@ -9,7 +9,7 @@ import { SkillsSection } from '@/components/resume/Skills';
 import { Experience } from '@/components/resume/Experience';
 import Education from '@/components/resume/Education';
 import { Projects } from '@/components/resume/Projects';
-import { BookStack, ArchivalProofs } from '@/components/resume/Sidebar';
+import { TechnicalPapersSidebar } from '@/components/resume/Sidebar';
 
 
 function ResumePageContent() {
@@ -90,9 +90,8 @@ function ResumePageContent() {
             </div>
 
             {/* Archival Case Sidebar */}
-            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 h-fit">
-              <BookStack />
-              <ArchivalProofs />
+            <div className="lg:col-span-4 lg:sticky lg:top-24 h-fit">
+              <TechnicalPapersSidebar />
             </div>
 
           </div>
