@@ -49,21 +49,21 @@ export default function Education() {
       <div className="vintage-corner-flourish vintage-flourish-br" />
 
       <CardHeader className="relative z-10">
-        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Education</CardTitle>
+        <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Education</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6 relative z-10">
         {education.map((edu, index) => (
-          <div key={index} className="font-serif">
+          <div key={index} className="font-times">
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0">
                 <GraduationCap className="w-5 h-5 text-[var(--accent-color)]" />
               </div>
 
               <div className="flex-1">
-                <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)]">{edu.institution}</h3>
-                <p className="text-sm mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
-                <p className="text-xs text-[var(--meta-color)] italic">{edu.field}</p>
-                <p className="text-xs text-[var(--meta-color)]">{edu.period}</p>
+                <h3 className="font-bold font-cormorant text-xl text-[var(--text-color)]">{edu.institution}</h3>
+                <p className="text-base mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
+                <p className="text-sm text-[var(--meta-color)] italic">{edu.field}</p>
+                <p className="text-sm text-[var(--meta-color)]">{edu.period}</p>
 
                 {edu.skills && (
                   <div className="flex flex-wrap gap-2 mt-3">
@@ -71,7 +71,7 @@ export default function Education() {
                       <Badge
                         key={skillIndex}
                         variant="secondary"
-                        className="text-xs px-2.5 py-0.5 vintage-badge"
+                        className="text-sm px-2.5 py-0.5 vintage-badge"
                       >
                         {skill}
                       </Badge>

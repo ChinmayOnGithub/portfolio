@@ -49,7 +49,7 @@ To maintain visual excellence and a pristine code workspace, **never place raw a
 
 | Directory | Asset Type | Example Assets |
 | :--- | :--- | :--- |
-| `/public/images/` | Static photos, background covers | `profile.jpg`, `cover.png` |
+| `/public/images/` | Static photos, background covers | `profile.png`, `cover.png` |
 | `/public/gifs/` | Video files, animations, loaded loops | `sukuna.mp4`, `watching_tv.jpg` |
 | `/public/icons/` | Custom vector graphics & functional SVGs | `mail.svg`, `download.svg`, `crown.svg` |
 | `/public/project-logos/` | Individual brand/project square icons | `stremora.svg`, `verifyhub.svg` |

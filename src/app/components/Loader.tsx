@@ -9,14 +9,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 const MinimalLoader = ({ progress, theme }: { progress: number, theme: string | undefined }) => {
   const themeClasses = {
     dark: {
-      text: 'text-gray-300',
-      bg: 'bg-gray-300',
-      barBg: 'bg-gray-800',
+      text: 'text-[#A68B6D]',
+      bg: 'bg-[#D0A060]',
+      barBg: 'bg-[#443E38]',
     },
     light: {
-      text: 'text-gray-700',
-      bg: 'bg-gray-700',
-      barBg: 'bg-gray-200',
+      text: 'text-[#8B6F47]',
+      bg: 'bg-[#8C6239]',
+      barBg: 'bg-[#DDD5C5]',
     }
   };
   const currentTheme = theme === 'light' ? themeClasses.light : themeClasses.dark;
@@ -101,7 +101,7 @@ export default function Loader({ onFinished }: { onFinished: () => void }) {
     return null;
   }
 
-  const bgColor = resolvedTheme === 'light' ? 'bg-[#FAF3E6]' : 'bg-[#1a1a1a]';
+  const bgColor = resolvedTheme === 'light' ? 'bg-[#FAF6EE]' : 'bg-[#1E1C19]';
 
   return (
     <AnimatePresence>

@@ -4,86 +4,25 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { ArrowLeft, Sun, Moon, Github } from 'lucide-react';
+import { useReaderSettings, getReaderColors } from './ReaderSettingsContext';
 
 export default function ProjectNavigation() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  
-  // Reader Options States
-  const [textSize, setTextSize] = useState<'small' | 'medium' | 'large'>('medium');
-  const [bookTheme, setBookTheme] = useState<'paper' | 'newspaper' | 'sepia'>('paper');
+  const { textSize, bookTheme, setTextSize, setBookTheme } = useReaderSettings();
 
   const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    // Initialize state from localStorage
-    const t = localStorage.getItem('reader-book-theme') || 'paper';
-    const s = localStorage.getItem('reader-text-size') || 'medium';
-    setBookTheme(t as any);
-    setTextSize(s as any);
   }, []);
-
-  // Handle outside clicks and Escape key
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
-        setShowSettings(false);
-      }
-    };
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setShowSettings(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  if (!mounted) return null;
 
   const isDark = resolvedTheme === 'dark';
 
-  const updateSetting = (key: 'reader-book-theme' | 'reader-text-size', value: string) => {
-    localStorage.setItem(key, value);
-    if (key === 'reader-book-theme') setBookTheme(value as any);
-    if (key === 'reader-text-size') setTextSize(value as any);
-    // Dispatch event to sync page
-    window.dispatchEvent(new Event('reader-settings-update'));
-  };
+  if (!mounted) return null;
 
-  // Theme styling tokens matching the page
-  const getNavColors = () => {
-    if (isDark) {
-      switch (bookTheme) {
-        case 'newspaper':
-          return { bg: '#121212', border: '#333333', text: '#E0E0E0', accent: '#66A3FF', cardBg: 'rgba(50,50,50,0.15)' };
-        case 'sepia':
-          return { bg: '#251D14', border: '#4D3B26', text: '#E5D6B6', accent: '#D0A060', cardBg: 'rgba(60,40,20,0.15)' };
-        case 'paper':
-        default:
-          return { bg: '#1E1C19', border: '#443E38', text: '#E8E2D8', accent: '#7EA6D8', cardBg: 'rgba(41,38,34,0.15)' };
-      }
-    } else {
-      switch (bookTheme) {
-        case 'newspaper':
-          return { bg: '#F4F4F4', border: '#CCCCCC', text: '#111111', accent: '#1A3052', cardBg: 'rgba(220,220,220,0.3)' };
-        case 'sepia':
-          return { bg: '#F4ECD8', border: '#D2C4A5', text: '#332211', accent: '#5A3D28', cardBg: 'rgba(235,215,180,0.3)' };
-        case 'paper':
-        default:
-          return { bg: '#F8F5EE', border: '#DDD5C5', text: '#2A2A2A', accent: '#2B4C7E', cardBg: 'rgba(241,238,230,0.35)' };
-      }
-    }
-  };
-
-  const navColors = getNavColors();
+  const navColors = getReaderColors(bookTheme, isDark);
 
   return (
     <nav 
@@ -119,63 +58,74 @@ export default function ProjectNavigation() {
           {showSettings && (
             <div 
               ref={settingsRef}
-              className="absolute right-12 top-8 z-50 p-4 border rounded-sm shadow-lg w-52 font-serif text-[11px]"
+              className="absolute right-0 top-10 z-50 p-5 border rounded-sm shadow-2xl w-60 font-serif text-xs vintage-card"
               style={{ 
-                backgroundColor: navColors.bg,
-                borderColor: navColors.border,
-                color: navColors.text
+                position: 'absolute',
+                backgroundColor: 'var(--card-bg, ' + navColors.bg + ')',
+                borderColor: 'var(--border-color, ' + navColors.border + ')',
+                color: 'var(--text-color, ' + navColors.text + ')',
+                boxShadow: '3px 3px 0px var(--border-color, ' + navColors.border + ')'
               }}
             >
-              <div className="mb-3">
-                <span className="block font-bold mb-1.5 uppercase tracking-wider opacity-75">Text Size</span>
-                <div className="flex gap-1.5">
-                  {(['small', 'medium', 'large'] as const).map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => updateSetting('reader-text-size', size)}
-                      className={`px-1.5 py-0.5 border rounded-sm flex-1 capitalize transition-colors ${
-                        textSize === size ? 'font-bold' : 'opacity-70'
-                      }`}
-                      style={{
-                        borderColor: textSize === size ? navColors.accent : navColors.border,
-                        backgroundColor: textSize === size ? navColors.cardBg : 'transparent'
-                      }}
-                    >
-                      {size === 'medium' ? 'Reg' : size === 'small' ? 'A-' : 'A+'}
-                    </button>
-                  ))}
+              <div className="vintage-card-inner-border" />
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b" style={{ borderColor: 'var(--border-color, ' + navColors.border + ')' }}>
+                  <span className="font-bold uppercase tracking-wider text-[10px]" style={{ color: 'var(--meta-color)' }}>Reader Options</span>
+                  <button onClick={() => setShowSettings(false)} className="text-[10px] uppercase font-bold opacity-60 hover:opacity-100">Close</button>
                 </div>
-              </div>
-              
-              <div>
-                <span className="block font-bold mb-1.5 uppercase tracking-wider opacity-75">Page Tone</span>
-                <div className="flex flex-col gap-1">
-                  {(['paper', 'newspaper', 'sepia'] as const).map((tone) => (
-                    <button
-                      key={tone}
-                      onClick={() => updateSetting('reader-book-theme', tone)}
-                      className={`px-2 py-0.5 border rounded-sm text-left capitalize transition-colors flex justify-between items-center ${
-                        bookTheme === tone ? 'font-bold' : 'opacity-70'
-                      }`}
-                      style={{
-                        borderColor: bookTheme === tone ? navColors.accent : navColors.border,
-                        backgroundColor: bookTheme === tone ? navColors.cardBg : 'transparent'
-                      }}
-                    >
-                      <span>{tone}</span>
-                      <span 
-                        className="w-3.5 h-3.5 rounded-full border" 
-                        style={{ 
-                          backgroundColor: tone === 'paper' 
-                            ? (isDark ? '#1E1C19' : '#F8F5EE') 
-                            : tone === 'newspaper' 
-                              ? (isDark ? '#121212' : '#F4F4F4') 
-                              : (isDark ? '#251D14' : '#F4ECD8'),
-                          borderColor: navColors.border
+                <div>
+                  <span className="block font-bold mb-2 uppercase tracking-wider text-[10px]" style={{ color: 'var(--meta-color)' }}>Text Size</span>
+                  <div className="flex gap-2">
+                    {(['small', 'medium', 'large'] as const).map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setTextSize(size)}
+                        className={`py-1 border rounded-sm flex-1 capitalize transition-colors text-[11px] font-bold ${
+                          textSize === size ? 'opacity-100' : 'opacity-60 hover:opacity-85'
+                        }`}
+                        style={{
+                          borderColor: textSize === size ? 'var(--accent-color, ' + navColors.accent + ')' : 'var(--border-color, ' + navColors.border + ')',
+                          backgroundColor: textSize === size ? 'var(--accent-color, ' + navColors.accent + ')' : 'transparent',
+                          color: textSize === size ? 'var(--bg-color, ' + navColors.bg + ')' : 'var(--text-color, ' + navColors.text + ')'
                         }}
-                      />
-                    </button>
-                  ))}
+                      >
+                        {size === 'medium' ? 'Reg' : size === 'small' ? 'A-' : 'A+'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <span className="block font-bold mb-2 uppercase tracking-wider text-[10px]" style={{ color: 'var(--meta-color)' }}>Page Tone</span>
+                  <div className="flex flex-col gap-1.5">
+                    {(['paper', 'newspaper', 'sepia'] as const).map((tone) => (
+                      <button
+                        key={tone}
+                        onClick={() => setBookTheme(tone)}
+                        className={`px-3 py-1.5 border rounded-sm text-left capitalize transition-colors flex justify-between items-center text-[11px] font-bold ${
+                          bookTheme === tone ? 'opacity-100' : 'opacity-60 hover:opacity-85'
+                        }`}
+                        style={{
+                          borderColor: bookTheme === tone ? 'var(--accent-color, ' + navColors.accent + ')' : 'var(--border-color, ' + navColors.border + ')',
+                          backgroundColor: bookTheme === tone ? 'var(--accent-color, ' + navColors.accent + ')' : 'transparent',
+                          color: bookTheme === tone ? 'var(--bg-color, ' + navColors.bg + ')' : 'var(--text-color, ' + navColors.text + ')'
+                        }}
+                      >
+                        <span>{tone}</span>
+                        <span 
+                          className="w-3 h-3 rounded-full border" 
+                          style={{ 
+                            backgroundColor: tone === 'paper' 
+                              ? (isDark ? '#1E1C19' : '#F8F5EE') 
+                              : tone === 'newspaper' 
+                                ? (isDark ? '#121212' : '#F4F4F4') 
+                                : (isDark ? '#251D14' : '#F4ECD8'),
+                            borderColor: bookTheme === tone ? 'var(--bg-color, ' + navColors.bg + ')' : 'var(--border-color, ' + navColors.border + ')'
+                          }}
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

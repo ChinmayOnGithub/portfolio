@@ -73,11 +73,11 @@ export function Experience() {
       <div className="vintage-corner-flourish vintage-flourish-br" />
 
       <CardHeader className="relative z-10">
-        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Experience</CardTitle>
+        <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Experience</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6 relative z-10">
         {experiences.map((exp, expIndex) => (
-          <div key={expIndex} className="relative font-serif">
+          <div key={expIndex} className="relative font-times">
             {expIndex !== 0 && <div className="absolute left-5 -top-3 w-px h-3 bg-[var(--border-color)]" />}
 
             <div className="flex gap-4">
@@ -85,8 +85,8 @@ export function Experience() {
 
               <div className="flex-1">
                 <div className="mb-4">
-                  <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)]">{exp.company}</h3>
-                  <p className="text-xs text-[var(--meta-color)] italic">{exp.duration} · {exp.location}</p>
+                  <h3 className="font-bold font-cormorant text-xl text-[var(--text-color)]">{exp.company}</h3>
+                  <p className="text-sm text-[var(--meta-color)] italic">{exp.duration} · {exp.location}</p>
                 </div>
 
                 <div className="space-y-4">
@@ -94,12 +94,12 @@ export function Experience() {
                     <div key={roleIndex} className="relative pl-6 border-l border-[var(--border-color)]">
                       <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)]" />
 
-                      <h4 className="font-bold text-sm font-serif text-[var(--text-color)]">{role.title}</h4>
-                      <p className="text-xs mb-2 text-[var(--meta-color)]">{role.type} · {role.period}</p>
+                      <h4 className="font-bold text-base font-cormorant text-[var(--text-color)]">{role.title}</h4>
+                      <p className="text-sm mb-2 text-[var(--meta-color)]">{role.type} · {role.period}</p>
                       {role.workMode && (
-                        <p className="text-xs mb-2 text-[var(--meta-color)]">{role.workMode}</p>
+                        <p className="text-sm mb-2 text-[var(--meta-color)]">{role.workMode}</p>
                       )}
-                      <p className="text-sm mb-3 leading-relaxed text-[var(--text-color)]/95">{role.description}</p>
+                      <p className="text-base mb-3 leading-relaxed text-[var(--text-color)]/95">{role.description}</p>
 
                       {role.skills && (
                         <div className="flex flex-wrap gap-2 mt-2">
@@ -107,7 +107,7 @@ export function Experience() {
                             <Badge
                               key={skillIndex}
                               variant="secondary"
-                              className="text-xs px-2.5 py-0.5 vintage-badge"
+                              className="text-sm px-2.5 py-0.5 vintage-badge"
                             >
                               {skill}
                             </Badge>

@@ -43,11 +43,11 @@ export function SkillsSection() {
       <div className="vintage-corner-flourish vintage-flourish-br" />
 
       <CardHeader className="pb-3 relative z-10">
-        <CardTitle className="text-lg font-bold font-cormorant text-[var(--text-color)]">Skills</CardTitle>
+        <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Skills</CardTitle>
       </CardHeader>
-      <CardContent className="pt-0 font-serif relative z-10">
+      <CardContent className="pt-0 font-times relative z-10">
         <div className="mb-6">
-          <h3 className="font-bold mb-3 text-sm text-[var(--meta-color)] font-cormorant tracking-wide uppercase">Top Skills</h3>
+          <h3 className="font-bold mb-3 text-base text-[var(--meta-color)] font-cormorant tracking-wide uppercase">Top Skills</h3>
           <div className="flex flex-wrap gap-2">
             {topSkills.map((skill, index) => (
               <Badge
@@ -62,7 +62,7 @@ export function SkillsSection() {
         </div>
 
         <div>
-          <h3 className="font-bold mb-3 text-sm text-[var(--meta-color)] font-cormorant tracking-wide uppercase">All Skills</h3>
+          <h3 className="font-bold mb-3 text-base text-[var(--meta-color)] font-cormorant tracking-wide uppercase">All Skills</h3>
           <div className="flex flex-wrap gap-2">
             {allSkills.map((skill, index) => (
               <Badge

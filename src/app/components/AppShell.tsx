@@ -15,8 +15,8 @@ export default function AppShell({
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
-  // Minimal Navigation for project pages
-  const isProjectPage = pathname.startsWith('/projects');
+  // Minimal Navigation for reader pages (projects and papers)
+  const isReaderPage = pathname.startsWith('/projects') || pathname.startsWith('/papers');
 
   useEffect(() => {
     setIsMounted(true);
@@ -28,6 +28,18 @@ export default function AppShell({
 
   return (
     <>
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[200] px-4 py-2 border font-serif font-bold uppercase tracking-wider text-xs rounded-sm shadow-md transition-colors"
+        style={{
+          backgroundColor: 'var(--accent-color)',
+          color: 'var(--bg-color)',
+          borderColor: 'var(--border-color)'
+        }}
+      >
+        Skip to main content
+      </a>
+
       <AnimatePresence>
         {isLoading && <Loader onFinished={() => setIsLoading(false)} />}
       </AnimatePresence>
@@ -38,9 +50,9 @@ export default function AppShell({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          {isProjectPage && <ProjectNavigation />}
+          {isReaderPage && <ProjectNavigation />}
 
-          <main className="relative z-0">
+          <main id="main-content" className="relative z-0">
             {children}
           </main>
         </motion.div>

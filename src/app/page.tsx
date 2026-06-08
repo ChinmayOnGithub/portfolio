@@ -1,18 +1,17 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResumeThemeProvider, useResumeThemeSafe } from '@/components/resume/ThemeProvider';
 import { ResumeHeader } from '@/components/resume/Header';
 import { About } from '@/components/resume/About';
-import { Featured } from '@/components/resume/Featured';
 import { SkillsSection } from '@/components/resume/Skills';
 import { Experience } from '@/components/resume/Experience';
 import Education from '@/components/resume/Education';
 import { Projects } from '@/components/resume/Projects';
-import { TechnicalPapersSidebar } from '@/components/resume/Sidebar';
 
 
 function ResumePageContent() {
+  const [showSkills, setShowSkills] = useState(false);
   const { theme } = useResumeThemeSafe();
   const isDark = theme === 'dark';
 
@@ -66,33 +65,32 @@ function ResumePageContent() {
         <div id="home">
           <ResumeHeader />
         </div>
-        <main className="p-4 lg:p-6 max-w-7xl mx-auto relative z-10 mt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <main className="p-4 lg:p-6 max-w-4xl mx-auto relative z-10 mt-8">
+          <div className="space-y-12">
 
-            {/* Main Content Ledger */}
-            <div className="lg:col-span-8 space-y-12">
-              <section id="about" className="scroll-mt-24">
-                <About />
-              </section>
-              <section id="projects" className="scroll-mt-24 space-y-12">
-                <Featured />
-                <Projects />
-              </section>
-              <section id="skills" className="scroll-mt-24">
-                <SkillsSection />
-              </section>
-              <section id="experience" className="scroll-mt-24">
-                <Experience />
-              </section>
-              <section id="education" className="scroll-mt-24">
-                <Education />
-              </section>
+            {/* About & Optional Skills Layout Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start transition-all duration-500 ease-in-out">
+              <div className={showSkills ? "lg:col-span-6 w-full" : "lg:col-span-12 max-w-2xl mx-auto w-full"}>
+                <About showSkills={showSkills} onToggleSkills={() => setShowSkills(!showSkills)} />
+              </div>
+              {showSkills && (
+                <div className="lg:col-span-6 w-full animate-in slide-in-from-right duration-300">
+                  <SkillsSection />
+                </div>
+              )}
             </div>
 
-            {/* Archival Case Sidebar */}
-            <div className="lg:col-span-4 lg:sticky lg:top-24 h-fit">
-              <TechnicalPapersSidebar />
-            </div>
+            <section id="experience" className="scroll-mt-24">
+              <Experience />
+            </section>
+
+            <section id="projects" className="scroll-mt-24 space-y-12">
+              <Projects />
+            </section>
+
+            <section id="education" className="scroll-mt-24">
+              <Education />
+            </section>
 
           </div>
         </main>

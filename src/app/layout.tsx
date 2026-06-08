@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from './components/ThemeProvider';
+import { ReaderSettingsProvider } from './components/ReaderSettingsContext';
 import AppShell from './components/AppShell';
 
 const inter = Inter({
@@ -17,9 +18,24 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'chinmaypatil',
-	description: 'Portfolio of Chinmay Patil',
+	title: 'Chinmay Patil | Backend & DevOps Engineer',
+	description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
 	metadataBase: new URL('https://chinmaypatil.com'),
+	keywords: ['Chinmay Patil', 'Software Engineer', 'Backend Engineer', 'DevOps', 'Cloud Infrastructure', 'Portfolio', 'System Design', 'C++', 'Linux'],
+	authors: [{ name: 'Chinmay Patil' }],
+	openGraph: {
+		title: 'Chinmay Patil | Backend & DevOps Engineer',
+		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
+		url: 'https://chinmaypatil.com',
+		siteName: 'Chinmay Patil Portfolio',
+		locale: 'en_US',
+		type: 'website',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Chinmay Patil | Backend & DevOps Engineer',
+		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
+	},
 };
 
 export const viewport: Viewport = {
@@ -44,7 +60,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange={false}
 				>
-					<AppShell>{children}</AppShell>
+					<ReaderSettingsProvider>
+						<AppShell>{children}</AppShell>
+					</ReaderSettingsProvider>
 				</ThemeProvider>
 			</body>
 		</html>
