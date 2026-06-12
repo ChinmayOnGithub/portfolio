@@ -65,7 +65,7 @@ To ensure seamless reading comfort, the reading view page and the sticky navigat
 - **Primary Serif**: `'Cormorant Garamond'` - For headings and formal elements
 - **Body Serif**: `'Times New Roman', serif` - For readable content blocks
 - **Interface Sans**: `'Inter'` - For UI elements and metadata
-- **Monospace**: `'Share Tech Mono'` - For technical details and code
+- **Monospace**: `'Courier Prime'` (typewriter serif style) - For technical details, code blocks, clipboard stamp indicators, and index markings
 
 ### Hierarchy Scale
 ```css
@@ -74,8 +74,8 @@ h1: 2.5rem - 3.5rem | Cormorant Garamond Bold | line-height: 1.15
 h2: 1.5rem - 2rem   | Cormorant Garamond Bold | line-height: 1.25
 
 /* Content Typography - Comfortable reading */
-Body: 0.875rem - 1rem | Times serif | line-height: 1.7
-Meta: 0.75rem - 0.875rem | Inter | line-height: 1.5 | opacity: 0.85
+Body: 0.875rem - 1.125rem | Times serif | line-height: 1.7 | Scale optimized for readability
+Meta: 0.75rem - 0.875rem | Inter / Courier Prime | line-height: 1.5 | opacity: 0.85
 ```
 
 ## Component Design Language
@@ -87,23 +87,31 @@ Meta: 0.75rem - 0.875rem | Inter | line-height: 1.5 | opacity: 0.85
 - **Outer Border**: 1.5px solid border with sharp, precise corners (no border-radius)
 - **Inner Border**: Subtle inset border creating depth and authenticity
 - **Corner Flourishes**: Small decorative corner elements suggesting age and craftsmanship
-- **Drop Shadows**: Minimal, suggesting natural paper stack depth
+- **Stacked Paper Shadows**: Instead of standard blurred card shadows, cards stack visually using offset paper-edge border shadows (`box-shadow: 1px 1px 0px var(--border-color), 2px 2px 0px var(--card-bg), 3px 3px 0px var(--border-color), 0px 4px 12px rgba(0, 0, 0, 0.05)`).
+- **Clipped Page Workaround**: When a card uses a `clipPath` polygon crease fold (e.g. the dog-ear corner fold in `About.tsx`), CSS box-shadows are clipped. To preserve the stacked paper aesthetic, the card is wrapped in a relative container, and two absolute-positioned background sheets are rendered behind the card when folded, matching the `clipPath` and translated by `translate(2px, 2px)` and `translate(4px, 4px)`.
 
 **Implementation**:
 ```css
 .vintage-card {
-  border: 1.5px solid var(--border);
-  border-radius: 2px; /* Minimal, just enough to soften */
-  background: var(--card-bg);
   position: relative;
+  background-color: var(--card-bg) !important;
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: 2px !important;
+  /* Multi-layered paper edges */
+  box-shadow: 
+    1px 1px 0px var(--border-color),
+    2px 2px 0px var(--card-bg),
+    3px 3px 0px var(--border-color),
+    0px 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
 
 .vintage-card-inner-border {
   /* Creates the authentic double-border effect */
   position: absolute;
   top: 4px; left: 4px; right: 4px; bottom: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   opacity: 0.35;
+  z-index: 5;
 }
 ```
 
@@ -139,13 +147,29 @@ Meta: 0.75rem - 0.875rem | Inter | line-height: 1.5 | opacity: 0.85
 ```
 
 ### Badge System - "Classification Tags"
-**Concept**: Skills and categories appear as vintage filing system labels
+**Concept**: Skills and categories appear as vintage catalog card index labels.
+
+**Style & Consistency**:
+- **Uniform Padding**: Standardized to `px-2.5 py-0.5` across all sections for visual consistency.
+- **Shape**: Rectangular with minimal border-radius (`rounded-sm`).
+- **Typography**: Cormorant Garamond, bold, uppercase, tracking-wide.
+- **Stamped Shadows**: Every badge features a subtle stamped drop-shadow (`box-shadow: 1.5px 1.5px 0px var(--border-color)`) that presses slightly down on hover (`transform: translate(0.5px, 0.5px)`) for high tactile feedback.
+
+### Archival Photo Frame - "Registry Portrait"
+**Concept**: The profile photo mimics a physical passport photograph taped down on an official document sheet.
 
 **Style**:
-- **Shape**: Slightly rounded rectangles (minimal border-radius)
-- **Typography**: Cormorant Garamond, uppercase, tight letterspacing
-- **Colors**: Muted tones matching the paper aesthetic
-- **Shadow**: Subtle drop shadow suggesting layered paper
+- **Passport Frame**: Perfect square layout with double borders, inset padding, and a card drop shadow.
+- **Archival Tape**: A translucent, rotated parchment tape overlay (`bg-[#C5B4A3]/40 dark:bg-[#4a423a]/50 backdrop-blur-[0.5px] border border-[#A8988A]/35 -rotate-1`) sits at the top center, giving the impression that the photo is physically taped onto the page.
+- **Silver-Gelatin / Sepia Tint**: Saturated digital colors are desaturated and blended into the parchment canvas using a warm sepia CSS filter (`sepia-[0.35] contrast-[1.05] saturate-[0.8] brightness-[0.98]`).
+
+### Faint Catalog Stamps & Layout Alignments
+**Concept**: Subtle typewriter labels classification codes placed in card headers.
+
+**Implementation**:
+- **Reference Stamps**: Small typewriter labels (e.g. `[ REGISTRY REF: CP-1926 ]`, `[ SEC: EMPLOYMENT_LOG ]`) rendered at `opacity-35` in Courier Prime to match catalog reference stamps.
+- **Collision Mitigation**: Controls (like the `◀ Fold index` button on the About card or the `Search Catalog` button on the Projects card) are placed inline inside the `CardHeader` flex row next to the stamp to prevent absolute position overlaps.
+- **Crease Offsets**: When the About card is folded, the right-side stamp utilizes `mr-12` to clear the 48px diagonal dog-ear folded corner crease.
 
 ### Reader Navigation & Enhancements - "Immersive Reading"
 **Concept**: Minimal utilities to assist reading long documents without compromising the distraction-free vintage paper focus.
@@ -154,6 +178,8 @@ Meta: 0.75rem - 0.875rem | Inter | line-height: 1.5 | opacity: 0.85
 - **Dynamic Scroll progress bar**: A thin `2px` progress indicator attached to the absolute bottom of the sticky header (`ProjectNavigation`). It dynamically matches the current resolved theme accent color and fills up as the user scrolls.
 - **Floating Back to Top button**: A responsive floating button with the `ArrowUp` icon. Sits at `bottom-[88px] right-6` on mobile/tablet to stack neatly above the Mobile TOC button, and at `xl:bottom-8 xl:right-8` on larger screens.
 - **Card Catalog Related list**: Replaces standard list views for related documents with card-catalog style boxes using the vintage double-border design, Cormorant title typography, and a subtle `-translate-y-0.5` hover micro-animation.
+- **Inline Category Breadcrumbs**: The bulky blocky category badge above paper/project titles is removed. Instead, the category name is integrated inline inside the metadata bar as an elegant breadcrumb item (e.g. `Chinmay Patil / Backend & DevOps / Systems & Infrastructure`), reducing header clutter.
+- **Mobile Responsive Wrap**: All metadata author lines and contact clipboard buttons use `flex-wrap` and adjusted margins to prevent horizontal overflow and text clipping on narrow mobile viewports.
 
 ## Layout Principles
 

@@ -26,6 +26,13 @@
 - [x] **Next.js Hydration Double-Render Progress Bar Flicker** (Progress bar restarts from 0% on client-side hydration mount)
 - [x] **Sticky Left TOC Sidebar Overlap / Truncation Bug** (Left TOC sidebar overlaps main reading text on viewports under 1440px and truncates long titles with '...')
 
+### 🐛 Unfixed UI Bugs & Future Refinements (Saved for Later)
+- [ ] **Hydration Theme Flash**: A brief flash of the browser default light parchment theme occurs on page load before Next.js client-side code loads and hydrates the dark class preference from `localStorage`.
+- [ ] **TOC Scroll Sync Precision**: On reader pages with short sections, multiple headers visible inside the viewport can cause the active TOC highlight indicator to flicker or lag behind.
+- [ ] **PDF Print Page-Break Card Clipping**: Printing or saving the browser page directly to PDF does not guarantee clean page-break splits, occasionally slicing card containers or text blocks horizontally.
+- [ ] **Mobile Landscape Header Encroachment**: In landscape mode on mobile viewports, the sticky header occupies excessive vertical space, compressing the readable content area.
+- [ ] **Keyboard Accessibility on Dog-Ear Crease**: The focus outline box on the interactive peel-corner button offsets slightly from the diagonal fold crease line, presenting a minor alignment defect.
+
 ### 🎨 Senior UI/UX Critique Proposals (Completed)
 - [x] **Typewriter Monospace Swap**: Swap Share Tech Mono with Courier Prime / slab-serif typewriter font (currently clashes with vintage theme)
 - [x] **About Me Line Length Constraint**: Add `max-w-2xl` line length lock to avoid saccadic fatigue (currently stretches up to 140+ characters)
