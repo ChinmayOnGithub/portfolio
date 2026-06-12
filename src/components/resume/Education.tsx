@@ -48,7 +48,12 @@ export default function Education() {
       <div className="vintage-corner-flourish vintage-flourish-br" />
 
       <CardHeader className="relative z-10">
-        <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Education</CardTitle>
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-2xl lg:text-3xl font-bold font-cormorant text-[var(--text-color)]">Education</CardTitle>
+          <span className="hidden sm:inline font-mono text-[10px] text-[var(--meta-color)]/35 tracking-widest uppercase mt-1">
+            [ ARCHIVAL_CLASS: DEGREES ]
+          </span>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6 relative z-10">
         {education.map((edu, index) => (
@@ -57,10 +62,10 @@ export default function Education() {
               {getInstitutionLogo(edu.institution)}
 
               <div className="flex-1">
-                <h3 className="font-bold font-cormorant text-xl text-[var(--text-color)]">{edu.institution}</h3>
-                <p className="text-base mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
-                <p className="text-sm text-[var(--meta-color)] italic">{edu.field}</p>
-                <p className="text-sm text-[var(--meta-color)]">{edu.period}</p>
+                <h3 className="font-bold font-cormorant text-2xl text-[var(--text-color)]">{edu.institution}</h3>
+                <p className="text-base lg:text-lg mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
+                <p className="text-sm lg:text-base text-[var(--meta-color)] italic">{edu.field}</p>
+                <p className="text-sm lg:text-base text-[var(--meta-color)]">{edu.period}</p>
               </div>
             </div>
           </div>

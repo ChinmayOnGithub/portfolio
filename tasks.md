@@ -26,6 +26,13 @@
 - [x] **Next.js Hydration Double-Render Progress Bar Flicker** (Progress bar restarts from 0% on client-side hydration mount)
 - [x] **Sticky Left TOC Sidebar Overlap / Truncation Bug** (Left TOC sidebar overlaps main reading text on viewports under 1440px and truncates long titles with '...')
 
+### 🎨 Senior UI/UX Critique Proposals (Completed)
+- [x] **Typewriter Monospace Swap**: Swap Share Tech Mono with Courier Prime / slab-serif typewriter font (currently clashes with vintage theme)
+- [x] **About Me Line Length Constraint**: Add `max-w-2xl` line length lock to avoid saccadic fatigue (currently stretches up to 140+ characters)
+- [x] **Rectangular Dossier Profile Picture**: Redesign the round header avatar into a rectangular passport/dossier photograph frame
+- [x] **Physical Paperclip Placement**: Reposition the sidebar paperclip SVG to overlap the card edge (currently floats awkwardly in empty margin)
+- [x] **Academic Hanging Indent References**: Format bibliographic citations using standard academic hanging indents (currently standard numbered list)
+
 ### 🚧 High Priority UX Improvements
 - [ ] **Paper Reading Experience Enhancements**
   - [x] Add reading progress indicator for long papers

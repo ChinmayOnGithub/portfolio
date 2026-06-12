@@ -57,23 +57,28 @@ export function Projects() {
 
       <CardHeader className="relative z-10">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Projects</CardTitle>
-          <button
-            onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-            className="vintage-btn h-8 px-3 text-sm inline-flex items-center gap-1.5 font-bold tracking-wider transition-all duration-200"
-          >
-            {isSearchExpanded ? (
-              <>
-                <X className="w-3.5 h-3.5" />
-                <span>Close Search</span>
-              </>
-            ) : (
-              <>
-                <Search className="w-3.5 h-3.5" />
-                <span>Search Catalog</span>
-              </>
-            )}
-          </button>
+          <CardTitle className="text-2xl lg:text-3xl font-bold font-cormorant text-[var(--text-color)]">Projects</CardTitle>
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline font-mono text-[10px] text-[var(--meta-color)]/35 tracking-widest uppercase mt-1">
+              [ CAT_NO: 804-SYS ]
+            </span>
+            <button
+              onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+              className="vintage-btn h-8 px-3 text-sm inline-flex items-center gap-1.5 font-bold tracking-wider transition-all duration-200"
+            >
+              {isSearchExpanded ? (
+                <>
+                  <X className="w-3.5 h-3.5" />
+                  <span>Close Search</span>
+                </>
+              ) : (
+                <>
+                  <Search className="w-3.5 h-3.5" />
+                  <span>Search Catalog</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-6 relative z-10">
@@ -137,7 +142,7 @@ export function Projects() {
             >
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h3 className="font-bold font-cormorant text-xl flex items-center gap-2 text-[var(--text-color)]">
+                  <h3 className="font-bold font-cormorant text-2xl flex items-center gap-2 text-[var(--text-color)]">
                     <Link
                       href={project.paperUrl}
                       className="hover:text-[var(--accent-color)] transition-colors"
@@ -154,11 +159,11 @@ export function Projects() {
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </h3>
-                  <p className="text-sm font-sans italic text-[var(--meta-color)]">{project.period} · {project.association} · <Link href={project.paperUrl} className="text-[var(--accent-color)] hover:underline">Read Technical Paper</Link></p>
+                  <p className="text-sm lg:text-base font-sans italic text-[var(--meta-color)]">{project.period} · {project.association} · <Link href={project.paperUrl} className="text-[var(--accent-color)] hover:underline">Read Technical Paper</Link></p>
                 </div>
               </div>
 
-              <p className="text-base mb-4 leading-relaxed font-times text-[var(--text-color)]/95">{project.description}</p>
+              <p className="text-base lg:text-[17px] mb-4 leading-relaxed font-times text-[var(--text-color)]/95">{project.description}</p>
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-sans">
                 <div className="flex flex-wrap gap-2">
@@ -166,7 +171,7 @@ export function Projects() {
                     <Badge
                       key={skillIndex}
                       variant="secondary"
-                      className={`text-sm px-2.5 py-0.5 transition-all shadow-none ${getSkillStyle()}`}
+                      className="text-sm px-2.5 py-0.5 vintage-badge"
                     >
                       {skill}
                     </Badge>

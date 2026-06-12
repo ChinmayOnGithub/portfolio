@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
 /*─────────────────────────────────────────────────────────────────────
@@ -24,7 +22,7 @@
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-mono: monospace;
   --font-inter: 'Inter', sans-serif;
-  --font-sharetech: 'Share Tech Mono', monospace;
+  --font-typewriter: 'Courier Prime', monospace;
   --font-anton: 'Anton', sans-serif;
 }
 
@@ -138,7 +136,7 @@ body {
   }
 
   .font-mono {
-    font-family: var(--font-sharetech);
+    font-family: var(--font-typewriter);
   }
 
   .font-anton {
@@ -161,7 +159,12 @@ body {
     background-color: var(--card-bg) !important;
     border: 1.5px solid var(--border-color) !important;
     border-radius: 2px !important;
-    box-shadow: none !important;
+    /* Realistic stacked paper card shadow */
+    box-shadow: 
+      1px 1px 0px var(--border-color),
+      2px 2px 0px var(--card-bg),
+      3px 3px 0px var(--border-color),
+      0px 4px 12px rgba(0, 0, 0, 0.05) !important;
   }
 
   .vintage-card-inner-border {

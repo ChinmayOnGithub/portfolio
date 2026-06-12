@@ -66,7 +66,7 @@ export function Experience() {
           <img 
             src={logoSrc} 
             alt={`${company} logo`}
-            className="w-14 h-14 object-contain"
+            className="w-14 h-14 object-contain filter sepia-[0.35] contrast-[1.05] saturate-[0.8] brightness-[0.98]"
           />
         </div>
       );
@@ -89,7 +89,12 @@ export function Experience() {
       <div className="vintage-corner-flourish vintage-flourish-br" />
 
       <CardHeader className="relative z-10">
-        <CardTitle className="text-xl font-bold font-cormorant text-[var(--text-color)]">Experience</CardTitle>
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-2xl lg:text-3xl font-bold font-cormorant text-[var(--text-color)]">Experience</CardTitle>
+          <span className="hidden sm:inline font-mono text-[10px] text-[var(--meta-color)]/35 tracking-widest uppercase mt-1">
+            [ SEC: EMPLOYMENT_LOG ]
+          </span>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6 relative z-10">
         {experiences.map((exp, expIndex) => (
@@ -101,8 +106,8 @@ export function Experience() {
 
               <div className="flex-1">
                 <div className="mb-4">
-                  <h3 className="font-bold font-cormorant text-xl text-[var(--text-color)]">{exp.company}</h3>
-                  <p className="text-sm text-[var(--meta-color)] italic">{exp.duration} · {exp.location}</p>
+                  <h3 className="font-bold font-cormorant text-2xl text-[var(--text-color)]">{exp.company}</h3>
+                  <p className="text-sm lg:text-base text-[var(--meta-color)] italic">{exp.duration} · {exp.location}</p>
                 </div>
 
                 <div className="space-y-4">
@@ -110,12 +115,12 @@ export function Experience() {
                     <div key={roleIndex} className="relative pl-6 border-l border-[var(--border-color)]">
                       <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)]" />
 
-                      <h4 className="font-bold text-base font-cormorant text-[var(--text-color)]">{role.title}</h4>
-                      <p className="text-sm mb-2 text-[var(--meta-color)]">{role.type} · {role.period}</p>
+                      <h4 className="font-bold text-lg lg:text-xl font-cormorant text-[var(--text-color)]">{role.title}</h4>
+                      <p className="text-sm lg:text-base mb-2 text-[var(--meta-color)]">{role.type} · {role.period}</p>
                       {role.workMode && (
-                        <p className="text-sm mb-2 text-[var(--meta-color)]">{role.workMode}</p>
+                        <p className="text-sm lg:text-base mb-2 text-[var(--meta-color)]">{role.workMode}</p>
                       )}
-                      <p className="text-base mb-3 leading-relaxed text-[var(--text-color)]/95">{role.description}</p>
+                      <p className="text-base lg:text-[17px] mb-3 leading-relaxed text-[var(--text-color)]/95">{role.description}</p>
 
                       {role.skills && (
                         <div className="flex flex-wrap gap-2 mt-2">

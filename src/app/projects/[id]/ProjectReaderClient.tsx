@@ -216,7 +216,7 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
             className="flex flex-col sm:flex-row justify-between items-center py-3.5 border-y text-sm font-sans"
             style={{ borderColor: 'var(--border-color)', color: 'var(--meta-color)' }}
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
               <span className="font-semibold" style={{ color: 'var(--text-color)' }}>Chinmay Patil</span>
               <span className="opacity-50">/</span>
               <span>Qualys Intern</span>
@@ -433,29 +433,29 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
             <h2 className="text-xl sm:text-2xl font-bold font-cormorant pb-1.5 border-b" style={{ borderColor: 'var(--border-color)' }}>
               References &amp; Links
             </h2>
-            <ul className="space-y-2 text-sm sm:text-base font-times">
-              <li className="flex items-center gap-2">
-                <span style={{ color: 'var(--meta-color)' }}>[1]</span>
-                <span>Source Code Archive:</span>
+            <ul className="space-y-3 text-sm sm:text-base font-times">
+              <li className="pl-8 -indent-8">
+                <span className="select-none font-bold inline-block w-8" style={{ color: 'var(--meta-color)' }}>[1]</span>
+                <span>Source Code Archive: </span>
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold underline"
+                  className="font-bold underline inline"
                   style={{ color: 'var(--accent-color)' }}
                 >
                   {project.name} on GitHub
                 </a>
               </li>
               {project.liveUrl && (
-                <li className="flex items-center gap-2">
-                  <span style={{ color: 'var(--meta-color)' }}>[2]</span>
-                  <span>Interactive Live Link:</span>
+                <li className="pl-8 -indent-8">
+                  <span className="select-none font-bold inline-block w-8" style={{ color: 'var(--meta-color)' }}>[2]</span>
+                  <span>Interactive Live Link: </span>
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold underline"
+                    className="font-bold underline inline"
                     style={{ color: 'var(--accent-color)' }}
                   >
                     {project.name} Production Release
@@ -540,7 +540,7 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
       {showFloatingButton && (
         <button
           onClick={() => setShowMobileTocOverlay(true)}
-          className="fixed bottom-6 right-6 z-40 xl:hidden w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200"
+          className="fixed bottom-6 right-6 z-40 xl:hidden w-12 h-12 rounded-sm flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200"
           style={{ boxShadow: '2px 2px 0px var(--border-color)' }}
           aria-label="Open Table of Contents"
         >
@@ -552,7 +552,7 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
       {showFloatingButton && (
         <button
           onClick={scrollToTop}
-          className="fixed z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200 bottom-[88px] right-6 xl:bottom-8 xl:right-8"
+          className="fixed z-40 w-12 h-12 rounded-sm flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200 bottom-[88px] right-6 xl:bottom-8 xl:right-8"
           style={{ boxShadow: '2px 2px 0px var(--border-color)' }}
           aria-label="Back to top"
         >
@@ -577,7 +577,7 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
               <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)] uppercase tracking-wider">Tome Index</h3>
               <button
                 onClick={() => setShowMobileTocOverlay(false)}
-                className="w-8 h-8 rounded-full border border-[var(--border-color)] flex items-center justify-center bg-[var(--badge-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)]/10"
+                className="w-8 h-8 rounded-sm border border-[var(--border-color)] flex items-center justify-center bg-[var(--badge-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)]/10"
                 aria-label="Close index"
               >
                 <X className="w-4 h-4" />

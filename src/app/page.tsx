@@ -15,6 +15,24 @@ function ResumePageContent() {
   const { theme } = useResumeThemeSafe();
   const isDark = theme === 'dark';
 
+  const handleSkillsNav = () => {
+    if (!showSkills) {
+      setShowSkills(true);
+    }
+    // Wait for the DOM element to render
+    setTimeout(() => {
+      const element = document.getElementById('skills');
+      if (element) {
+        const offset = 90; // Account for sticky header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 50);
+  };
 
   const colors = isDark ? {
     bg: '#1E1C19',
@@ -61,20 +79,41 @@ function ResumePageContent() {
     >
       <title>Chinmay Patil | Backend &amp; DevOps Engineer</title>
       <meta name="description" content="Backend &amp; DevOps focused B.Tech IT Graduate from Walchand College of Engineering specializing in designing APIs, homelabs, Linux administration, and containers." />
-      <div className="w-full">
+      
+      {/* Flawless Faded Ledger Grid Background Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.22] dark:opacity-[0.12] z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--border-color) 1px, transparent 1px)
+          `,
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(circle at 50% 30%, black 30%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at 50% 30%, black 30%, transparent 80%)',
+        }}
+      />
+
+      <div className="w-full relative z-10">
         <div id="home">
-          <ResumeHeader />
+          <ResumeHeader onSkillsClick={handleSkillsNav} />
         </div>
         <main className="p-4 lg:p-6 max-w-4xl mx-auto relative z-10 mt-8">
-          <div className="space-y-12">
+          <div className="space-y-8">
 
             {/* About & Optional Skills Layout Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start transition-all duration-500 ease-in-out">
-              <div className={showSkills ? "lg:col-span-6 w-full" : "lg:col-span-12 w-full"}>
+            <div className="flex flex-col lg:flex-row gap-6 items-start">
+              <div 
+                id="about"
+                className={showSkills ? "w-full lg:flex-1 scroll-mt-24" : "w-full scroll-mt-24"}
+              >
                 <About showSkills={showSkills} onToggleSkills={() => setShowSkills(!showSkills)} />
               </div>
               {showSkills && (
-                <div className="lg:col-span-6 w-full animate-in slide-in-from-right duration-300">
+                <div
+                  id="skills"
+                  className="w-full lg:flex-1 scroll-mt-24"
+                >
                   <SkillsSection />
                 </div>
               )}
@@ -84,7 +123,7 @@ function ResumePageContent() {
               <Experience />
             </section>
 
-            <section id="projects" className="scroll-mt-24 space-y-12">
+            <section id="projects" className="scroll-mt-24 space-y-8">
               <Projects />
             </section>
 

@@ -7,21 +7,41 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Linkedin, Github, Mail, Moon, Sun, Download, Menu, X, Rss } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
-import coverImg from './images/cover.png';
 import profileImg from './images/profile.png';
 
-export function ResumeHeader() {
+interface ResumeHeaderProps {
+  onSkillsClick?: () => void;
+}
+
+export function ResumeHeader({ onSkillsClick }: ResumeHeaderProps = {}) {
   const { theme, toggleTheme } = useResumeThemeSafe();
   const isDark = theme === 'dark';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedLocation, setCopiedLocation] = useState(false);
+
+  const copyToClipboard = (text: string, type: 'email' | 'location') => {
+    if (typeof window === 'undefined') return;
+    navigator.clipboard.writeText(text).then(() => {
+      if (type === 'email') {
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2000);
+      } else {
+        setCopiedLocation(true);
+        setTimeout(() => setCopiedLocation(false), 2000);
+      }
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
 
   // Navigation items
   const navigationItems = [
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'about', label: 'About', href: '#about' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
     { id: 'skills', label: 'Skills', href: '#skills' },
     { id: 'experience', label: 'Experience', href: '#experience' },
+    { id: 'projects', label: 'Projects', href: '#projects' },
     { id: 'education', label: 'Education', href: '#education' }
   ];
 
@@ -50,8 +70,12 @@ export function ResumeHeader() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    // Smooth scroll with offset for sticky elements
     const targetId = href.replace('#', '');
+    if (targetId === 'skills' && onSkillsClick) {
+      onSkillsClick();
+      return;
+    }
+    
     const element = document.getElementById(targetId);
     if (element) {
       const offset = 90; // Account for sticky header
@@ -67,54 +91,62 @@ export function ResumeHeader() {
 
   return (
     <Card className="rounded-none border-t-0 border-x-0 border-b p-0 gap-0 bg-[var(--card-bg)] border-[var(--border-color)] text-[var(--text-color)] shadow-none">
-      <div className="relative h-40 lg:h-56 overflow-hidden print:hidden">
-        <Image 
-          src={coverImg}
-          alt="Professional cover background showcasing development environment"
-          fill
-          className="object-cover opacity-90 contrast-125"
-          priority
-          sizes="(max-width: 768px) 100vw, 100vw"
-          placeholder="blur"
-        />
-      </div>
-
-      <div className="relative px-4 lg:px-6 pb-6 bg-[var(--card-bg)]">
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-          <div className="shrink-0 -mt-20 lg:-mt-28 print:hidden">
-            <div className="w-32 h-32 lg:w-52 lg:h-52 rounded-full border-4 overflow-hidden flex items-center justify-center border-[var(--card-bg)] bg-[var(--card-bg)] shadow-lg relative z-10">
-              <Image 
-                src={profileImg} 
-                alt="Chinmay Patil Profile Photo" 
-                width={208} 
-                height={208} 
-                className="w-full h-full object-cover filter contrast-[1.05]" 
-                priority
-              />
+      <div className="max-w-4xl mx-auto px-4 lg:px-6 py-6 w-full">
+        <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-6">
+          <div className="shrink-0 print:hidden">
+            <div className="w-32 h-32 lg:w-48 lg:h-48 rounded-sm border-2 border-[var(--border-color)] bg-[var(--card-bg)] p-2 shadow-md relative z-10">
+              {/* Vintage Archival Tape Overlay */}
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-16 h-5 bg-[#C5B4A3]/40 dark:bg-[#4a423a]/50 backdrop-blur-[0.5px] border border-[#A8988A]/35 rotate-[-1.5deg] shadow-sm z-20 pointer-events-none" />
+              <div className="absolute inset-2 border pointer-events-none opacity-25" style={{ borderColor: 'var(--border-color)' }} />
+              <div className="relative w-full h-full overflow-hidden">
+                <Image 
+                  src={profileImg} 
+                  alt="Chinmay Patil Profile Photo" 
+                  fill
+                  className="object-cover filter sepia-[0.35] contrast-[1.05] saturate-[0.8] brightness-[0.98]" 
+                  priority
+                  sizes="(max-width: 768px) 128px, 192px"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex-1 pt-4 lg:pt-8 print:pt-0">
+          <div className="flex-1 print:pt-0">
             <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-4">
               <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-1">
-                  <h1 className="text-3xl lg:text-4xl font-bold font-cormorant tracking-tight text-[var(--text-color)]">Chinmay Patil</h1>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="inline-flex items-center px-2 py-0.5 vintage-badge text-sm">
-                      Software Engineer | Backend Engineer
-                    </span>
-                  </div>
-                </div>
+                <h1 className="text-3xl lg:text-4xl font-bold font-cormorant tracking-tight text-[var(--text-color)] mb-1">Chinmay Patil</h1>
                 <p className="text-base lg:text-lg mb-3 font-serif italic text-[var(--meta-color)]">Intern @Qualys | C++ | Linux | WCE ’26</p>
                 <div className="flex flex-col gap-2 text-sm lg:text-base mb-4 font-serif text-[var(--meta-color)] print:hidden">
-                  <span className="flex items-center gap-2">
+                  <button
+                    onClick={() => copyToClipboard('Karad, Maharashtra, India', 'location')}
+                    className="flex flex-wrap items-center gap-x-2 gap-y-1 hover:text-[var(--accent-color)] transition-colors duration-150 text-left focus:outline-none group w-fit"
+                    title="Click to copy location"
+                  >
                     <MapPin className="w-4 h-4 shrink-0 text-[var(--accent-color)]" />
-                    Karad, Maharashtra, India
-                  </span>
-                  <span className="flex items-center gap-2">
+                    <span className="border-b border-dotted border-transparent group-hover:border-[var(--accent-color)]">
+                      Karad, Maharashtra, India
+                    </span>
+                    {copiedLocation && (
+                      <span className="ml-2 font-mono text-xs text-red-700/90 dark:text-red-400/90 font-bold tracking-wider animate-pulse">
+                        [ COPIED! ]
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => copyToClipboard('chinmaydpatil09@gmail.com', 'email')}
+                    className="flex flex-wrap items-center gap-x-2 gap-y-1 hover:text-[var(--accent-color)] transition-colors duration-150 text-left focus:outline-none group w-fit"
+                    title="Click to copy email"
+                  >
                     <Mail className="w-4 h-4 shrink-0 text-[var(--accent-color)]" />
-                    chinmaydpatil09@gmail.com
-                  </span>
+                    <span className="border-b border-dotted border-transparent group-hover:border-[var(--accent-color)]">
+                      chinmaydpatil09@gmail.com
+                    </span>
+                    {copiedEmail && (
+                      <span className="ml-2 font-mono text-xs text-red-700/90 dark:text-red-400/90 font-bold tracking-wider animate-pulse">
+                        [ COPIED! ]
+                      </span>
+                    )}
+                  </button>
                 </div>
 
                 {/* Print-only contact info */}
@@ -137,15 +169,54 @@ export function ResumeHeader() {
                     <Download className="w-4 h-4" />
                     Download Resume
                   </a>
+
+                  {/* Desktop Navigation - Hidden on mobile, grouped inline with download button */}
+                  <div className="hidden lg:flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={toggleTheme}
+                      className="vintage-btn h-8 w-8 p-0"
+                      aria-label="Toggle theme"
+                    >
+                      {isDark ? <Sun className="w-4 h-4 text-[var(--accent-color)]" /> : <Moon className="w-4 h-4 text-[var(--accent-color)]" />}
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="vintage-btn h-8 w-8 p-0"
+                      asChild
+                    >
+                      <a href="https://linkedin.com/in/chinmaydpatil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <Linkedin className="w-4 h-4 text-[var(--accent-color)]" />
+                      </a>
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="vintage-btn h-8 w-8 p-0"
+                      asChild
+                    >
+                      <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                        <Github className="w-4 h-4 text-[var(--accent-color)]" />
+                      </a>
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="vintage-btn h-8 w-8 p-0"
+                      asChild
+                    >
+                      <a href="/feed.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS Feed">
+                        <Rss className="w-4 h-4 text-[var(--accent-color)]" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex gap-2.5 shrink-0 items-center">
+              <div className="flex gap-2.5 shrink-0 items-center lg:hidden">
                 {/* Mobile Menu Toggle - Only visible on mobile/tablet */}
                 <Button
                   size="sm"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="vintage-btn h-8 w-8 p-0 lg:hidden"
+                  className="vintage-btn h-8 w-8 p-0"
                   aria-label="Toggle navigation menu"
                   aria-expanded={isMobileMenuOpen}
                 >
@@ -155,50 +226,11 @@ export function ResumeHeader() {
                     <Menu className="w-4 h-4 text-[var(--accent-color)]" />
                   )}
                 </Button>
-
-                {/* Desktop Navigation - Hidden on mobile */}
-                <div className="hidden lg:flex gap-2.5">
-                  <Button
-                    size="sm"
-                    onClick={toggleTheme}
-                    className="vintage-btn h-8 w-8 p-0"
-                    aria-label="Toggle theme"
-                  >
-                    {isDark ? <Sun className="w-4 h-4 text-[var(--accent-color)]" /> : <Moon className="w-4 h-4 text-[var(--accent-color)]" />}
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="vintage-btn h-8 w-8 p-0"
-                    asChild
-                  >
-                    <a href="https://linkedin.com/in/chinmaydpatil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                      <Linkedin className="w-4 h-4 text-[var(--accent-color)]" />
-                    </a>
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="vintage-btn h-8 w-8 p-0"
-                    asChild
-                  >
-                    <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                      <Github className="w-4 h-4 text-[var(--accent-color)]" />
-                    </a>
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="vintage-btn h-8 w-8 p-0"
-                    asChild
-                  >
-                    <a href="/feed.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS Feed">
-                      <Rss className="w-4 h-4 text-[var(--accent-color)]" />
-                    </a>
-                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Mobile Navigation Menu Overlay */}
       {isMobileMenuOpen && (

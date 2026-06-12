@@ -160,12 +160,6 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
       {/* Main Content Column */}
       <div className="max-w-[720px] mx-auto px-6 pt-32">
         <header className="mb-12">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-sm uppercase font-bold tracking-widest font-sans px-2.5 py-1 rounded-sm" style={{ backgroundColor: 'var(--card-bg)', color: 'var(--accent-color)', border: '1px solid var(--border-color)' }}>
-              {paper.category}
-            </span>
-          </div>
-
           <h1 className="text-2xl sm:text-3.5xl lg:text-[40px] font-bold tracking-tight mb-5 leading-[1.2] font-cormorant">
             {paper.title}
           </h1>
@@ -182,6 +176,8 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
               <span className="font-semibold" style={{ color: 'var(--text-color)' }}>Chinmay Patil</span>
               <span className="opacity-50">/</span>
               <span>Backend &amp; DevOps</span>
+              <span className="opacity-50">/</span>
+              <span className="italic font-medium" style={{ color: 'var(--accent-color)' }}>{paper.category}</span>
             </div>
             <div className="mt-2 sm:mt-0 flex items-center gap-2">
               <span>Published {paper.date}</span>
@@ -256,13 +252,14 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
             <h2 className="text-xl sm:text-2xl font-bold font-cormorant pb-1.5 border-b" style={{ borderColor: 'var(--border-color)' }}>
               References &amp; Citations
             </h2>
-            <ol className="list-decimal pl-6 space-y-2.5 text-sm sm:text-base font-times">
+            <ul className="space-y-3 text-sm sm:text-base font-times">
               {paper.references.map((ref, index) => (
-                <li key={index} className="pl-1">
+                <li key={index} className="pl-8 -indent-8">
+                  <span className="select-none font-bold inline-block w-8" style={{ color: 'var(--meta-color)' }}>[{index + 1}]</span>
                   <span>{ref}</span>
                 </li>
               ))}
-            </ol>
+            </ul>
           </section>
 
           {/* Read Other Papers */}
@@ -325,7 +322,7 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
       {showFloatingButton && (
         <button
           onClick={() => setShowMobileTocOverlay(true)}
-          className="fixed bottom-6 right-6 z-40 xl:hidden w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200"
+          className="fixed bottom-6 right-6 z-40 xl:hidden w-12 h-12 rounded-sm flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200"
           style={{ boxShadow: '2px 2px 0px var(--border-color)' }}
           aria-label="Open Table of Contents"
         >
@@ -337,7 +334,7 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
       {showFloatingButton && (
         <button
           onClick={scrollToTop}
-          className="fixed z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200 bottom-[88px] right-6 xl:bottom-8 xl:right-8"
+          className="fixed z-40 w-12 h-12 rounded-sm flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200 bottom-[88px] right-6 xl:bottom-8 xl:right-8"
           style={{ boxShadow: '2px 2px 0px var(--border-color)' }}
           aria-label="Back to top"
         >
@@ -362,7 +359,7 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
               <h3 className="font-bold font-cormorant text-lg text-[var(--text-color)] uppercase tracking-wider">Tome Index</h3>
               <button
                 onClick={() => setShowMobileTocOverlay(false)}
-                className="w-8 h-8 rounded-full border border-[var(--border-color)] flex items-center justify-center bg-[var(--badge-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)]/10"
+                className="w-8 h-8 rounded-sm border border-[var(--border-color)] flex items-center justify-center bg-[var(--badge-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)]/10"
                 aria-label="Close index"
               >
                 <X className="w-4 h-4" />
