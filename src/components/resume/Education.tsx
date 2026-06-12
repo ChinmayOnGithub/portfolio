@@ -2,43 +2,42 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { GraduationCap } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
 
 export default function Education() {
-  const { theme } = useResumeThemeSafe();
-  const isDark = theme === 'dark';
-
   const education = [
     {
       institution: 'Walchand College of Engineering, Sangli',
       degree: 'B.Tech (Information Technology)',
-      field: 'CGPA: 8.37/10 · Graduated',
+      field: 'CGPA: 8.49/10 · Graduated',
       period: '2022 - 2026',
-      grade: null,
-      activities: null,
-      skills: ['Data Structures', 'Algorithms', 'Operating Systems', 'Database Management', 'Computer Networks'],
-    },
-    {
-      institution: 'Bapuji Salunkhe Mahavidyalaya, Karad',
-      degree: 'Higher Secondary Education',
-      field: 'Percentage: 80.33%',
-      period: '2022',
-      grade: null,
-      activities: null,
-      skills: null,
-    },
-    {
-      institution: 'Anandrao Chavan Vidyalaya, Karad',
-      degree: 'Secondary School Education',
-      field: 'Percentage: 97.00%',
-      period: '2020',
       grade: null,
       activities: null,
       skills: null,
     },
   ];
+
+  const getInstitutionLogo = (institution: string) => {
+    if (institution.includes('Walchand')) {
+      return (
+        <div className="w-16 h-16 rounded-sm border border-[var(--border-color)] flex items-center justify-center shrink-0 transition-all overflow-hidden">
+          <img 
+            src="/logo/walchand.png" 
+            alt="Walchand College logo"
+            className="w-14 h-14 object-contain"
+          />
+        </div>
+      );
+    }
+
+    // Fallback to graduation cap icon
+    return (
+      <div className="w-16 h-16 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0">
+        <GraduationCap className="w-6 h-6 text-[var(--accent-color)]" />
+      </div>
+    );
+  };
 
   return (
     <Card className="vintage-card">
@@ -55,29 +54,13 @@ export default function Education() {
         {education.map((edu, index) => (
           <div key={index} className="font-times">
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0">
-                <GraduationCap className="w-5 h-5 text-[var(--accent-color)]" />
-              </div>
+              {getInstitutionLogo(edu.institution)}
 
               <div className="flex-1">
                 <h3 className="font-bold font-cormorant text-xl text-[var(--text-color)]">{edu.institution}</h3>
                 <p className="text-base mt-1 text-[var(--text-color)]/95">{edu.degree}</p>
                 <p className="text-sm text-[var(--meta-color)] italic">{edu.field}</p>
                 <p className="text-sm text-[var(--meta-color)]">{edu.period}</p>
-
-                {edu.skills && (
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    {edu.skills.map((skill, skillIndex) => (
-                      <Badge
-                        key={skillIndex}
-                        variant="secondary"
-                        className="text-sm px-2.5 py-0.5 vintage-badge"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           </div>

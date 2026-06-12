@@ -1,141 +1,126 @@
-# Portfolio UI Improvement Tasks
+# Portfolio Streamlining Tasks
 
-*Prioritized task list for enhancing the vintage library-themed portfolio website. Tasks are ordered from critical UX issues to nice-to-have enhancements.*
+## Data Consolidation & UI Cleanup
 
----
+### ✅ Completed Tasks
+- [x] Delete resume_project_template.md (not needed)
+- [x] Created comprehensive GPU K8s research paper in constants.ts
+- [x] Remove "Read Architecture & Docs" button from Projects UI
+- [x] Fix project links - now pointing directly to papers
+- [x] Added technical papers for all projects (Stremora, VerifyHub, Compresso)
+- [x] Made project titles clickable links to papers
+- [x] Added "Read Technical Paper" link in project metadata
+- [x] Updated CGPA in Education section from 8.37 to 8.49
+- [x] Removed skill badges from Education section (DSA, OS, etc.)
+- [x] Made search bar collapsible in Projects section with vintage styling
+- [x] Added company logos (Qualys, WLUG) to Experience section
+- [x] Added Walchand logo to Education section
+- [x] Fixed About section width to match other sections when skills hidden
+- [x] Added paperUrl property to all projects in data.ts
+- [x] Cleaned up unused imports (Building2, Badge, theme variables)
+- [x] Optimized Projects component logic for paper URL mapping
+- [x] Added exact publication dates for all papers (not just month/year)
 
-## 🔄 PENDING TASKS
+### 🚧 High Priority UX Improvements
+- [ ] **Paper Reading Experience Enhancements**
+  - [ ] Add reading progress indicator for long papers
+  - [ ] Implement reading time estimation display
+  - [ ] Add "Table of Contents" navigation for papers
+  - [ ] Include paper download as PDF functionality
+  - [ ] Add social sharing buttons for papers
 
+- [ ] **Search & Discovery Improvements**
+  - [ ] Add paper search functionality (separate from projects)
+  - [ ] Implement tag-based filtering for papers
+  - [ ] Add "Related Papers" suggestions
+  - [ ] Include paper citation format generator
+  - [ ] Add paper metrics (views, reading time analytics)
 
+- [ ] **Navigation & Accessibility**
+  - [ ] Add breadcrumb navigation for papers
+  - [ ] Implement keyboard shortcuts for paper navigation
+  - [ ] Add "Back to Top" floating button on long papers
+  - [ ] Include paper printing optimization (CSS print styles)
+  - [ ] Add focus management for screen readers
 
+### 🎨 Visual & Interactive Enhancements
+- [ ] **Vintage Library Experience**
+  - [ ] Add paper "bookmarking" functionality
+  - [ ] Implement reading history/recently viewed papers
+  - [ ] Create paper "collections" or "binders"
+  - [ ] Add vintage paper texture overlays
+  - [ ] Include subtle page turn animations
 
+- [ ] **Content Enhancement**
+  - [ ] Add author bio section for each paper
+  - [ ] Include paper revision history/changelog
+  - [ ] Add inline image zoom functionality
+  - [ ] Implement code block syntax highlighting
+  - [ ] Add paper comments/annotations system
 
+- [ ] **Performance & Technical**
+  - [ ] Implement lazy loading for paper content
+  - [ ] Add paper content caching strategies
+  - [ ] Include offline reading capability (PWA)
+  - [ ] Add paper content search within text
+  - [ ] Implement SEO optimization for papers
 
+### 🔮 Future Feature Ideas
+- [ ] **Advanced Reading Features**
+  - [ ] Dark/Light/Sepia reading modes (already exists in design.md)
+  - [ ] Font size adjustment controls
+  - [ ] Reading speed tracking and analytics
+  - [ ] Paper comparison tool (side-by-side)
+  - [ ] Export paper as different formats (PDF, EPUB, etc.)
 
+- [ ] **Community & Sharing**
+  - [ ] Paper discussion threads
+  - [ ] Peer review system
+  - [ ] Paper collaboration tools
+  - [ ] Academic citation tracking
+  - [ ] Integration with academic platforms (ResearchGate, etc.)
 
-### Task 14: Progressive Web App Features
-**Status**: 🔄 Pending  
-**Priority**: Low  
-**Estimated Time**: 3-4 hours  
+- [ ] **Analytics & Insights**
+  - [ ] Reading pattern analytics
+  - [ ] Popular sections highlighting
+  - [ ] Time spent per section tracking
+  - [ ] Paper engagement metrics
+  - [ ] Reader journey mapping
 
-**Description**: Add PWA capabilities for offline viewing of projects, especially useful for PDF exports and project documentation.
+### 🔄 Code Optimization Done
+- [x] Removed unused imports in Experience.tsx (Building2)
+- [x] Removed unused imports in Education.tsx (Badge) 
+- [x] Removed unused theme variables (isDark, theme) where not needed
+- [x] Simplified Projects component paperId mapping logic
+- [x] Added consistent paperUrl to all projects in data.ts
+- [x] Proper TypeScript interface consistency
+- [x] Updated all papers with exact publication dates
 
-**Requirements**:
-- Implement service worker for caching
-- Add offline functionality for key pages
-- Create PWA manifest file
-- Add install prompt for mobile users
-- Ensure offline project viewing
+### 📅 Implementation Priority
+**Phase 1 (Next Sprint)**: Paper reading enhancements, ToC, progress indicator
+**Phase 2 (Future)**: Search improvements, bookmarking, collections  
+**Phase 3 (Advanced)**: Community features, analytics, advanced reading modes
 
-**Acceptance Criteria**:
-- [ ] Service worker caching implemented
-- [ ] Offline viewing functional
-- [ ] PWA manifest configured
-- [ ] Install prompt working
-- [ ] Offline experience smooth
+### 📝 Notes
+- Focus on maintaining vintage library aesthetic in all improvements
+- Ensure accessibility compliance for all new features
+- Keep performance optimized for mobile devices
+- Consider offline-first approach for core reading functionality
 
----
+### 📋 Proposed Changes
+1. **Single Source of Truth**: Use only constants.ts for all project/paper data
+2. **Papers-First Approach**: Convert projects to papers with detailed technical content
+3. **Simplified Navigation**: Direct links to papers instead of separate project pages
+4. **Clean UI**: Remove redundant buttons and simplify project display
 
-### Task 15: Analytics & User Behavior Insights
-**Status**: 🔄 Pending  
-**Priority**: Low  
-**Estimated Time**: 2-3 hours  
+### 🎯 Goal
+- Remove data duplication
+- Streamline user experience 
+- Focus on technical papers/blog content
+- Maintain all existing content (GPU project, Stremora, VerifyHub, Compresso)
 
-**Description**: Implement privacy-friendly analytics to track which projects get most attention, reading time on project pages, and popular sections.
-
-**Requirements**:
-- Choose privacy-friendly analytics solution (e.g., Plausible)
-- Implement page view tracking
-- Add reading time tracking for projects
-- Track popular sections and user flow
-- Ensure GDPR/privacy compliance
-
-**Acceptance Criteria**:
-- [ ] Analytics implementation privacy-compliant
-- [ ] Page views tracked properly
-- [ ] Reading time metrics available
-- [ ] User flow insights accessible
-- [ ] No performance impact on site
-
----
----
-
-## ✅ COMPLETED TASKS
-
-### Task 1: Mobile Navigation Menu
-**Status**: ✅ Completed  
-
----
-
-### Task 2: Loading Performance Optimization
-**Status**: ✅ Completed  
-
----
-
-### Task 3: Responsive Typography Scale
-**Status**: ✅ Completed  
-
----
-
-### Task 4: Accessibility Compliance (WCAG 2.1 AA)
-**Status**: ✅ Completed  
-
----
-
-### Task 5: Paper Navigation Implementation Fix
-**Status**: ✅ Completed  
-
----
-
-### Task 6: Project Detail Page Performance
-**Status**: ✅ Completed  
-
----
-
-### Task 7: Interactive States & Micro-animations
-**Status**: ✅ Completed  
-
----
-
-### Task 8: Search & Filter Functionality
-**Status**: ✅ Completed  
-
----
-
-### Task 17: Project & Paper Page Typography Scaling
-**Status**: ✅ Completed  
-
----
-
-### Task 20: Mobile Reader Floating TOC Menu
-**Status**: ✅ Completed  
-
----
-
-### Task 13: SEO & Social Media Optimization
-**Status**: ✅ Completed  
-
----
-
-### Task 16: Dynamic Route Headings and Metadata
-**Status**: ✅ Completed  
-
----
-
-### Task 9: Content State Management Enhancement
-**Status**: ✅ Completed  
-
----
-
-### Task 10: Mobile Project Reader UX
-**Status**: ✅ Completed  
-
----
-
-### Task 12: Error Boundaries & Loading States
-**Status**: ✅ Completed  
-
----
-
-### Task 21: Aligned Navigation and Reader Page Color Palettes
-**Status**: ✅ Completed  
+### 📝 Notes
+- Keep all existing project content but present as papers
+- GPU K8s project should be prominently featured
+- Maintain vintage library design aesthetic
+- All links should work correctly

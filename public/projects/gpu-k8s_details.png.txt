@@ -1,0 +1,16 @@
+Placeholder for GPU K8s Details Image
+======================================
+
+This should be replaced with:
+- Detailed system architecture diagram
+- Code snippets from the implementation
+- Performance benchmark results
+- GPU memory allocation visualization
+
+Suggested content:
+- Device plugin code structure
+- Heuristic scoring algorithm visualization
+- Performance comparison charts (HPA vs Custom Scaler)
+- GPU slice allocation table/dashboard
+
+Size: Recommended 1200x600px or similar detail view dimensions

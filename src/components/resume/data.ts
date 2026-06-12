@@ -25,6 +25,16 @@ export const education = [
 
 export const projects = [
   {
+    title: 'GPU Resource Management System for Kubernetes',
+    href: 'https://github.com/ChinmayOnGithub/gpu-k8s-resource-manager',
+    date: 'May 2026',
+    tech: ['Kubernetes', 'Go', 'Python', 'NVIDIA CUDA', 'NVML', 'Prometheus', 'Grafana'],
+    oneLine: 'Fractional GPU allocation and intelligent autoscaling for Kubernetes containers.',
+    backendLine:
+      'Built custom device plugin enabling 1000-slice GPU sharing with heuristic autoscaling, achieving +96.7% throughput over standard HPA.',
+    paperUrl: '/papers/gpu-k8s-resource-management',
+  },
+  {
     title: 'Stremora | Cloud Video Storage Platform',
     href: 'https://github.com/ChinmayOnGithub/stremora-backend',
     date: 'Jun 2025',
@@ -32,6 +42,7 @@ export const projects = [
     oneLine: 'Self-hostable cloud video storage and streaming backend.',
     backendLine:
       'Designed secure upload/stream endpoints with JWT auth, Dockerized services, and NGINX-backed deployment on AWS EC2.',
+    paperUrl: '/papers/stremora-cloud-video-platform',
   },
   {
     title: 'VerifyHub | Blockchain Certificate Verification',
@@ -41,6 +52,7 @@ export const projects = [
     oneLine: 'On-chain digital certificate verification with IPFS-backed storage.',
     backendLine:
       'Built Solidity contracts and verification APIs, focusing on hashing logic, IPFS integration, and Docker-based local blockchain setup.',
+    paperUrl: '/papers/verifyhub-blockchain-verification',
   },
   {
     title: 'Compresso | Image Compression Engine',
@@ -50,6 +62,7 @@ export const projects = [
     oneLine: 'Desktop image compression tool using vector quantization.',
     backendLine:
       'Implemented multi-threaded encoding pipeline and compression core, treating it like a systems/back-end performance project.',
+    paperUrl: '/papers/compresso-vector-quantization',
   },
 ];
 

@@ -1,0 +1,16 @@
+Placeholder for GPU K8s Hero Image
+========================================
+
+This should be replaced with:
+- Screenshot of Kubernetes dashboard showing GPU slice allocations
+- System architecture diagram 
+- Performance metrics visualization
+- Or terminal showing kubectl commands with GPU resources
+
+Suggested content:
+- kubectl get nodes with GPU resources
+- Grafana dashboard showing GPU utilization
+- Performance comparison charts
+- System monitoring interface
+
+Size: Recommended 1200x800px or similar hero image dimensions

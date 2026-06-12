@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building2 } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
 
 interface Role {
@@ -22,9 +21,6 @@ interface Experience {
 }
 
 export function Experience() {
-  const { theme } = useResumeThemeSafe();
-  const isDark = theme === 'dark';
-
   const experiences: Experience[] = [
     {
       company: 'Qualys',
@@ -57,9 +53,29 @@ export function Experience() {
   ];
 
   const getCompanyLogo = (company: string) => {
+    const logoMap: { [key: string]: string } = {
+      'Qualys': '/logo/qualys.png',
+      'WLUG (Walchand Linux Users Group)': '/logo/wlug.png',
+    };
+
+    const logoSrc = logoMap[company];
+    
+    if (logoSrc) {
+      return (
+        <div className="w-16 h-16 rounded-sm border border-[var(--border-color)] flex items-center justify-center shrink-0 transition-all overflow-hidden">
+          <img 
+            src={logoSrc} 
+            alt={`${company} logo`}
+            className="w-14 h-14 object-contain"
+          />
+        </div>
+      );
+    }
+
+    // Fallback to letter logo if no image found
     return (
-      <div className="w-10 h-10 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0 transition-all">
-        <span className="font-bold font-cormorant text-base text-[var(--accent-color)]">{company[0]}</span>
+      <div className="w-16 h-16 rounded-sm border border-[var(--border-color)] bg-[var(--badge-bg)] flex items-center justify-center shrink-0 transition-all">
+        <span className="font-bold font-cormorant text-lg text-[var(--accent-color)]">{company[0]}</span>
       </div>
     );
   };

@@ -70,7 +70,7 @@ function ResumePageContent() {
 
             {/* About & Optional Skills Layout Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start transition-all duration-500 ease-in-out">
-              <div className={showSkills ? "lg:col-span-6 w-full" : "lg:col-span-12 max-w-2xl mx-auto w-full"}>
+              <div className={showSkills ? "lg:col-span-6 w-full" : "lg:col-span-12 w-full"}>
                 <About showSkills={showSkills} onToggleSkills={() => setShowSkills(!showSkills)} />
               </div>
               {showSkills && (
