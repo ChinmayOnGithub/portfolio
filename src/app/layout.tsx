@@ -23,6 +23,11 @@ export const metadata: Metadata = {
 	metadataBase: new URL('https://chinmaypatil.com'),
 	keywords: ['Chinmay Patil', 'Software Engineer', 'Backend Engineer', 'DevOps', 'Cloud Infrastructure', 'Portfolio', 'System Design', 'C++', 'Linux'],
 	authors: [{ name: 'Chinmay Patil' }],
+	alternates: {
+		types: {
+			'application/rss+xml': [{ url: '/feed.xml', title: "Chinmay Patil's Technical Papers Feed" }],
+		},
+	},
 	openGraph: {
 		title: 'Chinmay Patil | Backend & DevOps Engineer',
 		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',

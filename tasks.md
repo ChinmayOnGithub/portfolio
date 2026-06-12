@@ -21,11 +21,16 @@
 - [x] Optimized Projects component logic for paper URL mapping
 - [x] Added exact publication dates for all papers (not just month/year)
 
+### 🐛 Discovered UI Bugs (Proposed Fixes)
+- [x] **Dropdown Popover Outside Click / Escape Dismissal Bug** (Aa Options dropdown doesn't close on click-outside or pressing Escape)
+- [x] **Next.js Hydration Double-Render Progress Bar Flicker** (Progress bar restarts from 0% on client-side hydration mount)
+- [x] **Sticky Left TOC Sidebar Overlap / Truncation Bug** (Left TOC sidebar overlaps main reading text on viewports under 1440px and truncates long titles with '...')
+
 ### 🚧 High Priority UX Improvements
 - [ ] **Paper Reading Experience Enhancements**
-  - [ ] Add reading progress indicator for long papers
+  - [x] Add reading progress indicator for long papers
   - [ ] Implement reading time estimation display
-  - [ ] Add "Table of Contents" navigation for papers
+  - [x] Add "Table of Contents" navigation for papers
   - [ ] Include paper download as PDF functionality
   - [ ] Add social sharing buttons for papers
 
@@ -39,7 +44,7 @@
 - [ ] **Navigation & Accessibility**
   - [ ] Add breadcrumb navigation for papers
   - [ ] Implement keyboard shortcuts for paper navigation
-  - [ ] Add "Back to Top" floating button on long papers
+  - [x] Add "Back to Top" floating button on long papers
   - [ ] Include paper printing optimization (CSS print styles)
   - [ ] Add focus management for screen readers
 

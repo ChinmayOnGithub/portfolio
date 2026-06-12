@@ -23,7 +23,7 @@ export default function AppShell({
   }, []);
 
   if (!isMounted) {
-    return <Loader onFinished={() => { }} />;
+    return null;
   }
 
   return (

@@ -3,20 +3,60 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { ArrowLeft, Sun, Moon, Github } from 'lucide-react';
+import { ArrowLeft, Sun, Moon, Github, Rss } from 'lucide-react';
 import { useReaderSettings, getReaderColors } from './ReaderSettingsContext';
 
 export default function ProjectNavigation() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { textSize, bookTheme, setTextSize, setBookTheme } = useReaderSettings();
 
   const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
+        const toggleButton = document.getElementById('aa-options-toggle');
+        if (toggleButton && toggleButton.contains(event.target as Node)) {
+          return;
+        }
+        setShowSettings(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowSettings(false);
+      }
+    };
+
+    if (showSettings) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showSettings]);
 
   const isDark = resolvedTheme === 'dark';
 
@@ -30,8 +70,13 @@ export default function ProjectNavigation() {
       style={{ 
         backgroundColor: navColors.bg,
         borderColor: navColors.border,
-        color: navColors.text
-      }}
+        color: navColors.text,
+        '--card-bg': navColors.cardBg || navColors.bg,
+        '--border-color': navColors.border,
+        '--text-color': navColors.text,
+        '--meta-color': navColors.meta,
+        '--accent-color': navColors.accent
+      } as React.CSSProperties}
     >
       <div className="max-w-[720px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* Back to Home */}
@@ -48,6 +93,7 @@ export default function ProjectNavigation() {
           
           {/* Reader Settings Toggle */}
           <button
+            id="aa-options-toggle"
             onClick={() => setShowSettings(!showSettings)}
             className="text-sm font-semibold underline decoration-1 underline-offset-4 transition-colors"
             style={{ color: navColors.accent }}
@@ -61,10 +107,10 @@ export default function ProjectNavigation() {
               className="absolute right-0 top-10 z-50 p-5 border rounded-sm shadow-2xl w-60 font-serif text-xs vintage-card"
               style={{ 
                 position: 'absolute',
-                backgroundColor: 'var(--card-bg, ' + navColors.bg + ')',
-                borderColor: 'var(--border-color, ' + navColors.border + ')',
-                color: 'var(--text-color, ' + navColors.text + ')',
-                boxShadow: '3px 3px 0px var(--border-color, ' + navColors.border + ')'
+                backgroundColor: 'var(--card-bg)',
+                borderColor: 'var(--border-color)',
+                color: 'var(--text-color)',
+                boxShadow: '3px 3px 0px var(--border-color)'
               }}
             >
               <div className="vintage-card-inner-border" />
@@ -152,8 +198,28 @@ export default function ProjectNavigation() {
           >
             <Github className="w-4 h-4" />
           </a>
+
+          {/* RSS Feed Link */}
+          <a
+            href="/feed.xml"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-opacity"
+            aria-label="RSS Feed"
+          >
+            <Rss className="w-4 h-4" />
+          </a>
         </div>
       </div>
+
+      {/* Dynamic Scroll Reading Bar */}
+      <div
+        className="absolute bottom-0 left-0 h-[2px] transition-all duration-100"
+        style={{
+          width: `${scrollProgress}%`,
+          backgroundColor: navColors.accent
+        }}
+      />
     </nav>
   );
 }

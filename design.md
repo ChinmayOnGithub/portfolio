@@ -147,6 +147,14 @@ Meta: 0.75rem - 0.875rem | Inter | line-height: 1.5 | opacity: 0.85
 - **Colors**: Muted tones matching the paper aesthetic
 - **Shadow**: Subtle drop shadow suggesting layered paper
 
+### Reader Navigation & Enhancements - "Immersive Reading"
+**Concept**: Minimal utilities to assist reading long documents without compromising the distraction-free vintage paper focus.
+
+**Components**:
+- **Dynamic Scroll progress bar**: A thin `2px` progress indicator attached to the absolute bottom of the sticky header (`ProjectNavigation`). It dynamically matches the current resolved theme accent color and fills up as the user scrolls.
+- **Floating Back to Top button**: A responsive floating button with the `ArrowUp` icon. Sits at `bottom-[88px] right-6` on mobile/tablet to stack neatly above the Mobile TOC button, and at `xl:bottom-8 xl:right-8` on larger screens.
+- **Card Catalog Related list**: Replaces standard list views for related documents with card-catalog style boxes using the vintage double-border design, Cormorant title typography, and a subtle `-translate-y-0.5` hover micro-animation.
+
 ## Layout Principles
 
 ### Grid System - "Archival Organization"

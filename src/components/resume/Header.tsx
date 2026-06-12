@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MapPin, Linkedin, Github, Mail, Moon, Sun, Download, Menu, X } from 'lucide-react';
+import { MapPin, Linkedin, Github, Mail, Moon, Sun, Download, Menu, X, Rss } from 'lucide-react';
 import { useResumeThemeSafe } from './ThemeProvider';
 import coverImg from './images/cover.png';
 import profileImg from './images/profile.png';
@@ -184,6 +184,15 @@ export function ResumeHeader() {
                       <Github className="w-4 h-4 text-[var(--accent-color)]" />
                     </a>
                   </Button>
+                  <Button
+                    size="sm"
+                    className="vintage-btn h-8 w-8 p-0"
+                    asChild
+                  >
+                    <a href="/feed.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS Feed">
+                      <Rss className="w-4 h-4 text-[var(--accent-color)]" />
+                    </a>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -279,6 +288,15 @@ export function ResumeHeader() {
                     >
                       <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                         <Github className="w-4 h-4" />
+                      </a>
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="vintage-btn flex-1 h-10 p-0"
+                      asChild
+                    >
+                      <a href="/feed.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS Feed">
+                        <Rss className="w-4 h-4" />
                       </a>
                     </Button>
                   </div>

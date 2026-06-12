@@ -4,7 +4,7 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { papers } from '../../constants';
-import { BookOpen, X } from 'lucide-react';
+import { BookOpen, X, ArrowUp } from 'lucide-react';
 import { useReaderSettings, getReaderColors } from '../../components/ReaderSettingsContext';
 
 interface PaperReaderClientProps {
@@ -13,7 +13,6 @@ interface PaperReaderClientProps {
 
 export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
   const { resolvedTheme } = useTheme();
-  const [scrollProgress, setScrollProgress] = React.useState(0);
   const [mounted, setMounted] = React.useState(false);
   const [showFloatingButton, setShowFloatingButton] = React.useState(false);
   const [showMobileTocOverlay, setShowMobileTocOverlay] = React.useState(false);
@@ -28,13 +27,9 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
     setMounted(true);
   }, []);
 
-  // Scroll Progress
+  // Scroll Listener for Floating Button
   React.useEffect(() => {
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setScrollProgress((window.scrollY / totalHeight) * 100);
-      }
       setShowFloatingButton(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll);
@@ -106,6 +101,13 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const cssVariables = {
     '--bg-color': colors.bg,
     '--text-color': colors.text,
@@ -124,17 +126,9 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
         color: 'var(--text-color)'
       }}
     >
-      {/* Dynamic Scroll Reading Bar */}
-      <div
-        className="fixed top-0 left-0 right-0 h-[3px] z-50 origin-left transition-all duration-100"
-        style={{
-          width: `${scrollProgress}%`,
-          backgroundColor: 'var(--accent-color)'
-        }}
-      />
 
       {/* Sticky Left TOC Sidebar */}
-      <aside className="fixed top-36 left-[calc(50%-540px)] w-[165px] hidden xl:block z-20 font-serif text-sm select-none">
+      <aside className="fixed top-36 xl:left-[calc(50%-570px)] 2xl:left-[calc(50%-540px)] w-[165px] hidden xl:block z-20 font-serif text-sm select-none">
         <p className="font-bold uppercase tracking-widest mb-4 opacity-50 text-xs" style={{ color: 'var(--meta-color)' }}>
           Tome Index
         </p>
@@ -152,7 +146,7 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
                 <a
                   href={`#${item.id}`}
                   onClick={(e) => handleTocClick(e, item.id)}
-                  className={`hover:opacity-100 transition-opacity block truncate ${isActive ? 'font-bold opacity-100' : 'opacity-65'}`}
+                  className={`hover:opacity-100 transition-opacity block whitespace-normal break-words ${isActive ? 'font-bold opacity-100' : 'opacity-65'}`}
                   style={{ color: isActive ? 'var(--accent-color)' : 'var(--text-color)' }}
                 >
                   {item.title}
@@ -289,24 +283,36 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
               </Link>
             </div>
 
-            <div className="divide-y" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {otherPapers.map((p) => (
                 <Link
                   key={p.id}
                   href={`/papers/${p.id}`}
-                  className="group py-4 block transition-all flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 hover:opacity-80"
+                  className="group relative border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-sm"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--border-color)',
+                    boxShadow: '2px 2px 0px var(--border-color)',
+                  }}
                 >
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xs uppercase font-bold tracking-widest text-[9px]" style={{ color: 'var(--accent-color)' }}>
-                      {p.category}
-                    </span>
-                    <h4 className="text-base font-bold underline decoration-1 underline-offset-4">
-                      {p.title}
-                    </h4>
-                  </div>
-                  <div className="flex items-center gap-3 text-xs opacity-75">
-                    <span className="line-clamp-1 max-w-[320px] italic">{p.summary}</span>
-                    <span style={{ color: 'var(--meta-color)' }}>{p.date}</span>
+                  <div className="absolute top-1 left-1 right-1 bottom-1 border pointer-events-none opacity-25 rounded-[1px]" style={{ borderColor: 'var(--border-color)' }} />
+                  
+                  <div className="relative z-10 flex flex-col h-full justify-between gap-3 font-serif">
+                    <div>
+                      <span className="text-[10px] uppercase font-bold tracking-widest block mb-1.5" style={{ color: 'var(--accent-color)' }}>
+                        {p.category}
+                      </span>
+                      <h4 className="text-base font-bold font-cormorant group-hover:text-[var(--accent-color)] transition-colors line-clamp-2">
+                        {p.title}
+                      </h4>
+                      <p className="text-xs italic mt-2 opacity-80 font-times line-clamp-2 leading-relaxed">
+                        {p.summary}
+                      </p>
+                    </div>
+                    <div className="text-[10px] font-sans flex justify-between items-center opacity-65 border-t pt-2 mt-auto" style={{ borderColor: 'var(--border-color)' }}>
+                      <span>{p.readTime} min read</span>
+                      <span>{p.date}</span>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -324,6 +330,18 @@ export default function PaperReaderClient({ paper }: PaperReaderClientProps) {
           aria-label="Open Table of Contents"
         >
           <BookOpen className="w-5 h-5" />
+        </button>
+      )}
+
+      {/* Floating Back to Top Button */}
+      {showFloatingButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bg-color)] transition-all duration-200 bottom-[88px] right-6 xl:bottom-8 xl:right-8"
+          style={{ boxShadow: '2px 2px 0px var(--border-color)' }}
+          aria-label="Back to top"
+        >
+          <ArrowUp className="w-5 h-5" />
         </button>
       )}
 
