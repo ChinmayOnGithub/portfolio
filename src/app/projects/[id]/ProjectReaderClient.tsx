@@ -159,7 +159,7 @@ export default function ProjectReaderClient({ project }: ProjectReaderClientProp
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 relative pb-28"
+      className="min-h-screen relative pb-28"
       style={{
         ...cssVariables,
         backgroundColor: 'var(--bg-color)',

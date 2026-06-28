@@ -58,19 +58,19 @@ export function AccoladesSidebar() {
   ];
 
   return (
-    <div className={`relative border p-6 pt-8 rounded-sm shadow-md font-serif overflow-hidden transition-all duration-300 ${
+    <div className={`relative border p-6 pt-8 rounded-sm shadow-md font-serif overflow-hidden ${
       isDark 
         ? 'bg-[#2B2520] text-[#E8E2D8] border-[#4E443A]' 
         : 'bg-[#FAF0D9] text-[#4A3B32] border-[#C5B59E]'
     }`}>
       {/* Decorative Vintage Paperclip */}
       <div className="absolute -top-5 left-6 z-20 pointer-events-none">
-        <svg className={`w-7 h-10 drop-shadow-sm transform -rotate-12 transition-colors duration-300 ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className={`w-7 h-10 drop-shadow-sm transform -rotate-12 ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
         </svg>
       </div>
 
-      <h3 className={`text-base font-bold font-cormorant tracking-wide uppercase mb-6 pb-2 border-b text-center transition-colors duration-300 ${
+      <h3 className={`text-base font-bold font-cormorant tracking-wide uppercase mb-6 pb-2 border-b text-center ${
         isDark ? 'border-[#4E443A]/50 text-[#D0A060]' : 'border-[#C5B59E]/50 text-[#2C1E14]'
       }`}>
         Verified Seals & Accolades
@@ -80,14 +80,14 @@ export function AccoladesSidebar() {
         {accolades.map((item) => (
           <div 
             key={item.id} 
-            className={`group flex items-start gap-4 border-b border-dashed pb-5 last:border-0 last:pb-0 transition-colors duration-300 ${
+            className={`group flex items-start gap-4 border-b border-dashed pb-5 last:border-0 last:pb-0 ${
               isDark ? 'border-[#4E443A]/40' : 'border-[#C5B59E]/40'
             }`}
           >
             {/* Organic Wax Seal Emblem */}
             <div className="shrink-0 relative">
               <div 
-                className="w-11 h-11 rounded-full border-2 border-dashed flex flex-col items-center justify-center select-none shadow-sm relative transition-all duration-300"
+                className="w-11 h-11 rounded-full border-2 border-dashed flex flex-col items-center justify-center select-none shadow-sm relative"
                 style={{
                   borderRadius: '48% 52% 50% 50% / 50% 48% 52% 50%', // Simulates melted wax edge
                   transform: `rotate(${item.id === 'hacktoberfest' ? '-6deg' : item.id === 'wce' ? '4deg' : item.id === 'open-source' ? '-2deg' : '8deg'})`,
@@ -135,7 +135,7 @@ export function AccoladesSidebar() {
 
       {/* Verified Stamp Seal at the bottom */}
       <div className="mt-6 flex justify-end">
-        <div className={`w-12 h-12 border rounded-full flex items-center justify-center text-[7px] font-bold tracking-tighter uppercase transform rotate-12 select-none transition-colors duration-300 ${
+        <div className={`w-12 h-12 border rounded-full flex items-center justify-center text-[7px] font-bold tracking-tighter uppercase transform rotate-12 select-none ${
           isDark ? 'border-[#D0A060]/30 text-[#D0A060]/50' : 'border-[#8A5A1B]/40 text-[#8A5A1B]/50'
         }`}>
           ARCHIVE SEC

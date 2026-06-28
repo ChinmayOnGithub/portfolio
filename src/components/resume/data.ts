@@ -140,14 +140,6 @@ export const interests = [
   'Competitive programming',
 ];
 
-export const blogs = [
-  {
-    title: 'Coming Soon',
-    description: 'Technical write-ups about backend development, Linux, and DevOps.',
-    link: '/blogs',
-  },
-];
-
 export const homelab = {
   summary:
     'Small-scale homelab experiments focused on Linux, Docker, reverse proxies, and monitoring to mirror real backend environments.',
@@ -189,7 +181,7 @@ export const products: Product[] = [
       'Open Source',
     ],
     cta: {
-      primary: { label: 'Launch Tools →', href: 'https://tools.chinmaypatil.com' },
+      primary: { label: 'Launch Browser Tools →', href: 'https://tools.chinmaypatil.com' },
       secondary: { label: 'View Source', href: 'https://github.com/ChinmayOnGithub/browser-tools' },
     },
     metrics: [

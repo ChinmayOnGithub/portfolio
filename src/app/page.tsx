@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { ResumeThemeProvider, useResumeThemeSafe } from '@/components/resume/ThemeProvider';
 import { ResumeHeader } from '@/components/resume/Header';
 import { About } from '@/components/resume/About';
@@ -13,8 +14,20 @@ import { Products } from '@/components/resume/Products';
 
 function ResumePageContent() {
   const [showSkills, setShowSkills] = useState(false);
+  const [copiedFooterEmail, setCopiedFooterEmail] = useState(false);
   const { theme } = useResumeThemeSafe();
   const isDark = theme === 'dark';
+
+  const handleCopyFooterEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window === 'undefined') return;
+    navigator.clipboard.writeText('chinmaydpatil09@gmail.com').then(() => {
+      setCopiedFooterEmail(true);
+      setTimeout(() => setCopiedFooterEmail(false), 2000);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  };
 
   const handleSkillsNav = () => {
     if (!showSkills) {
@@ -71,7 +84,7 @@ function ResumePageContent() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 relative pb-20 font-sans"
+      className="min-h-screen relative pb-20 font-sans"
       style={{
         ...cssVariables,
         backgroundColor: 'var(--bg-color)',
@@ -135,6 +148,25 @@ function ResumePageContent() {
             <section id="education" className="scroll-mt-24">
               <Education />
             </section>
+
+            {/* Extended Vintage Footer */}
+            <footer className="mt-16 pt-8 pb-12 border-t border-[var(--border-color)] border-dashed text-center font-mono text-xs text-[var(--meta-color)]/80 relative z-10">
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-4 font-serif text-sm">
+                <Link href="/privacy" className="hover:text-[var(--accent-color)] transition-colors">Privacy Policy</Link>
+                <Link href="/terms" className="hover:text-[var(--accent-color)] transition-colors">Terms</Link>
+                <Link href="/cookie" className="hover:text-[var(--accent-color)] transition-colors">Cookie Policy</Link>
+                <button
+                  onClick={handleCopyFooterEmail}
+                  className="hover:text-[var(--accent-color)] transition-colors cursor-pointer focus:outline-none"
+                >
+                  {copiedFooterEmail ? '[ Email Copied! ]' : 'Contact'}
+                </button>
+                <a href="https://github.com/ChinmayOnGithub" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-color)] transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/chinmaydpatil" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-color)] transition-colors">LinkedIn</a>
+                <a href="https://tools.chinmaypatil.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-color)] transition-colors font-bold text-[var(--accent-color)]">Browser Tools</a>
+              </div>
+              <p className="opacity-60">© 2026 Chinmay Patil. All rights reserved.</p>
+            </footer>
 
           </div>
         </main>

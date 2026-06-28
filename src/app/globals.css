@@ -43,7 +43,6 @@ body {
   background: var(--primary);
   color: var(--text-primary);
   font-family: var(--font-inter);
-  transition: all 0.3s ease;
 }
 
 /*─────────────────────────────────────────────────────────────────────

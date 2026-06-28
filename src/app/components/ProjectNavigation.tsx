@@ -66,7 +66,7 @@ export default function ProjectNavigation() {
 
   return (
     <nav 
-      className="fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 font-serif" 
+      className="fixed top-0 left-0 right-0 z-50 border-b font-serif" 
       style={{ 
         backgroundColor: navColors.bg,
         borderColor: navColors.border,
