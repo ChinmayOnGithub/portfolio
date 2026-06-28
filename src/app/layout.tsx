@@ -19,9 +19,9 @@ const robotoMono = Roboto_Mono({
 
 export const metadata: Metadata = {
 	title: 'Chinmay Patil | Backend & DevOps Engineer',
-	description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
+	description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore Browser Tools (tools.chinmaypatil.com) - a suite of privacy-first client-side utilities, systems engineering, DevOps pipeline automations, and technical papers.',
 	metadataBase: new URL('https://chinmaypatil.com'),
-	keywords: ['Chinmay Patil', 'Software Engineer', 'Backend Engineer', 'DevOps', 'Cloud Infrastructure', 'Portfolio', 'System Design', 'C++', 'Linux'],
+	keywords: ['Chinmay Patil', 'Browser Tools', 'tools.chinmaypatil.com', 'Software Engineer', 'Backend Engineer', 'DevOps', 'Cloud Infrastructure', 'Portfolio', 'System Design', 'C++', 'Linux'],
 	authors: [{ name: 'Chinmay Patil' }],
 	alternates: {
 		types: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: 'Chinmay Patil | Backend & DevOps Engineer',
-		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
+		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore Browser Tools (tools.chinmaypatil.com) - a suite of privacy-first client-side utilities, systems engineering, DevOps pipeline automations, and technical papers.',
 		url: 'https://chinmaypatil.com',
 		siteName: 'Chinmay Patil Portfolio',
 		locale: 'en_US',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Chinmay Patil | Backend & DevOps Engineer',
-		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore systems engineering, DevOps pipeline automations, cloud infrastructure, and technical case studies.',
+		description: 'Portfolio of Chinmay Patil, Software Engineer & Backend Developer. Explore Browser Tools (tools.chinmaypatil.com) - a suite of privacy-first client-side utilities, systems engineering, DevOps pipeline automations, and technical papers.',
 	},
 };
 

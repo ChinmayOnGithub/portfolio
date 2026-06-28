@@ -42,6 +42,7 @@ export function ResumeHeader({ onSkillsClick }: ResumeHeaderProps = {}) {
     { id: 'skills', label: 'Skills', href: '#skills' },
     { id: 'experience', label: 'Experience', href: '#experience' },
     { id: 'projects', label: 'Projects', href: '#projects' },
+    { id: 'products', label: 'Products', href: '#products' },
     { id: 'education', label: 'Education', href: '#education' }
   ];
 

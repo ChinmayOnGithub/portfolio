@@ -8,6 +8,7 @@ import { SkillsSection } from '@/components/resume/Skills';
 import { Experience } from '@/components/resume/Experience';
 import Education from '@/components/resume/Education';
 import { Projects } from '@/components/resume/Projects';
+import { Products } from '@/components/resume/Products';
 
 
 function ResumePageContent() {
@@ -78,7 +79,7 @@ function ResumePageContent() {
       }}
     >
       <title>Chinmay Patil | Backend &amp; DevOps Engineer</title>
-      <meta name="description" content="Backend &amp; DevOps focused B.Tech IT Graduate from Walchand College of Engineering specializing in designing APIs, homelabs, Linux administration, and containers." />
+      <meta name="description" content="Backend &amp; DevOps focused B.Tech IT Graduate from Walchand College of Engineering. Creator of Browser Tools (tools.chinmaypatil.com) - a suite of privacy-first client-side utilities. Specializing in APIs, DevOps, and cloud systems." />
       
       {/* Flawless Faded Ledger Grid Background Pattern */}
       <div 
@@ -125,6 +126,10 @@ function ResumePageContent() {
 
             <section id="projects" className="scroll-mt-24 space-y-8">
               <Projects />
+            </section>
+
+            <section id="products" className="scroll-mt-24">
+              <Products />
             </section>
 
             <section id="education" className="scroll-mt-24">

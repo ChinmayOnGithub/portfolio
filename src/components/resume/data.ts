@@ -158,3 +158,46 @@ export const homelab = {
     'Linux server administration: systemd services, firewall, log inspection',
   ],
 };
+
+export interface Product {
+  title: string;
+  badge: string;
+  description: string;
+  highlights: string[];
+  cta: {
+    primary: { label: string; href: string };
+    secondary?: { label: string; href: string };
+  };
+  metrics: {
+    label: string;
+    value: string;
+  }[];
+}
+
+export const products: Product[] = [
+  {
+    title: 'Browser Tools',
+    badge: 'Production',
+    description: 'A growing collection of privacy-first browser utilities that process everything locally without uploading files to any server.',
+    highlights: [
+      '30+ Browser Tools',
+      'Client-side Processing',
+      'Privacy First',
+      'No File Uploads',
+      'Fast',
+      'Mobile Friendly',
+      'Open Source',
+    ],
+    cta: {
+      primary: { label: 'Launch Tools →', href: 'https://tools.chinmaypatil.com' },
+      secondary: { label: 'View Source', href: 'https://github.com/ChinmayOnGithub/browser-tools' },
+    },
+    metrics: [
+      { label: 'Utilities', value: '30+' },
+      { label: 'Browser Processing', value: '100%' },
+      { label: 'Server Uploads', value: '0' },
+      { label: 'Avg Processing', value: '<50 ms' },
+    ],
+  },
+];
+
